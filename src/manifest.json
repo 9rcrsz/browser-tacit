@@ -1,0 +1,27 @@
+{
+  "name": "Browser Tacit",
+  "version": "1.0",
+  "description": "",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "externally_connectable": {
+    "matches": ["http://localhost/*"]
+  },
+  "action": {
+    "default_icon": {
+      "19": "assets/icon-19.png",
+      "38": "assets/icon-38.png"
+    },
+    "default_popup": "index.html"
+  }
+}
