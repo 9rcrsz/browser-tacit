@@ -1,4 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject} from "rxjs";
+import {BreakpointTypes, CssGroup, CssPropertyTypes} from "./css-group.model";
+import {CssService} from "./css.service";
 
 declare var chrome: any;
 
@@ -7,10 +10,14 @@ declare var chrome: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'browser-tacit';
+  cssGroups$ = new BehaviorSubject<Map<string, CssGroup>>(new Map<string, CssGroup>());
 
-  constructor() {
+  constructor(protected cssService: CssService) {
+  }
+
+  ngOnInit() {
     this.subscribe();
   }
 
@@ -23,8 +30,11 @@ export class AppComponent {
   }
 
   subscribe() {
-    chrome.runtime.onMessage.addListener((request: any, sender: any, sendResponse: any) => {
-        console.log(request)
+    chrome.runtime.onMessage.addListener((request: { moduleClassName: string, vars: Array<string> }, sender: any, sendResponse: any) => {
+        this.cssGroups$.next(this.cssService.buildCssGroupsMap(request));
+
+        console.log(this.cssGroups$.getValue());
+
         sendResponse({msg: "OK"});
       }
     );
