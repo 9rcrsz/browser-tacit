@@ -1,0 +1,39 @@
+<article>
+  <h2>{{cssGroup.name}}</h2>
+  <h3>General</h3>
+  <ul>
+    <li *ngFor="let property of cssGroup.general | keyvalue">
+      {{property.key}}
+      <input [(ngModel)]="property.value" [name]="'general'+property.key" (change)="onChanged(property)"/>
+    </li>
+  </ul>
+  <h3>Desktop</h3>
+  <ul>
+    <li *ngFor="let property of cssGroup.desktop | keyvalue">
+      {{property.key}}
+      <input [(ngModel)]="property.value" [name]="'desktop'+property.key"/>
+    </li>
+  </ul>
+  <h3>Laptop</h3>
+  <ul>
+    <li *ngFor="let property of cssGroup.laptop | keyvalue">
+      {{property.key}}
+      <input [(ngModel)]="property.value" [name]="'laptop'+property.key"/>
+    </li>
+  </ul>
+  <h3>Tablet</h3>
+  <ul>
+    <li *ngFor="let property of cssGroup.tablet | keyvalue">
+      {{property.key}}
+      <input [(ngModel)]="property.value" [name]="'tablet'+property.key"/>
+    </li>
+  </ul>
+  <h3>Mobile</h3>
+  <ul>
+    <li *ngFor="let property of cssGroup.mobile | keyvalue">
+      {{property.key}}
+      <input [(ngModel)]="property.value" [name]="'mobile'+property.key"/>
+    </li>
+  </ul>
+  <hr/>
+</article>
