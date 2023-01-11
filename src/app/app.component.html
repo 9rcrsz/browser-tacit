@@ -1,27 +1,7 @@
 <button (click)="send()">Get Variables</button>
 <article>
-  <section *ngFor="let cssGroup of cssGroups$ | async | keyvalue">
-    <h2>{{cssGroup.value.name}}</h2>
-    <h3>General</h3>
-    <ul>
-      <li *ngFor="let property of cssGroup.value.general | keyvalue">{{property.key}}</li>
-    </ul>
-    <h3>Desktop</h3>
-    <ul>
-      <li *ngFor="let property of cssGroup.value.desktop | keyvalue">{{property.key}}</li>
-    </ul>
-    <h3>Laptop</h3>
-    <ul>
-      <li *ngFor="let property of cssGroup.value.laptop | keyvalue">{{property.key}}</li>
-    </ul>
-    <h3>Tablet</h3>
-    <ul>
-      <li *ngFor="let property of cssGroup.value.tablet | keyvalue">{{property.key}}</li>
-    </ul>
-    <h3>Mobile</h3>
-    <ul>
-      <li *ngFor="let property of cssGroup.value.mobile | keyvalue">{{property.key}}</li>
-    </ul>
-    <hr />
-  </section>
+  <app-css-group *ngFor="let cssGroup of cssGroups$ | async | keyvalue"
+                 [cssGroup]="cssGroup.value"
+  (eventUpdate)="onChanged($event)">
+  </app-css-group>
 </article>
