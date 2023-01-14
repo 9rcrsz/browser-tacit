@@ -22,12 +22,12 @@ export class AppComponent implements OnInit {
   }
 
   onChanged(data: { key: string, value: string }) {
-    this.send({type: 'set-variable', variable: data});
+    this.send({type: 'set-variables', variables: [data]});
   }
 
-  send(data: { type: string, variable?: { key: string, value: string } } = {type: 'get-variables'}) {
+    send(request: { type: string, variables?: [{ key: string, value: string }] } = {type: 'get-variables'}) {
     chrome.tabs.query({active: true, lastFocusedWindow: true}).then((data: any) => {
-      chrome.tabs.sendMessage(data[0].id, data).then((d: any) => {
+      chrome.tabs.sendMessage(data[0].id, request).then((d: any) => {
         console.log(d);
       });
     })
