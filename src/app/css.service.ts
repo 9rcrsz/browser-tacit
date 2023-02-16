@@ -12,6 +12,16 @@ export class CssService {
         return;
       }
 
+      // restore value form the local storage
+      const storageProperty = localStorage.getItem(preparedVariable.origin);
+      if (storageProperty) {
+        if (storageProperty === preparedVariable.value) {
+          localStorage.removeItem(preparedVariable.origin);
+        } else {
+          preparedVariable.value = storageProperty;
+        }
+      }
+
       const groupName = preparedVariable.variableParts.join('_');
       if (!cssGroups.get(groupName)) {
         cssGroups.set(groupName, new CssGroup());
@@ -26,7 +36,8 @@ export class CssService {
     return cssGroups;
   }
 
-  parseVariable(cssVariable: string): null | { cssProperty: string, variableParts: Array<string>, breakpoint: string, value: string } {
+  parseVariable(cssVariable: string): null |
+    { cssProperty: string, variableParts: Array<string>, breakpoint: string, value: string, origin: string } {
     const varAndVal = cssVariable.split(':');
     if (varAndVal.length !== 2) {
       return null;
@@ -45,7 +56,7 @@ export class CssService {
         break;
     }
 
-    return {cssProperty, variableParts: arrVar, breakpoint, value: varAndVal[1].trim()}
+    return {cssProperty, variableParts: arrVar, breakpoint, value: varAndVal[1].trim(), origin: varAndVal[0].trim()}
   }
 }
 

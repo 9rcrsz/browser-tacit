@@ -1,7 +1,10 @@
-<button mat-button (click)="send()">Get Variables</button>
+<header>
+  <button mat-button (click)="send()">Get Variables</button>
+  <button mat-button (click)="export()">Export</button>
+</header>
 <article>
   <app-css-group *ngFor="let cssGroup of cssGroups$ | async | keyvalue"
                  [cssGroup]="cssGroup.value"
-  (eventUpdate)="onChanged($event)">
+                 (eventUpdate)="onChanged($event)">
   </app-css-group>
 </article>

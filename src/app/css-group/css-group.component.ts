@@ -16,8 +16,10 @@ export class CssGroupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onChanged(property: any) {
-    const name = '--' + property.key + '_' + this.cssGroup.name;
+  onChanged(property: any, breakpoint: string) {
+    const name = '--' + property.key + '_' + this.cssGroup.name + (breakpoint === 'general' ? '' : '_' + breakpoint);
+
+    localStorage.setItem(name, property.value);
     this.eventUpdate.emit({key: name, value: property.value})
     console.log(name, property, this.cssGroup)
   }

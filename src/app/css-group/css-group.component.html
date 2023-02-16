@@ -5,7 +5,7 @@
     <li *ngFor="let property of cssGroup.general | keyvalue">
       <mat-form-field color="primary" appearance="fill">
         <mat-label>{{property.key}}</mat-label>
-        <input matInput [(ngModel)]="property.value" [name]="'general'+property.key" (change)="onChanged(property)">
+        <input matInput [(ngModel)]="property.value" [name]="'general'+property.key" (change)="onChanged(property, 'general')">
       </mat-form-field>
     </li>
   </ul>
@@ -16,7 +16,7 @@
     <li *ngFor="let property of cssGroup.desktop | keyvalue">
       <mat-form-field color="primary" appearance="fill">
         <mat-label>{{property.key}}</mat-label>
-        <input matInput [(ngModel)]="property.value" [name]="'desktop'+property.key" (change)="onChanged(property)">
+        <input matInput [(ngModel)]="property.value" [name]="'desktop'+property.key" (change)="onChanged(property, 'desktop')">
       </mat-form-field>
     </li>
   </ul>
@@ -27,7 +27,7 @@
     <li *ngFor="let property of cssGroup.laptop | keyvalue">
       <mat-form-field color="primary" appearance="fill">
         <mat-label>{{property.key}}</mat-label>
-        <input matInput [(ngModel)]="property.value" [name]="'laptop'+property.key" (change)="onChanged(property)">
+        <input matInput [(ngModel)]="property.value" [name]="'laptop'+property.key" (change)="onChanged(property, 'laptop')">
       </mat-form-field>
     </li>
   </ul>
@@ -38,7 +38,7 @@
     <li *ngFor="let property of cssGroup.tablet | keyvalue">
       <mat-form-field color="primary" appearance="fill">
         <mat-label>{{property.key}}</mat-label>
-        <input matInput [(ngModel)]="property.value" [name]="'tablet'+property.key" (change)="onChanged(property)">
+        <input matInput [(ngModel)]="property.value" [name]="'tablet'+property.key" (change)="onChanged(property, 'tablet')">
       </mat-form-field>
     </li>
   </ul>
@@ -49,7 +49,7 @@
     <li *ngFor="let property of cssGroup.mobile | keyvalue">
       <mat-form-field color="primary" appearance="fill">
         <mat-label>{{property.key}}</mat-label>
-        <input matInput [(ngModel)]="property.value" [name]="'mobile'+property.key" (change)="onChanged(property)">
+        <input matInput [(ngModel)]="property.value" [name]="'mobile'+property.key" (change)="onChanged(property, 'mobile')">
       </mat-form-field>
     </li>
   </ul>

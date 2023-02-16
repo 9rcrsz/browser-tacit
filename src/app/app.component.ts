@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {BreakpointTypes, CssGroup, CssPropertyTypes} from "./css-group.model";
 import {CssService} from "./css.service";
+import {CssGroupExport} from "./css-group.export";
 
 declare var chrome: any;
 
@@ -335,14 +336,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.subscribe();
+    this.subscribe();
 
     this.cssGroups$.next(this.cssService.buildCssGroupsMap(ddd));
-    console.log(ddd);
   }
 
   onChanged(data: { key: string, value: string }) {
-    // this.send({type: 'set-variables', variables: [data]});
+    this.send({type: 'set-variables', variables: [data]});
   }
 
   send(request: { type: string, variables?: [{ key: string, value: string }] } = {type: 'get-variables'}) {
@@ -351,6 +351,20 @@ export class AppComponent implements OnInit {
         console.log(d);
       });
     })
+  }
+
+  export() {
+    let variables: Array<string> = [];
+    this.cssGroups$.getValue().forEach(cssGroup => {
+      const tmpForExport = new CssGroupExport(cssGroup);
+      variables = [...variables, ...tmpForExport.export()]
+    });
+
+    navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
+      alert('Copied to clipboard.');
+    }, function (err) {
+      console.error('Async: Could not copy text: ', err);
+    });
   }
 
   subscribe() {

@@ -17,11 +17,11 @@ export class CssGroup {
   name = '';
   depth = 0;
 
-  general: { padding?: string, margin?: string, display?: string, color?: string } = {};
-  desktop: { padding?: string, margin?: string, display?: string, color?: string } = {};
-  laptop: { padding?: string, margin?: string, display?: string, color?: string } = {};
-  tablet: { padding?: string, margin?: string, display?: string, color?: string } = {};
-  mobile: { padding?: string, margin?: string, display?: string, color?: string } = {};
+  general: { [key: string]: string } = {};
+  desktop: { [key: string]: string } = {};
+  laptop: { [key: string]: string } = {};
+  tablet: { [key: string]: string } = {};
+  mobile: { [key: string]: string } = {};
 
   desktopToggle = false;
   laptopToggle = false;
