@@ -8,7 +8,7 @@ export class CssService {
 
     data.vars.forEach(tmpVar => {
       const preparedVariable = this.parseVariable(tmpVar);
-      if (preparedVariable.variableParts[0] !== data.moduleClassName) {
+      if (!preparedVariable || preparedVariable.variableParts[0] !== data.moduleClassName) {
         return;
       }
 
@@ -18,14 +18,21 @@ export class CssService {
       }
       cssGroups.get(groupName)!.name = groupName;
       cssGroups.get(groupName)!.depth = preparedVariable.variableParts.length;
-      cssGroups.get(groupName)![preparedVariable.breakpoint as BreakpointTypes][preparedVariable.cssProperty as CssPropertyTypes] = '';
+      cssGroups.get(groupName)![preparedVariable.breakpoint as BreakpointTypes][preparedVariable.cssProperty as CssPropertyTypes] = preparedVariable.value;
     });
+
+    console.log(cssGroups)
 
     return cssGroups;
   }
 
-  parseVariable(cssVariable: string): { cssProperty: string, variableParts: Array<string>, breakpoint: string } {
-    const arrVar = cssVariable.replace('--', '').split('_');
+  parseVariable(cssVariable: string): null | { cssProperty: string, variableParts: Array<string>, breakpoint: string, value: string } {
+    const varAndVal = cssVariable.split(':');
+    if (varAndVal.length !== 2) {
+      return null;
+    }
+
+    const arrVar = varAndVal[0].replace('--', '').split('_');
     const cssProperty = arrVar.shift() as string;
 
     let breakpoint = BreakpointTypes.general;
@@ -38,7 +45,7 @@ export class CssService {
         break;
     }
 
-    return {cssProperty, variableParts: arrVar, breakpoint}
+    return {cssProperty, variableParts: arrVar, breakpoint, value: varAndVal[1].trim()}
   }
 }
 

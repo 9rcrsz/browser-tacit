@@ -17,9 +17,14 @@ export class CssGroup {
   name = '';
   depth = 0;
 
-    general: { padding?: string, margin?: string, display?: string, color?: string } = {};
+  general: { padding?: string, margin?: string, display?: string, color?: string } = {};
   desktop: { padding?: string, margin?: string, display?: string, color?: string } = {};
   laptop: { padding?: string, margin?: string, display?: string, color?: string } = {};
   tablet: { padding?: string, margin?: string, display?: string, color?: string } = {};
   mobile: { padding?: string, margin?: string, display?: string, color?: string } = {};
+
+  desktopToggle = false;
+  laptopToggle = false;
+  tabletToggle = false;
+  mobileToggle = false;
 }

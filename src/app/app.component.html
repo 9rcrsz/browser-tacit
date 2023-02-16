@@ -1,4 +1,4 @@
-<button (click)="send()">Get Variables</button>
+<button mat-button (click)="send()">Get Variables</button>
 <article>
   <app-css-group *ngFor="let cssGroup of cssGroups$ | async | keyvalue"
                  [cssGroup]="cssGroup.value"

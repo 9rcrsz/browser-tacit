@@ -3,36 +3,54 @@
   <h3>General</h3>
   <ul>
     <li *ngFor="let property of cssGroup.general | keyvalue">
-      {{property.key}}
-      <input [(ngModel)]="property.value" [name]="'general'+property.key" (change)="onChanged(property)"/>
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>{{property.key}}</mat-label>
+        <input matInput [(ngModel)]="property.value" [name]="'general'+property.key" (change)="onChanged(property)">
+      </mat-form-field>
     </li>
   </ul>
-  <h3>Desktop</h3>
-  <ul>
+  <h3>
+    <mat-checkbox class="example-margin" [(ngModel)]="cssGroup.desktopToggle">Desktop</mat-checkbox>
+  </h3>
+  <ul *ngIf="cssGroup.desktopToggle">
     <li *ngFor="let property of cssGroup.desktop | keyvalue">
-      {{property.key}}
-      <input [(ngModel)]="property.value" [name]="'desktop'+property.key"/>
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>{{property.key}}</mat-label>
+        <input matInput [(ngModel)]="property.value" [name]="'desktop'+property.key" (change)="onChanged(property)">
+      </mat-form-field>
     </li>
   </ul>
-  <h3>Laptop</h3>
-  <ul>
+  <h3>
+    <mat-checkbox class="example-margin" [(ngModel)]="cssGroup.laptopToggle">Laptop</mat-checkbox>
+  </h3>
+  <ul *ngIf="cssGroup.desktopToggle">
     <li *ngFor="let property of cssGroup.laptop | keyvalue">
-      {{property.key}}
-      <input [(ngModel)]="property.value" [name]="'laptop'+property.key"/>
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>{{property.key}}</mat-label>
+        <input matInput [(ngModel)]="property.value" [name]="'laptop'+property.key" (change)="onChanged(property)">
+      </mat-form-field>
     </li>
   </ul>
-  <h3>Tablet</h3>
-  <ul>
+  <h3>
+    <mat-checkbox class="example-margin" [(ngModel)]="cssGroup.tabletToggle">Tablet</mat-checkbox>
+  </h3>
+  <ul *ngIf="cssGroup.tabletToggle">
     <li *ngFor="let property of cssGroup.tablet | keyvalue">
-      {{property.key}}
-      <input [(ngModel)]="property.value" [name]="'tablet'+property.key"/>
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>{{property.key}}</mat-label>
+        <input matInput [(ngModel)]="property.value" [name]="'tablet'+property.key" (change)="onChanged(property)">
+      </mat-form-field>
     </li>
   </ul>
-  <h3>Mobile</h3>
-  <ul>
+  <h3>
+    <mat-checkbox class="example-margin" [(ngModel)]="cssGroup.mobileToggle">Mobile</mat-checkbox>
+  </h3>
+  <ul *ngIf="cssGroup.mobileToggle">
     <li *ngFor="let property of cssGroup.mobile | keyvalue">
-      {{property.key}}
-      <input [(ngModel)]="property.value" [name]="'mobile'+property.key"/>
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>{{property.key}}</mat-label>
+        <input matInput [(ngModel)]="property.value" [name]="'mobile'+property.key" (change)="onChanged(property)">
+      </mat-form-field>
     </li>
   </ul>
   <hr/>

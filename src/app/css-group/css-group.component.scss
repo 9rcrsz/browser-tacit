@@ -1,0 +1,13 @@
+:host {
+  > article {
+    padding: 0 24px;
+
+    ul {
+      list-style-type: none;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      display: flex;
+      gap: 12px;
+    }
+  }
+}
