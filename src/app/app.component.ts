@@ -367,9 +367,19 @@ export class AppComponent implements OnInit {
     });
   }
 
+  reset() {
+    localStorage.clear();
+    this.cssGroups$.getValue().forEach(cssGroup => {
+      for (let breakpointTypesKey in BreakpointTypes) {
+        const tmpBreakpoint = cssGroup[breakpointTypesKey as BreakpointTypes]
+        // current = default
+      }
+    });
+  }
+
   subscribe() {
     chrome.runtime.onMessage.addListener((request: { moduleClassName: string, vars: Array<string> }, sender: any, sendResponse: any) => {
-        this.cssGroups$.next(this.cssService.buildCssGroupsMap(request));
+        // this.cssGroups$.next(this.cssService.buildCssGroupsMap(request));
 
         console.log(this.cssGroups$.getValue());
 

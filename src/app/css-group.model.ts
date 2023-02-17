@@ -13,15 +13,21 @@ export enum CssPropertyTypes {
   color = 'color'
 }
 
+export interface CssValue {
+  default: string,
+  current: string,
+  color?: string
+}
+
 export class CssGroup {
   name = '';
   depth = 0;
 
-  general: { [key: string]: string } = {};
-  desktop: { [key: string]: string } = {};
-  laptop: { [key: string]: string } = {};
-  tablet: { [key: string]: string } = {};
-  mobile: { [key: string]: string } = {};
+  general: { [key: string]: CssValue } = {};
+  desktop: { [key: string]: CssValue } = {};
+  laptop: { [key: string]: CssValue } = {};
+  tablet: { [key: string]: CssValue } = {};
+  mobile: { [key: string]: CssValue } = {};
 
   desktopToggle = false;
   laptopToggle = false;

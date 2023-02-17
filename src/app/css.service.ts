@@ -14,11 +14,12 @@ export class CssService {
 
       // restore value form the local storage
       const storageProperty = localStorage.getItem(preparedVariable.origin);
+      let currentValue = preparedVariable.value;
       if (storageProperty) {
         if (storageProperty === preparedVariable.value) {
           localStorage.removeItem(preparedVariable.origin);
         } else {
-          preparedVariable.value = storageProperty;
+          currentValue = storageProperty;
         }
       }
 
@@ -28,7 +29,8 @@ export class CssService {
       }
       cssGroups.get(groupName)!.name = groupName;
       cssGroups.get(groupName)!.depth = preparedVariable.variableParts.length;
-      cssGroups.get(groupName)![preparedVariable.breakpoint as BreakpointTypes][preparedVariable.cssProperty as CssPropertyTypes] = preparedVariable.value;
+      cssGroups.get(groupName)![preparedVariable.breakpoint as BreakpointTypes][preparedVariable.cssProperty as CssPropertyTypes] =
+        {default: preparedVariable.value, current: currentValue};
     });
 
     console.log(cssGroups)

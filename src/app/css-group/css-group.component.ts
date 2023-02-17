@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CssGroup} from "../css-group.model";
+import {BreakpointTypes, CssGroup, CssValue} from "../css-group.model";
+import {HelperService} from "../helper.service";
 
 @Component({
   selector: 'app-css-group',
@@ -9,6 +10,7 @@ import {CssGroup} from "../css-group.model";
 export class CssGroupComponent implements OnInit {
   @Output() eventUpdate = new EventEmitter<{ key: string, value: string }>();
   @Input() cssGroup!: CssGroup;
+  breakpointTypes = BreakpointTypes;
 
   constructor() {
   }
@@ -16,11 +18,11 @@ export class CssGroupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onChanged(property: any, breakpoint: string) {
-    const name = '--' + property.key + '_' + this.cssGroup.name + (breakpoint === 'general' ? '' : '_' + breakpoint);
+  onChanged(property: { key: string, value: CssValue }, breakpoint: BreakpointTypes) {
+    const name = HelperService.buildName(property.key, this.cssGroup.name, breakpoint);
 
-    localStorage.setItem(name, property.value);
-    this.eventUpdate.emit({key: name, value: property.value})
+    localStorage.setItem(name, property.value.current);
+    this.eventUpdate.emit({key: name, value: property.value.current})
     console.log(name, property, this.cssGroup)
   }
 
