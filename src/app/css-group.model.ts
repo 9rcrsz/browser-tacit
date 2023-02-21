@@ -14,23 +14,22 @@ export enum CssPropertyTypes {
 }
 
 export interface CssValue {
-  default: string,
-  current: string,
-  color?: string
+  default: string;
+  current: string;
+  labels?: Array<string>
 }
 
 export class CssGroup {
   name = '';
   depth = 0;
 
-  general: { [key: string]: CssValue } = {};
-  desktop: { [key: string]: CssValue } = {};
-  laptop: { [key: string]: CssValue } = {};
-  tablet: { [key: string]: CssValue } = {};
-  mobile: { [key: string]: CssValue } = {};
+  breakpoints = new Map<BreakpointTypes, Map<CssPropertyTypes, CssValue>>();
+  toggle: { [key: string]: boolean } = {}
 
-  desktopToggle = false;
-  laptopToggle = false;
-  tabletToggle = false;
-  mobileToggle = false;
+  constructor() {
+    for (let breakpointTypesKey in BreakpointTypes) {
+      this.breakpoints.set(breakpointTypesKey as BreakpointTypes, new Map());
+      this.toggle[breakpointTypesKey] = false;
+    }
+  }
 }

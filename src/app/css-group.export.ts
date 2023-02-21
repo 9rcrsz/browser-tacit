@@ -1,4 +1,5 @@
-import {BreakpointTypes, CssGroup} from "./css-group.model";
+import {CssGroup, CssPropertyTypes, CssValue} from "./css-group.model";
+import {HelperService} from "./helper.service";
 
 export class CssGroupExport {
   protected model: CssGroup;
@@ -8,17 +9,16 @@ export class CssGroupExport {
   }
 
   export(): Array<string> {
-    const variables = [];
+    const variables: Array<string> = [];
 
-    for (let breakpointTypesKey in BreakpointTypes) {
-      const tmpBreakpoint = this.model[breakpointTypesKey as BreakpointTypes]
-      for (let i in tmpBreakpoint) {
-        if (tmpBreakpoint[i].current !== tmpBreakpoint[i].default) {
-          const name = '--' + i + '_' + this.model.name + ': ' + this.model.general[i].current + ';';
+    this.model.breakpoints.forEach((breakpoint, breakpointName) => {
+      breakpoint.forEach((cssVal: CssValue, prop: CssPropertyTypes) => {
+        if (cssVal.current !== cssVal.default) {
+          const name = HelperService.buildName(prop, this.model.name, breakpointName);
           variables.push(name);
         }
-      }
-    }
+      })
+    });
 
     return variables;
   }

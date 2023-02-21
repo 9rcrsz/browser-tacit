@@ -369,12 +369,12 @@ export class AppComponent implements OnInit {
 
   reset() {
     localStorage.clear();
-    this.cssGroups$.getValue().forEach(cssGroup => {
-      for (let breakpointTypesKey in BreakpointTypes) {
-        const tmpBreakpoint = cssGroup[breakpointTypesKey as BreakpointTypes]
-        // current = default
-      }
-    });
+    // this.cssGroups$.getValue().forEach(cssGroup => {
+    //   for (let breakpointTypesKey in BreakpointTypes) {
+    //     const tmpBreakpoint = cssGroup[breakpointTypesKey as BreakpointTypes]
+    //     // current = default
+    //   }
+    // });
   }
 
   subscribe() {

@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BreakpointTypes, CssGroup, CssPropertyTypes} from "./css-group.model";
+import {TemplatesEnum} from "./templates.enum";
 
 @Injectable({providedIn: "root"})
 export class CssService {
@@ -27,10 +28,17 @@ export class CssService {
       if (!cssGroups.get(groupName)) {
         cssGroups.set(groupName, new CssGroup());
       }
-      cssGroups.get(groupName)!.name = groupName;
-      cssGroups.get(groupName)!.depth = preparedVariable.variableParts.length;
-      cssGroups.get(groupName)![preparedVariable.breakpoint as BreakpointTypes][preparedVariable.cssProperty as CssPropertyTypes] =
-        {default: preparedVariable.value, current: currentValue};
+
+      const cssGroup = cssGroups.get(groupName);
+      cssGroup!.name = groupName;
+      cssGroup!.depth = preparedVariable.variableParts.length;
+
+      const cssGroupBreakpoint = cssGroup!.breakpoints.get(preparedVariable.breakpoint as BreakpointTypes);
+      cssGroupBreakpoint!.set(preparedVariable.cssProperty as CssPropertyTypes, {
+        default: preparedVariable.value,
+        current: currentValue,
+        labels: preparedVariable.labels
+      })
     });
 
     console.log(cssGroups)
@@ -39,14 +47,32 @@ export class CssService {
   }
 
   parseVariable(cssVariable: string): null |
-    { cssProperty: string, variableParts: Array<string>, breakpoint: string, value: string, origin: string } {
-    const varAndVal = cssVariable.split(':');
+    {
+      cssProperty: string,
+      variableParts: Array<string>,
+      breakpoint: string,
+      labels: Array<string>,
+      value: string,
+      origin: string
+    } {
+
+    const labels = [];
+    for (let templatesEnumKey in TemplatesEnum) {
+      const tmp = cssVariable.replace('_' + templatesEnumKey + '_', '_');
+      if (tmp.length !== cssVariable.length) {
+        cssVariable = tmp;
+        labels.push(templatesEnumKey);
+      }
+    }
+
+    const varAndVal: Array<string> = cssVariable.split(':');
     if (varAndVal.length !== 2) {
       return null;
     }
 
     const arrVar = varAndVal[0].replace('--', '').split('_');
     const cssProperty = arrVar.shift() as string;
+
 
     let breakpoint = BreakpointTypes.general;
     switch (arrVar[arrVar.length - 1]) {
@@ -58,7 +84,14 @@ export class CssService {
         break;
     }
 
-    return {cssProperty, variableParts: arrVar, breakpoint, value: varAndVal[1].trim(), origin: varAndVal[0].trim()}
+    return {
+      cssProperty,
+      variableParts: arrVar,
+      breakpoint,
+      labels,
+      value: varAndVal[1].trim(),
+      origin: varAndVal[0].trim()
+    }
   }
 }
 
