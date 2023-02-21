@@ -30,6 +30,10 @@ export class CssGroup {
     for (let breakpointTypesKey in BreakpointTypes) {
       this.breakpoints.set(breakpointTypesKey as BreakpointTypes, new Map());
       this.toggle[breakpointTypesKey] = false;
+
+      if (breakpointTypesKey === BreakpointTypes.general) {
+        this.toggle[breakpointTypesKey] = true;
+      }
     }
   }
 }
