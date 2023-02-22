@@ -1,5 +1,4 @@
 import {CssGroup, CssPropertyTypes, CssValue} from "./css-group.model";
-import {HelperService} from "./services/helper.service";
 
 export class CssGroupExport {
   protected model: CssGroup;
@@ -14,7 +13,7 @@ export class CssGroupExport {
     this.model.breakpoints.forEach((breakpoint, breakpointName) => {
       breakpoint.forEach((cssVal: CssValue, prop: CssPropertyTypes) => {
         if (cssVal.current !== cssVal.default) {
-          const name = HelperService.buildName(prop, this.model.name, breakpointName);
+          const name = cssVal.name + ': ' + cssVal.current + ';';
           variables.push(name);
         }
       })

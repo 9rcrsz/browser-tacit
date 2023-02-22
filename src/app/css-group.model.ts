@@ -16,7 +16,8 @@ export enum CssPropertyTypes {
 export interface CssValue {
   default: string;
   current: string;
-  labels?: Array<string>
+  name: string;
+  labels: Array<string>
 }
 
 export class CssGroup {

@@ -2,6 +2,7 @@
   <button mat-button (click)="send()">Get Variables</button>
   <button mat-button (click)="export()">Export</button>
   <button mat-button (click)="reset()">Reset</button>
+  <select-template></select-template>
 </header>
 <article>
   <app-css-group *ngFor="let cssGroup of cssGroups$ | async | keyvalue"

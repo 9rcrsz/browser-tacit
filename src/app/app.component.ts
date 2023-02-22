@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {BreakpointTypes, CssGroup, CssPropertyTypes} from "./css-group.model";
+import {CssGroup} from "./css-group.model";
 import {CssService} from "./css.service";
 import {CssGroupExport} from "./css-group.export";
 
@@ -326,7 +326,8 @@ const ddd = {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   title = 'browser-tacit';

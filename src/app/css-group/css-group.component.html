@@ -1,5 +1,11 @@
 <article>
-  <h2>{{cssGroup.name}}</h2>
+  <header>
+    <h2>
+      {{cssGroup.name}}
+    </h2>
+    <select-template></select-template>
+  </header>
+
   <section *ngFor='let breakpoint of (cssGroup.breakpoints | keyvalue: unsorted)'>
     <h3>
       <mat-checkbox class="example-margin"

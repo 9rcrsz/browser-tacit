@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BreakpointTypes, CssGroup, CssValue} from "../css-group.model";
-import {HelperService} from "../services/helper.service";
 
 @Component({
   selector: 'app-css-group',
   templateUrl: './css-group.component.html',
-  styleUrls: ['./css-group.component.scss']
+  styleUrls: ['./css-group.component.scss'],
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CssGroupComponent implements OnInit {
   @Output() eventUpdate = new EventEmitter<{ key: string, value: string }>();
@@ -19,11 +19,9 @@ export class CssGroupComponent implements OnInit {
   }
 
   onChanged(property: { key: string, value: CssValue }, breakpoint: BreakpointTypes) {
-    const name = HelperService.buildName(property.key, this.cssGroup.name, breakpoint);
-
-    localStorage.setItem(name, property.value.current);
-    this.eventUpdate.emit({key: name, value: property.value.current})
-    console.log(name, property, this.cssGroup)
+    localStorage.setItem(property.value.name, property.value.current);
+    this.eventUpdate.emit({key: property.value.name, value: property.value.current})
+    console.log(property.value.name, property, this.cssGroup)
   }
 
   unsorted() {

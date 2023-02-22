@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {SelectTemplateModule} from "../select-template";
 
 @NgModule({
   declarations: [
@@ -14,13 +15,14 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
   exports: [
     CssGroupComponent
   ],
-  imports: [
-    FormsModule,
-    CommonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCheckboxModule
-  ],
+        imports: [
+                FormsModule,
+                CommonModule,
+                MatInputModule,
+                MatFormFieldModule,
+                MatCheckboxModule,
+                SelectTemplateModule
+        ],
   providers: [],
 })
 export class CssGroupModule {

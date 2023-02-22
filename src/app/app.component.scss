@@ -1,8 +1,17 @@
 :host {
+
   > header {
+    width: 100%;
     background: #F1F1F1;
-    position: sticky;
+    position: fixed;
+    display: flex;
+    align-self: center;
     padding: 12px;
     top: 0;
+    z-index: 99;
+  }
+
+  > article {
+    padding: 100px 0;
   }
 }

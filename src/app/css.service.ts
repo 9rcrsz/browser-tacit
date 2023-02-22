@@ -37,7 +37,8 @@ export class CssService {
       cssGroupBreakpoint!.set(preparedVariable.cssProperty as CssPropertyTypes, {
         default: preparedVariable.value,
         current: currentValue,
-        labels: preparedVariable.labels
+        labels: preparedVariable.labels,
+        name: tmpVar.split(':')[0].trim()
       })
     });
 

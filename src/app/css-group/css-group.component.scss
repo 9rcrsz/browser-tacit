@@ -2,6 +2,16 @@
   > article {
     padding: 0 24px;
 
+    > header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      select-template {
+        margin-left: auto;
+      }
+    }
+
     ul {
       list-style-type: none;
       justify-content: flex-start;
