@@ -1,5 +1,5 @@
 import {CssGroup, CssPropertyTypes, CssValue} from "./css-group.model";
-import {HelperService} from "./helper.service";
+import {HelperService} from "./services/helper.service";
 
 export class CssGroupExport {
   protected model: CssGroup;

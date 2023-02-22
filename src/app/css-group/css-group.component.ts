@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BreakpointTypes, CssGroup, CssValue} from "../css-group.model";
-import {HelperService} from "../helper.service";
+import {HelperService} from "../services/helper.service";
 
 @Component({
   selector: 'app-css-group',
