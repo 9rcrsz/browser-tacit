@@ -1,8 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {CssGroup} from "./css-group.model";
-import {CssService} from "./css.service";
+import {CssService} from "./services/css.service";
 import {CssGroupExport} from "./css-group.export";
+import {CssGroupFactory} from "./css-group.factory";
+import {TemplatesService} from "./services/templates.service";
 
 declare var chrome: any;
 
@@ -333,7 +335,7 @@ export class AppComponent implements OnInit {
   title = 'browser-tacit';
   cssGroups$ = new BehaviorSubject<Map<string, CssGroup>>(new Map<string, CssGroup>());
 
-  constructor(protected cssService: CssService) {
+  constructor(protected cssService: CssService, protected templatesService: TemplatesService) {
   }
 
   ngOnInit() {
@@ -344,6 +346,16 @@ export class AppComponent implements OnInit {
 
   onChanged(data: { key: string, value: string }) {
     this.send({type: 'set-variables', variables: [data]});
+  }
+
+  templateSelected(templateName: string) {
+    this.templatesService.templates.get(templateName)!
+      .subscribe(data => {
+        this.cssGroups$.getValue().forEach(cssGroup => {
+          CssGroupFactory.populateHandler(cssGroup).populate(data)
+        })
+      });
+
   }
 
   send(request: { type: string, variables?: [{ key: string, value: string }] } = {type: 'get-variables'}) {

@@ -382,6 +382,7 @@
   --overflow_orders-component_orders-content_left: hidden;
   --overflow_orders-components_orders-content_right: hidden;
 
+  --display_order-part_paid: none;
   --display_order-part_paid-with_header_hr: none;
   --display_order-part_paid-with_header_hr_desktop: none;
   --display_order-part_paid-with_header_hr_laptop: none;

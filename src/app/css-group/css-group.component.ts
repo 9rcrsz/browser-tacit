@@ -27,6 +27,4 @@ export class CssGroupComponent implements OnInit {
   unsorted() {
     return 0;
   }
-
-
 }

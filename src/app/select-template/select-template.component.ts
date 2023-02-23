@@ -9,17 +9,14 @@ import {take} from "rxjs/operators";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTemplateComponent {
-  @Output() eventSelectTemplate = new EventEmitter<Array<string>>();
+  @Output() eventSelectTemplate = new EventEmitter<string>();
   templateName?: string;
 
   constructor(protected tService: TemplatesService) {
   }
 
   onChanged(selectedTemplateName: string) {
-    this.tService.loadTemplate(selectedTemplateName)
-      .pipe(take(1))
-      .subscribe(template => {
-        this.eventSelectTemplate.emit(template);
-      })
+    this.tService.loadTemplate(selectedTemplateName);
+    this.eventSelectTemplate.emit(selectedTemplateName)
   }
 }
