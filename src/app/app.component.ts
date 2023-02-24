@@ -5,6 +5,7 @@ import {CssService} from "./services/css.service";
 import {CssGroupExport} from "./css-group.export";
 import {CssGroupFactory} from "./css-group.factory";
 import {TemplatesService} from "./services/templates.service";
+import {take} from "rxjs/operators";
 
 declare var chrome: any;
 
@@ -350,6 +351,7 @@ export class AppComponent implements OnInit {
 
   templateSelected(templateName: string) {
     this.templatesService.templates.get(templateName)!
+      .pipe(take(1))
       .subscribe(data => {
         this.cssGroups$.getValue().forEach(cssGroup => {
           CssGroupFactory.populateHandler(cssGroup).populate(data)
