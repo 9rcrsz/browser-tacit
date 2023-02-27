@@ -6,6 +6,7 @@ import {CssGroupExport} from "./css-group.export";
 import {CssGroupFactory} from "./css-group.factory";
 import {TemplatesService} from "./services/templates.service";
 import {take} from "rxjs/operators";
+import {Colors} from "./colors.model";
 
 declare var chrome: any;
 
@@ -334,6 +335,7 @@ const ddd = {
 })
 export class AppComponent implements OnInit {
   title = 'browser-tacit';
+  colors$ = new BehaviorSubject<Colors>(new Colors());
   cssGroups$ = new BehaviorSubject<Map<string, CssGroup>>(new Map<string, CssGroup>());
   templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
@@ -358,6 +360,8 @@ export class AppComponent implements OnInit {
       this.templatesService.templates.get(templateName)!
         .pipe(take(1))
         .subscribe(data => {
+          this.colors$.getValue().template = templateName;
+
           this.cssGroups$.getValue().forEach(cssGroup => {
             cssGroup.template = templateName;
             CssGroupFactory.populateHandler(cssGroup).populate(data)

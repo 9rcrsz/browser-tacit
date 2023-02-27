@@ -7,19 +7,21 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
 import {SelectTemplateModule} from "./select-template";
+import {ColorsGroupModel} from "./colors-group";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    CssGroupModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    HttpClientModule,
-    SelectTemplateModule
-  ],
+        imports: [
+                BrowserModule,
+                CssGroupModule,
+                BrowserAnimationsModule,
+                MatButtonModule,
+                HttpClientModule,
+                SelectTemplateModule,
+                ColorsGroupModel
+        ],
   providers: [],
   bootstrap: [AppComponent]
 })

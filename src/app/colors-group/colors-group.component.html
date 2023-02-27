@@ -1,0 +1,26 @@
+<article>
+  <header>
+    <h2>Colors</h2>
+    <select-template [templateName]="colors.template"
+                     (eventSelectTemplate)="colors.template = $event">
+    </select-template>
+  </header>
+
+  <section>
+
+    <ul>
+      <li *ngFor='let color of (colors.list | keyvalue)'>
+        <mat-form-field color="primary" appearance="fill">
+          <mat-label>{{color.key}}</mat-label>
+          <input matInput [(ngModel)]="color.value" [name]="color.key">
+          <mat-hint *ngIf="color.value" [style]="{'background-color': color.value}">
+            <span style="color: #000">Black example.</span>
+            <span style="color: #fff">White example.</span>
+          </mat-hint>
+        </mat-form-field>
+      </li>
+    </ul>
+
+  </section>
+  <hr/>
+</article>
