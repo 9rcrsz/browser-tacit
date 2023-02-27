@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {TemplatesService} from "../services/templates.service";
 import {take} from "rxjs/operators";
 
@@ -9,14 +9,17 @@ import {take} from "rxjs/operators";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTemplateComponent {
-  @Output() eventSelectTemplate = new EventEmitter<string>();
-  templateName?: string;
+  @Output() eventSelectTemplate = new EventEmitter<string | null>();
+  @Input() templateName: string | null = null;
 
   constructor(protected tService: TemplatesService) {
   }
 
-  onChanged(selectedTemplateName: string) {
-    this.tService.loadTemplate(selectedTemplateName);
+  onChanged(selectedTemplateName: string | null) {
+    if (selectedTemplateName !== null) {
+      this.tService.loadTemplate(selectedTemplateName);
+    }
+
     this.eventSelectTemplate.emit(selectedTemplateName)
   }
 }

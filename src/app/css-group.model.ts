@@ -23,6 +23,7 @@ export interface CssValue {
 export class CssGroup {
   name = '';
   depth = 0;
+  template: string | null = null;
 
   breakpoints = new Map<BreakpointTypes, Map<CssPropertyTypes, CssValue>>();
   toggle: { [key: string]: boolean } = {}

@@ -3,7 +3,10 @@
     <h2>
       {{cssGroup.name}}
     </h2>
-    <select-template></select-template>
+    <select-template
+      [templateName]="cssGroup.template"
+      (eventSelectTemplate)="cssGroup.template = $event">
+    </select-template>
   </header>
 
   <section *ngFor='let breakpoint of (cssGroup.breakpoints | keyvalue: unsorted)'>

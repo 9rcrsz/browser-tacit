@@ -1,6 +1,7 @@
 <mat-form-field appearance="fill">
   <mat-label>Template</mat-label>
   <mat-select [(ngModel)]="templateName" (valueChange)="onChanged($event)">
+    <mat-option [value]="null">Default</mat-option>
     <mat-option [value]="'png'">PNG</mat-option>
   </mat-select>
 </mat-form-field>

@@ -335,12 +335,13 @@ const ddd = {
 export class AppComponent implements OnInit {
   title = 'browser-tacit';
   cssGroups$ = new BehaviorSubject<Map<string, CssGroup>>(new Map<string, CssGroup>());
+  templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   constructor(protected cssService: CssService, protected templatesService: TemplatesService) {
   }
 
   ngOnInit() {
-    this.subscribe();
+    // this.subscribe();
 
     this.cssGroups$.next(this.cssService.buildCssGroupsMap(ddd));
   }
@@ -349,15 +350,20 @@ export class AppComponent implements OnInit {
     this.send({type: 'set-variables', variables: [data]});
   }
 
-  templateSelected(templateName: string) {
-    this.templatesService.templates.get(templateName)!
-      .pipe(take(1))
-      .subscribe(data => {
-        this.cssGroups$.getValue().forEach(cssGroup => {
-          CssGroupFactory.populateHandler(cssGroup).populate(data)
-        })
-      });
+  templateSelected(templateName: string | null) {
+    this.reset();
+    this.templateName$.next(templateName);
 
+    if (templateName !== null) {
+      this.templatesService.templates.get(templateName)!
+        .pipe(take(1))
+        .subscribe(data => {
+          this.cssGroups$.getValue().forEach(cssGroup => {
+            cssGroup.template = templateName;
+            CssGroupFactory.populateHandler(cssGroup).populate(data)
+          })
+        });
+    }
   }
 
   send(request: { type: string, variables?: [{ key: string, value: string }] } = {type: 'get-variables'}) {
@@ -383,6 +389,7 @@ export class AppComponent implements OnInit {
   }
 
   reset() {
+    this.templateName$.next(null);
     localStorage.clear();
     this.cssGroups$.getValue().forEach(cssGroup => {
       cssGroup.breakpoints.forEach(breakpoint => {

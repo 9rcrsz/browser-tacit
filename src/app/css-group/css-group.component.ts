@@ -19,6 +19,7 @@ export class CssGroupComponent implements OnInit {
   }
 
   onChanged(property: { key: string, value: CssValue }, breakpoint: BreakpointTypes) {
+    this.cssGroup.template = null;
     localStorage.setItem(property.value.name, property.value.current);
     this.eventUpdate.emit({key: property.value.name, value: property.value.current})
     console.log(property.value.name, property, this.cssGroup)
