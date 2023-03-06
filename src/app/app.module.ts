@@ -10,6 +10,7 @@ import {SelectTemplateModule} from "./select-template";
 import {ColorsGroupModel} from "./colors-group";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { environment } from '../environments/environment';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { environment } from '../environments/environment';
                 HttpClientModule,
                 SelectTemplateModule,
                 ColorsGroupModel,
-                MatExpansionModule],
+                MatExpansionModule,
+                environment.production ? [] : AkitaNgDevtools.forRoot()],
   providers: [],
   bootstrap: [AppComponent]
 })
