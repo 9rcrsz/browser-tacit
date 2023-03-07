@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BreakpointTypes, CssGroup, CssValue} from "../css-group.model";
+import {CssGroup} from "@app/models/css-group.model";
+import {BreakpointTypes} from "@app/models/breakpoint-types.enum";
+import {CssValue} from "@app/models/css-value.model";
 
 @Component({
   selector: 'app-css-group',

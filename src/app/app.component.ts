@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {CssGroup} from "./css-group.model";
-import {CssService} from "./services/css.service";
-import {CssGroupExport} from "./css-group.export";
-import {CssGroupFactory} from "./css-group.factory";
-import {TemplatesService} from "./services/templates.service";
 import {take} from "rxjs/operators";
-import {Colors} from "./colors.model";
+import {Colors} from "@app/models/colors.model";
+import {CssGroup} from "@app/models/css-group.model";
+import {CssService} from "@app/services/css.service";
+import {TemplatesService} from "@app/services/templates.service";
+import {createCssGroupExport, createCssGroupPopulate} from "@app/factories/css-group.factory";
+import {createColors} from "@app/factories/colors.factory";
 
 declare var chrome: any;
 
@@ -1371,7 +1371,7 @@ const ddd = [
 })
 export class AppComponent implements OnInit {
   title = 'browser-tacit';
-  colors$ = new BehaviorSubject<Colors>(new Colors());
+  colors$ = new BehaviorSubject<Colors>(createColors());
   cssGroups$ = new BehaviorSubject<Map<string, CssGroup>>(new Map<string, CssGroup>());
   templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   tmp: Array<Map<string, CssGroup>> = [];
@@ -1403,7 +1403,7 @@ export class AppComponent implements OnInit {
 
           this.cssGroups$.getValue().forEach(cssGroup => {
             cssGroup.template = templateName;
-            CssGroupFactory.populateHandler(cssGroup).populate(data)
+            createCssGroupPopulate(cssGroup).populate(data)
           })
         });
     }
@@ -1420,8 +1420,7 @@ export class AppComponent implements OnInit {
   export() {
     let variables: Array<string> = [];
     this.cssGroups$.getValue().forEach(cssGroup => {
-      const tmpForExport = new CssGroupExport(cssGroup);
-      variables = [...variables, ...tmpForExport.export()]
+      variables = [...variables, ...createCssGroupExport(cssGroup).export()]
     });
 
     navigator.clipboard.writeText(variables.join("\r\n")).then(function () {

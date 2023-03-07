@@ -1,6 +1,9 @@
 import {Injectable} from "@angular/core";
-import {BreakpointTypes, CssGroup, CssPropertyTypes} from "../css-group.model";
-import {TemplatesEnum} from "../templates.enum";
+import {CssGroup} from "@app/models/css-group.model";
+import {createCssGroup} from "@app/factories/css-group.factory";
+import {BreakpointTypes} from "@app/models/breakpoint-types.enum";
+import {CssPropertyTypes} from "@app/models/css-propert-types.enum";
+import {TemplatesEnum} from "@app/models/templates.enum";
 
 @Injectable({providedIn: "root"})
 export class CssService {
@@ -26,7 +29,7 @@ export class CssService {
 
       const groupName = preparedVariable.variableParts.join('_');
       if (!cssGroups.get(groupName)) {
-        cssGroups.set(groupName, new CssGroup());
+        cssGroups.set(groupName, createCssGroup());
       }
 
       const cssGroup = cssGroups.get(groupName);

@@ -1,4 +1,4 @@
-import {BreakpointTypes} from "../css-group.model";
+import {BreakpointTypes} from "@app/models/breakpoint-types.enum";
 
 export class HelperService {
   static buildName(property: string, name: string, breakpoint: BreakpointTypes): string {

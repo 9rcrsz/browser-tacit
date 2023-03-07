@@ -1,4 +1,4 @@
-import {CssGroup} from "./css-group.model";
+import {CssGroup} from "@app/models/css-group.model";
 
 export class CssGroupPopulate {
   protected model: CssGroup;

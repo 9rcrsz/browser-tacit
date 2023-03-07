@@ -1,4 +1,6 @@
-import {CssGroup, CssPropertyTypes, CssValue} from "./css-group.model";
+import {CssGroup} from "@app/models/css-group.model";
+import {CssValue} from "@app/models/css-value.model";
+import {CssPropertyTypes} from "@app/models/css-propert-types.enum";
 
 export class CssGroupExport {
   protected model: CssGroup;

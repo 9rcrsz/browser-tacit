@@ -5,12 +5,6 @@
     "outDir": "./out-tsc/app",
     "types": []
   },
-  "paths": {
-    "@app/*": [
-      "./src/app/*",
-      "./src/app"
-    ],
-  },
   "files": [
     "src/main.ts",
     "src/polyfills.ts"

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Colors} from "../colors.model";
+import {Colors} from "@app/models/colors.model";
 
 @Component({
   selector: 'app-colors-group',

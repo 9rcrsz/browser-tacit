@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {TemplatesService} from "../services/templates.service";
 import {take} from "rxjs/operators";
+import {TemplatesService} from "@app/services/templates.service";
 
 @Component({
   selector: 'select-template',
