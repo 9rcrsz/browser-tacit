@@ -9,7 +9,8 @@ export function createCssGroup(params?: Partial<CssGroup>): CssGroup {
   const tmp = {
     name: params?.name ?? '',
     depth: params?.depth ?? 0,
-    breakpoints: params?.breakpoints ?? new Map<BreakpointTypes, Map<CssPropertyTypes, CssValue>>()
+    breakpoints: params?.breakpoints ?? new Map<BreakpointTypes, Map<CssPropertyTypes, CssValue>>(),
+    toggle: params?.toggle ?? {}
   } as CssGroup;
 
   for (let breakpointTypesKey in BreakpointTypes) {

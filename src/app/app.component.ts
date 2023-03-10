@@ -7,6 +7,8 @@ import {CssService} from "@app/services/css.service";
 import {TemplatesService} from "@app/services/templates.service";
 import {createCssGroupExport, createCssGroupPopulate} from "@app/factories/css-group.factory";
 import {createColors} from "@app/factories/colors.factory";
+import {CssGroupsStore} from "@app/store/state/css-groups.store";
+import {CssGroupsQuery} from "@app/store/state/css-groups.query";
 
 declare var chrome: any;
 
@@ -1376,15 +1378,22 @@ export class AppComponent implements OnInit {
   templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   tmp: Array<Map<string, CssGroup>> = [];
 
-  constructor(protected cssService: CssService, protected templatesService: TemplatesService) {
+  constructor(protected cssService: CssService,
+              protected templatesService: TemplatesService,
+              protected cssGroupsStore: CssGroupsStore,
+              public cssGroupsQuery: CssGroupsQuery) {
   }
 
   ngOnInit() {
     // this.subscribe();
 
+
     ddd.forEach(d => {
       this.cssGroups$.next(new Map([...this.cssGroups$.getValue(), ...this.cssService.buildCssGroupsMap(d)]));
+      this.cssGroupsStore.add([...this.cssService.buildCssGroupsMap(d).values()]);
+
     });
+
   }
 
   onChanged(data: { key: string, value: string }) {

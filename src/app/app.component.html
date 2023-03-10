@@ -21,12 +21,12 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <ng-container *ngFor="let cssGroup of cssGroups$ | async | keyvalue">
-    <mat-accordion *ngIf="cssGroup.value.depth === 1">
+  <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async">
+    <mat-accordion>
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{cssGroup.value.name}}
+            {{cssGroup.name}}
           </mat-panel-title>
           <!--        <mat-panel-description>-->
           <!--          This is a summary of the content-->
@@ -34,7 +34,7 @@
         </mat-expansion-panel-header>
 
         <app-css-group
-          [cssGroup]="cssGroup.value"
+          [cssGroup]="cssGroup"
           (eventUpdate)="onChanged($event)">
         </app-css-group>
 
