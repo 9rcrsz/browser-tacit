@@ -1,14 +1,14 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
-import {take} from "rxjs/operators";
-import {Colors} from "@app/models/colors.model";
-import {CssGroup} from "@app/models/css-group.model";
-import {CssService} from "@app/services/css.service";
-import {TemplatesService} from "@app/services/templates.service";
-import {createCssGroupExport, createCssGroupPopulate} from "@app/factories/css-group.factory";
-import {createColors} from "@app/factories/colors.factory";
-import {CssGroupsStore} from "@app/store/state/css-groups.store";
-import {CssGroupsQuery} from "@app/store/state/css-groups.query";
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from "rxjs";
+import { take } from "rxjs/operators";
+import { Colors } from "@app/models/colors.model";
+import { CssGroup } from "@app/models/css-group.model";
+import { CssService } from "@app/services/css.service";
+import { TemplatesService } from "@app/services/templates.service";
+import { createCssGroupExport, createCssGroupPopulate } from "@app/factories/css-group.factory";
+import { createColors } from "@app/factories/colors.factory";
+import { CssGroupsStore } from "@app/store/state/css-groups.store";
+import { CssGroupsQuery } from "@app/store/state/css-groups.query";
 
 declare var chrome: any;
 
@@ -1374,14 +1374,12 @@ const ddd = [
 export class AppComponent implements OnInit {
   title = 'browser-tacit';
   colors$ = new BehaviorSubject<Colors>(createColors());
-  cssGroups$ = new BehaviorSubject<Map<string, CssGroup>>(new Map<string, CssGroup>());
   templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-  tmp: Array<Map<string, CssGroup>> = [];
 
   constructor(protected cssService: CssService,
-              protected templatesService: TemplatesService,
-              protected cssGroupsStore: CssGroupsStore,
-              public cssGroupsQuery: CssGroupsQuery) {
+    protected templatesService: TemplatesService,
+    protected cssGroupsStore: CssGroupsStore,
+    public cssGroupsQuery: CssGroupsQuery) {
   }
 
   ngOnInit() {
@@ -1389,15 +1387,13 @@ export class AppComponent implements OnInit {
 
 
     ddd.forEach(d => {
-      this.cssGroups$.next(new Map([...this.cssGroups$.getValue(), ...this.cssService.buildCssGroupsMap(d)]));
       this.cssGroupsStore.add([...this.cssService.buildCssGroupsMap(d).values()]);
-
     });
 
   }
 
   onChanged(data: { key: string, value: string }) {
-    this.send({type: 'set-variables', variables: [data]});
+    this.send({ type: 'set-variables', variables: [data] });
   }
 
   templateSelected(templateName: string | null) {
@@ -1410,16 +1406,16 @@ export class AppComponent implements OnInit {
         .subscribe(data => {
           this.colors$.getValue().template = templateName;
 
-          this.cssGroups$.getValue().forEach(cssGroup => {
-            cssGroup.template = templateName;
-            createCssGroupPopulate(cssGroup).populate(data)
-          })
+          // this.cssGroups$.getValue().forEach(cssGroup => {
+          //   cssGroup.template = templateName;
+          //   createCssGroupPopulate(cssGroup).populate(data)
+          // })
         });
     }
   }
 
-  send(request: { type: string, variables?: [{ key: string, value: string }] } = {type: 'get-variables'}) {
-    chrome.tabs.query({active: true, lastFocusedWindow: true}).then((data: any) => {
+  send(request: { type: string, variables?: [{ key: string, value: string }] } = { type: 'get-variables' }) {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }).then((data: any) => {
       chrome.tabs.sendMessage(data[0].id, request).then((d: any) => {
         console.log(d);
       });
@@ -1427,38 +1423,40 @@ export class AppComponent implements OnInit {
   }
 
   export() {
-    let variables: Array<string> = [];
-    this.cssGroups$.getValue().forEach(cssGroup => {
-      variables = [...variables, ...createCssGroupExport(cssGroup).export()]
-    });
+    // let variables: Array<string> = [];
+    // this.cssGroups$.getValue().forEach(cssGroup => {
+    //   variables = [...variables, ...createCssGroupExport(cssGroup).export()]
+    // });
 
-    navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
-      alert('Copied to clipboard.');
-    }, function (err) {
-      console.error('Async: Could not copy text: ', err);
-    });
+    // navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
+    //   alert('Copied to clipboard.');
+    // }, function (err) {
+    //   console.error('Async: Could not copy text: ', err);
+    // });
   }
 
   reset() {
     this.templateName$.next(null);
     localStorage.clear();
-    this.cssGroups$.getValue().forEach(cssGroup => {
-      cssGroup.breakpoints.forEach(breakpoint => {
-        breakpoint.forEach(property => {
-          property.current = property.default;
-        });
-      });
-    });
+    // this.cssGroups$.getValue().forEach(cssGroup => {
+    //   for (const breakpoint in cssGroup.bps) {
+    //     for (const property in cssGroup.bps[breakpoint]) {
+    //       cssGroup.bps[breakpoint][property].current = cssGroup.bps[breakpoint][property].default;
+    //     }
+
+    //   }
+    // });
   }
 
   subscribe() {
     chrome.runtime.onMessage.addListener((request: { moduleClassName: string, vars: Array<string> }, sender: any, sendResponse: any) => {
-        // this.cssGroups$.next(this.cssService.buildCssGroupsMap(request));
-
-        console.log(this.cssGroups$.getValue());
-
-        sendResponse({msg: "OK"});
-      }
+      // this.cssGroups$.next(this.cssService.buildCssGroupsMap(request));
+      sendResponse({ msg: "OK" });
+    }
     );
+  }
+
+  trackByName(index: number, cssGroup: CssGroup) {
+    return cssGroup.name;
   }
 }

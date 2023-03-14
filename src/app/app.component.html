@@ -21,7 +21,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async">
+  <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async; trackBy: trackByName">
     <mat-accordion>
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>

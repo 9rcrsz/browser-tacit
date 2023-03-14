@@ -1,6 +1,6 @@
 :host {
 
-  > header {
+  >header {
     width: 100%;
     background: #F1F1F1;
     position: fixed;
@@ -11,7 +11,13 @@
     z-index: 99;
   }
 
-  > article {
+  >article {
     padding: 100px 0;
+  }
+
+  .mat-accordion {
+    .mat-expansion-panel {
+      margin: 16px 0;
+    }
   }
 }

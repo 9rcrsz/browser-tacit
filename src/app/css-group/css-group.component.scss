@@ -1,9 +1,8 @@
 :host {
-  > article {
-    padding: 0 24px;
+  >article {
 
-    > header {
-      width: 100%;
+    .wo-header {
+      padding: 16px 24px 0 24px;
       display: flex;
       align-items: center;
 
@@ -12,12 +11,25 @@
       }
     }
 
-    ul {
-      list-style-type: none;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      display: flex;
-      gap: 12px;
+    .wo-main {
+      padding: 0 24px;
+
+      ul {
+        list-style-type: none;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        display: flex;
+        gap: 12px;
+      }
+    }
+
+    &.wo-child-oppened {
+      >.wo-header {
+        display: none;
+      }
+      >.wo-main {
+        display: none;
+      }
     }
   }
 }

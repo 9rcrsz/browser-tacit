@@ -6,6 +6,5 @@ export interface CssGroup {
   name: string;
   depth: number;
   template: string | null;
-  breakpoints: Map<BreakpointTypes, Map<CssPropertyTypes, CssValue>>;
-  toggle: { [key: string]: boolean };
+  bps: {[breakpoint: string]: {[property: string]: CssValue}};
 }

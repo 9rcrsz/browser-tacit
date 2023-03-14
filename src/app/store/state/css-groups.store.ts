@@ -6,7 +6,7 @@ export interface CssGroupsState extends EntityState<CssGroup> {
 }
 
 @Injectable({providedIn: 'root'})
-@StoreConfig({name: 'css-groups', idKey: 'name'})
+@StoreConfig({name: 'css-groups', idKey: 'name', deepFreezeFn: obj=>obj})
 export class CssGroupsStore extends EntityStore<CssGroupsState> {
 
   constructor() {

@@ -12,14 +12,14 @@ export class CssGroupExport {
   export(): Array<string> {
     const variables: Array<string> = [];
 
-    this.model.breakpoints.forEach((breakpoint, breakpointName) => {
-      breakpoint.forEach((cssVal: CssValue, prop: CssPropertyTypes) => {
-        if (cssVal.current !== cssVal.default) {
-          const name = cssVal.name + ': ' + cssVal.current + ';';
-          variables.push(name);
-        }
-      })
-    });
+    // this.model.breakpoints.forEach((breakpoint, breakpointName) => {
+    //   breakpoint.forEach((cssVal: CssValue, prop: CssPropertyTypes) => {
+    //     if (cssVal.current !== cssVal.default) {
+    //       const name = cssVal.name + ': ' + cssVal.current + ';';
+    //       variables.push(name);
+    //     }
+    //   })
+    // });
 
     return variables;
   }

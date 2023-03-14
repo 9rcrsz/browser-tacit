@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {CssGroup} from "@app/models/css-group.model";
-import {createCssGroup} from "@app/factories/css-group.factory";
-import {BreakpointTypes} from "@app/models/breakpoint-types.enum";
-import {CssPropertyTypes} from "@app/models/css-propert-types.enum";
-import {TemplatesEnum} from "@app/models/templates.enum";
+import { Injectable } from "@angular/core";
+import { CssGroup } from "@app/models/css-group.model";
+import { createCssGroup } from "@app/factories/css-group.factory";
+import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
+import { CssPropertyTypes } from "@app/models/css-propert-types.enum";
+import { TemplatesEnum } from "@app/models/templates.enum";
 
-@Injectable({providedIn: "root"})
+@Injectable({ providedIn: "root" })
 export class CssService {
   buildCssGroupsMap(data: { moduleClassName: string, vars: Array<string> }): Map<string, CssGroup> {
     const cssGroups = new Map<string, CssGroup>();
@@ -36,13 +36,12 @@ export class CssService {
       cssGroup!.name = groupName;
       cssGroup!.depth = preparedVariable.variableParts.length;
 
-      const cssGroupBreakpoint = cssGroup!.breakpoints.get(preparedVariable.breakpoint as BreakpointTypes);
-      cssGroupBreakpoint!.set(preparedVariable.cssProperty as CssPropertyTypes, {
+      cssGroup!.bps[preparedVariable.breakpoint][preparedVariable.cssProperty] = {
         default: preparedVariable.value,
         current: currentValue,
         labels: preparedVariable.labels,
         name: tmpVar.split(':')[0].trim()
-      })
+      }
     });
 
     console.log(cssGroups)
@@ -51,14 +50,14 @@ export class CssService {
   }
 
   parseVariable(cssVariable: string): null |
-    {
-      cssProperty: string,
-      variableParts: Array<string>,
-      breakpoint: string,
-      labels: Array<string>,
-      value: string,
-      origin: string
-    } {
+  {
+    cssProperty: string,
+    variableParts: Array<string>,
+    breakpoint: string,
+    labels: Array<string>,
+    value: string,
+    origin: string
+  } {
 
     const labels = [];
     for (let templatesEnumKey in TemplatesEnum) {

@@ -8,14 +8,14 @@ export class CssGroupPopulate {
   }
 
   populate(template: Map<string, string>) {
-    this.model.breakpoints.forEach(breakpoint => {
-      breakpoint.forEach(cssValue => {
-        const templateValue = template.get(cssValue.name);
-        if (templateValue !== undefined) {
-          cssValue.current = templateValue;
-          localStorage.setItem(cssValue.name, cssValue.current);
-        }
-      })
-    });
+    // this.model.breakpoints.forEach(breakpoint => {
+    //   breakpoint.forEach(cssValue => {
+    //     const templateValue = template.get(cssValue.name);
+    //     if (templateValue !== undefined) {
+    //       cssValue.current = templateValue;
+    //       localStorage.setItem(cssValue.name, cssValue.current);
+    //     }
+    //   })
+    // });
   }
 }

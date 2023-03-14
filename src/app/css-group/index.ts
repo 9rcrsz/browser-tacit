@@ -7,6 +7,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {SelectTemplateModule} from "../select-template";
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {SelectTemplateModule} from "../select-template";
                 MatInputModule,
                 MatFormFieldModule,
                 MatCheckboxModule,
-                SelectTemplateModule
+                SelectTemplateModule,
+                MatExpansionModule
         ],
   providers: [],
 })

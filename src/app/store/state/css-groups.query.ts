@@ -14,4 +14,8 @@ export class CssGroupsQuery extends QueryEntity<CssGroupsState> {
   getFirstLevel$(): Observable<CssGroup[]> {
     return this.selectAll({filterBy: [(g: CssGroup) => g.depth === 1]});
   }
+
+  getLevel$(depth: number, searchPrefix: string):Observable<CssGroup[]>{
+    return this.selectAll({filterBy: [(g: CssGroup) => g.depth === depth && g.name.indexOf(searchPrefix) === 0]});
+  }
 }
