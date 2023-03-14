@@ -44,7 +44,7 @@ export class CssGroupComponent implements OnInit {
       console.log(5, tmp);
       return q;
     });
-    console.log(123)
+
     this.cssGroup.template = null;
     localStorage.setItem(property.value.name, property.value.current);
     this.eventUpdate.emit({ key: property.value.name, value: property.value.current })
@@ -58,7 +58,7 @@ export class CssGroupComponent implements OnInit {
       this.childOppenedMap.delete(name);
     }
 
-    this.eventChildOppened.emit({ name, toggle });
+    this.cssGroupsService.update(this.cssGroup.name, { disabled: !!this.childOppenedMap.size });
   }
 
   trackByName(index: number, cssGroup: CssGroup) {

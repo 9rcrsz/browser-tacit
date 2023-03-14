@@ -31,7 +31,10 @@ $browser-tacit-theme: mat.define-light-theme((color: (primary: $browser-tacit-pr
 
 $blackFont: rgba(0, 0, 0, 0.87);
 $midBlackFont: rgba(0, 0, 0, 0.6);
+$lowBlackFont: rgba(0, 0, 0, 0.4);
 $whiteFont: rgba(255, 255, 255, 0.87);
+$midWhiteFont: rgba(255, 255, 255, 0.6);
+$lowWhiteFont: rgba(255, 255, 255, 0.4);
 $bgMain: #f1f1f1;
 $bgCart: #333;
 
@@ -92,6 +95,16 @@ body {
         justify-content: flex-end;
         flex-grow: 1;
         color: $whiteFont;
+      }
+
+      &[aria-disabled="true"] {
+        .mat-expansion-panel-header-title {
+          color: $lowBlackFont;
+        }
+  
+        .mat-expansion-panel-header-description {
+          color: $lowBlackFont;
+        }
       }
     }
 

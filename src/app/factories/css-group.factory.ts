@@ -9,6 +9,7 @@ export function createCssGroup(params?: Partial<CssGroup>): CssGroup {
   const tmp = {
     name: params?.name ?? '',
     depth: params?.depth ?? 0,
+    disabled: params?.disabled ?? false,
     bps: params?.bps ?? {}
   } as CssGroup;
 

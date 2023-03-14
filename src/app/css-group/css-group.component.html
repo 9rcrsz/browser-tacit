@@ -25,9 +25,9 @@
 
   <ng-container *ngIf="cssGroupsQuery.getLevel$(cssGroup.depth+1, cssGroup.name) | async as childCssGroups">
 
-    <article *ngFor="let cssGroup of childCssGroups; trackBy: trackByName">
-      <mat-accordion>
-        <mat-expansion-panel hideToggle (opened)="childToggle(cssGroup.name, true)"
+    <mat-accordion [multi]="true">
+      <ng-container *ngFor="let cssGroup of childCssGroups; trackBy: trackByName">
+        <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled" (opened)="childToggle(cssGroup.name, true)"
           (closed)="childToggle(cssGroup.name, false)">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -41,8 +41,8 @@
           <app-css-group [cssGroup]="cssGroup"></app-css-group>
 
         </mat-expansion-panel>
-      </mat-accordion>
-    </article>
+      </ng-container>
+    </mat-accordion>
 
   </ng-container>
 

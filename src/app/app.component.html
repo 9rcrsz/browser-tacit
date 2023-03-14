@@ -3,44 +3,32 @@
   <button mat-button (click)="export()">Export</button>
   <button mat-button (click)="reset()">Reset</button>
   <select-template [templateName]="templateName$ | async"
-                   (eventSelectTemplate)="templateSelected($event)"></select-template>
+    (eventSelectTemplate)="templateSelected($event)"></select-template>
 </header>
 
 <article>
-  <mat-accordion>
+  <mat-accordion [multi]="true">
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Colors
         </mat-panel-title>
-        <!--        <mat-panel-description>-->
-        <!--          This is a summary of the content-->
-        <!--        </mat-panel-description>-->
       </mat-expansion-panel-header>
       <app-colors-group *ngIf="colors$ | async as colors" [colors]="colors"></app-colors-group>
     </mat-expansion-panel>
-  </mat-accordion>
 
-  <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async; trackBy: trackByName">
-    <mat-accordion>
-      <mat-expansion-panel hideToggle>
+    <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async; trackBy: trackByName">
+      <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{cssGroup.name}}
           </mat-panel-title>
-          <!--        <mat-panel-description>-->
-          <!--          This is a summary of the content-->
-          <!--        </mat-panel-description>-->
         </mat-expansion-panel-header>
 
-        <app-css-group
-          [cssGroup]="cssGroup"
-          (eventUpdate)="onChanged($event)">
-        </app-css-group>
-
+        <app-css-group [cssGroup]="cssGroup" (eventUpdate)="onChanged($event)"></app-css-group>
       </mat-expansion-panel>
-    </mat-accordion>
 
-  </ng-container>
+    </ng-container>
+  </mat-accordion>
+
 </article>
-
