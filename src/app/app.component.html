@@ -1,5 +1,5 @@
 <header>
-  <button mat-button (click)="send()">Get Variables</button>
+  <button mat-button (click)="sync()">Get Variables</button>
   <button mat-button (click)="export()">Export</button>
   <button mat-button (click)="reset()">Reset</button>
   <select-template [templateName]="templateName$ | async"
@@ -25,7 +25,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <app-css-group [cssGroup]="cssGroup" (eventUpdate)="onChanged($event)"></app-css-group>
+        <app-css-group [cssGroup]="cssGroup"></app-css-group>
       </mat-expansion-panel>
 
     </ng-container>

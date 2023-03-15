@@ -3,18 +3,17 @@ import { CssGroup } from "@app/models/css-group.model";
 import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
 import { CssValue } from "@app/models/css-value.model";
 import { CssGroupsService } from '@app/store/state/css-groups.service';
-import { CssPropertyTypes } from '@app/models/css-propert-types.enum';
 import { CssGroupsStore } from '@app/store/state/css-groups.store';
 import { CssGroupsQuery } from '@app/store/state/css-groups.query';
+import { ChromeService } from '@app/services/chrome.service';
 
 @Component({
   selector: 'app-css-group',
   templateUrl: './css-group.component.html',
   styleUrls: ['./css-group.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CssGroupComponent implements OnInit {
-  @Output() eventUpdate = new EventEmitter<{ key: string, value: string }>();
   @Output() eventChildOppened = new EventEmitter<{ name: string, toggle: boolean }>();
   @Input() cssGroup!: CssGroup;
   breakpointTypes = BreakpointTypes;
@@ -24,6 +23,7 @@ export class CssGroupComponent implements OnInit {
   constructor(
     protected cssGroupsService: CssGroupsService,
     protected cssGroupsStore: CssGroupsStore,
+    protected chromeService: ChromeService,
     public cssGroupsQuery: CssGroupsQuery) {
   }
 
@@ -47,7 +47,8 @@ export class CssGroupComponent implements OnInit {
 
     this.cssGroup.template = null;
     localStorage.setItem(property.value.name, property.value.current);
-    this.eventUpdate.emit({ key: property.value.name, value: property.value.current })
+    this.chromeService.send({ type: 'set-variables', variables: [{ key: property.value.name, value: property.value.current }] });
+
     console.log(property.value.name, property, this.cssGroup)
   }
 
