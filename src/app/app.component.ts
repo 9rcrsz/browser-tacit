@@ -55,29 +55,19 @@ export class AppComponent implements OnInit {
   }
 
   export() {
-    // let variables: Array<string> = [];
-    // this.cssGroups$.getValue().forEach(cssGroup => {
-    //   variables = [...variables, ...createCssGroupExport(cssGroup).export()]
-    // });
+    const variables = this.cssGroupsService.export();
 
-    // navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
-    //   alert('Copied to clipboard.');
-    // }, function (err) {
-    //   console.error('Async: Could not copy text: ', err);
-    // });
+    navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
+      alert('Copied to clipboard.');
+    }, function (err) {
+      console.error('Async: Could not copy text: ', err);
+    });
   }
 
   reset() {
     this.templateName$.next(null);
     localStorage.clear();
-    // this.cssGroups$.getValue().forEach(cssGroup => {
-    //   for (const breakpoint in cssGroup.bps) {
-    //     for (const property in cssGroup.bps[breakpoint]) {
-    //       cssGroup.bps[breakpoint][property].current = cssGroup.bps[breakpoint][property].default;
-    //     }
-
-    //   }
-    // });
+    this.cssGroupsService.reset();
   }
 
   trackByName(index: number, cssGroup: CssGroup) {

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
 import { CssGroupsStore } from '@app/store/state/css-groups.store';
 import { CssGroup } from "@app/models/css-group.model";
 import { CssService } from '@app/services/css.service';
+import { createCssGroupExport } from '@app/factories/css-group.factory';
 
 const ddd: Array<{ moduleClassName: string, vars: string[] }> = [
   {
@@ -1384,8 +1384,30 @@ export class CssGroupsService {
     this.cssGroupsStore.update(id, cssGroup);
   }
 
-  remove(id: ID) {
+  remove(id: string) {
     this.cssGroupsStore.remove(id);
+  }
+
+  reset() {
+    const cssGroups: Array<CssGroup> = Object.values(JSON.parse(JSON.stringify(this.cssGroupsStore.getValue().entities)));
+    cssGroups.forEach((cssGroup: CssGroup) => {
+      for (const breakpoint in cssGroup.bps) {
+        for (const property in cssGroup.bps[breakpoint]) {
+          cssGroup.bps[breakpoint][property].current = cssGroup.bps[breakpoint][property].default;
+        }
+      }
+    });
+
+    this.cssGroupsStore.set(cssGroups);
+  }
+
+  export() {
+    let variables: Array<string> = [];
+    Object.values(this.cssGroupsStore.getValue().entities ?? {}).forEach(cssGroup => {
+      variables = [...variables, ...createCssGroupExport(cssGroup).export()]
+    });
+
+    return variables;
   }
 
 }
