@@ -3,9 +3,10 @@ import { CssGroup } from "@app/models/css-group.model";
 import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
 import { CssValue } from "@app/models/css-value.model";
 import { CssGroupsService } from '@app/store/state/css-groups.service';
-import { CssGroupsStore } from '@app/store/state/css-groups.store';
 import { CssGroupsQuery } from '@app/store/state/css-groups.query';
 import { ChromeService } from '@app/services/chrome.service';
+import { take } from 'rxjs/operators';
+import { TemplatesService } from '@app/services/templates.service';
 
 @Component({
   selector: 'app-css-group',
@@ -21,8 +22,8 @@ export class CssGroupComponent implements OnInit, OnChanges {
 
   constructor(
     protected cssGroupsService: CssGroupsService,
-    protected cssGroupsStore: CssGroupsStore,
     protected chromeService: ChromeService,
+    protected templatesService: TemplatesService,
     public cssGroupsQuery: CssGroupsQuery) {
   }
 
@@ -51,6 +52,18 @@ export class CssGroupComponent implements OnInit, OnChanges {
     this.chromeService.send({ type: 'set-variables', variables: [{ key: property.value.name, value: property.value.current }] });
 
     console.log(property.value.name, property, this.cssGroup)
+  }
+
+  templateSelected(templateName: string | null) {
+    if (templateName !== null) {
+      this.templatesService.templates.get(templateName)!
+        .pipe(take(1))
+        .subscribe(data => {
+          this.cssGroupsService.setCascadeTemplate(this.cssGroup, templateName, data);
+        });
+    } else {
+      this.cssGroupsService.setCascadeTemplate(this.cssGroup, null, new Map());
+    }
   }
 
   childToggle(name: string, toggle: boolean): void {

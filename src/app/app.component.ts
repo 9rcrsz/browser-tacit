@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
   }
 
   templateSelected(templateName: string | null) {
-    this.reset();
     this.templateName$.next(templateName);
 
     if (templateName !== null) {

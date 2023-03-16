@@ -3,7 +3,7 @@
     <h2>
       {{cssGroup.name}}
     </h2>
-    <select-template [templateName]="cssGroup.template" (eventSelectTemplate)="cssGroup.template = $event">
+    <select-template [templateName]="cssGroup.template" (eventSelectTemplate)="templateSelected($event)">
     </select-template>
   </header>
 
