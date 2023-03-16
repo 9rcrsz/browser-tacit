@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {QueryEntity} from '@datorama/akita';
-import {CssGroupsStore, CssGroupsState} from './css-groups.store';
+import { Injectable } from '@angular/core';
+import { QueryEntity } from '@datorama/akita';
+import { CssGroupsStore, CssGroupsState } from '@app/store/state/css-groups.store';
 import { Observable } from 'rxjs';
 import { CssGroup } from '@app/models/css-group.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CssGroupsQuery extends QueryEntity<CssGroupsState> {
 
   constructor(protected store: CssGroupsStore) {
@@ -12,10 +12,10 @@ export class CssGroupsQuery extends QueryEntity<CssGroupsState> {
   }
 
   getFirstLevel$(): Observable<CssGroup[]> {
-    return this.selectAll({filterBy: [(g: CssGroup) => g.depth === 1]});
+    return this.selectAll({ filterBy: [(g: CssGroup) => g.depth === 1] });
   }
 
-  getLevel$(depth: number, searchPrefix: string):Observable<CssGroup[]>{
-    return this.selectAll({filterBy: [(g: CssGroup) => g.depth === depth && g.name.indexOf(searchPrefix) === 0]});
+  getLevel$(depth: number, searchPrefix: string): Observable<CssGroup[]> {
+    return this.selectAll({ filterBy: [(g: CssGroup) => g.depth === depth && g.name.indexOf(searchPrefix) === 0] });
   }
 }

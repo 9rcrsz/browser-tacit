@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CssGroup } from "@app/models/css-group.model";
 import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
 import { CssValue } from "@app/models/css-value.model";
@@ -13,8 +13,7 @@ import { ChromeService } from '@app/services/chrome.service';
   styleUrls: ['./css-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CssGroupComponent implements OnInit {
-  @Output() eventChildOppened = new EventEmitter<{ name: string, toggle: boolean }>();
+export class CssGroupComponent implements OnInit, OnChanges {
   @Input() cssGroup!: CssGroup;
   breakpointTypes = BreakpointTypes;
   toggle: { [key: string]: boolean } = {};
@@ -25,6 +24,12 @@ export class CssGroupComponent implements OnInit {
     protected cssGroupsStore: CssGroupsStore,
     protected chromeService: ChromeService,
     public cssGroupsQuery: CssGroupsQuery) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.cssGroup && this.cssGroup) {
+      this.cssGroup = JSON.parse(JSON.stringify(this.cssGroup));
+    }
   }
 
   ngOnInit(): void {
@@ -38,14 +43,10 @@ export class CssGroupComponent implements OnInit {
   }
 
   onChanged(property: { key: string, value: CssValue }, breakpoint: BreakpointTypes) {
-    this.cssGroupsStore.update(this.cssGroup.name, (q: CssGroup) => {
-      const tmp = JSON.parse(JSON.stringify(q))
-      q.bps[breakpoint][property.key].current = '222';
-      console.log(5, tmp);
-      return q;
-    });
-
+    this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
     this.cssGroup.template = null;
+    this.cssGroupsService.update(this.cssGroup.name, this.cssGroup);
+
     localStorage.setItem(property.value.name, property.value.current);
     this.chromeService.send({ type: 'set-variables', variables: [{ key: property.value.name, value: property.value.current }] });
 
