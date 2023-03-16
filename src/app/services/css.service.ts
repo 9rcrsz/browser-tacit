@@ -34,6 +34,7 @@ export class CssService {
 
       const cssGroup = cssGroups.get(groupName);
       cssGroup!.name = groupName;
+      cssGroup!.template = localStorage.getItem('--template_' + groupName) ?? null;
       cssGroup!.depth = preparedVariable.variableParts.length;
 
       cssGroup!.bps[preparedVariable.breakpoint][preparedVariable.cssProperty] = {
@@ -43,8 +44,6 @@ export class CssService {
         name: tmpVar.split(':')[0].trim()
       }
     });
-
-    console.log(cssGroups)
 
     return cssGroups;
   }

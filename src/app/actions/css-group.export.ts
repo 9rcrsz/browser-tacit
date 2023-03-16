@@ -10,6 +10,10 @@ export class CssGroupExport {
   export(): Array<string> {
     const variables: Array<string> = [];
 
+    if (this.model.template) {
+      variables.push('--template_' + this.model.name + ': ' + this.model.template + ';');
+    }
+
     Object.keys(this.model.bps).forEach(breakpointName => {
       const breakpoint = this.model.bps[breakpointName];
 

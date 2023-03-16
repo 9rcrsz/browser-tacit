@@ -40,12 +40,10 @@ export class AppComponent implements OnInit {
         .pipe(take(1))
         .subscribe(data => {
           this.colors$.getValue().template = templateName;
-
-          // this.cssGroups$.getValue().forEach(cssGroup => {
-          //   cssGroup.template = templateName;
-          //   createCssGroupPopulate(cssGroup).populate(data)
-          // })
+          this.cssGroupsService.setTemplate(templateName, data);
         });
+    }else{
+      this.cssGroupsService.setTemplate(null, new Map());
     }
   }
 
