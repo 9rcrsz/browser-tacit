@@ -15,6 +15,7 @@ export class CssService {
       if (!preparedVariable || preparedVariable.variableParts[0] !== data.moduleClassName) {
         return;
       }
+      console.log(preparedVariable)
 
       // restore value form the local storage
       const storageProperty = localStorage.getItem(preparedVariable.origin);
@@ -44,6 +45,8 @@ export class CssService {
         name: tmpVar.split(':')[0].trim()
       }
     });
+
+    console.log(cssGroups)
 
     return cssGroups;
   }
