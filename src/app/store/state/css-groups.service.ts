@@ -1557,7 +1557,7 @@ export class CssGroupsService {
     this.cssGroupsStore.set(cssGroups);
   }
 
-  export() {
+  export(): Array<string> {
     let variables: Array<string> = [];
     Object.values(this.cssGroupsStore.getValue().entities ?? {}).forEach(cssGroup => {
       variables = [...variables, ...createCssGroupExport(cssGroup).export()]
