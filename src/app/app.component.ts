@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
 
   templateSelected(templateName: string | null) {
     this.templateName$.next(templateName);
+    localStorage.clear();
 
     if (templateName !== null) {
       this.templatesService.templates.get(templateName)!
@@ -40,13 +41,14 @@ export class AppComponent implements OnInit {
         .subscribe(data => {
           this.colors$.getValue().template = templateName;
           this.cssGroupsService.setTemplate(templateName, data);
+
+          this.chromeService.send({ type: 'remove-variables' });
+          this.chromeService.send({ type: 'set-variables', variables: this.cssGroupsService.export() })
         });
     } else {
       this.cssGroupsService.setTemplate(null, new Map());
+      this.chromeService.send({ type: 'remove-variables' });
     }
-
-    this.chromeService.send({ type: 'remove-variables' });
-    this.chromeService.send({ type: 'set-variables', variables: this.cssGroupsService.export() })
   }
 
   sync() {

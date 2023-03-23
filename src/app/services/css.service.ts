@@ -15,7 +15,7 @@ export class CssService {
       if (!preparedVariable || preparedVariable.variableParts[0] !== data.moduleClassName) {
         return;
       }
-      console.log(preparedVariable)
+      // console.log(preparedVariable)
 
       // restore value form the local storage
       const storageProperty = localStorage.getItem(preparedVariable.origin);
