@@ -4,7 +4,7 @@ import { take } from "rxjs/operators";
 import { Colors } from "@app/models/colors.model";
 import { CssGroup } from "@app/models/css-group.model";
 import { TemplatesService } from "@app/services/templates.service";
-import { createColors } from "@app/factories/colors.factory";
+import { createColors, createColorsExport } from "@app/factories/colors.factory";
 import { CssGroupsQuery } from "@app/store/state/css-groups.query";
 import { CssGroupsService } from '@app/store/state/css-groups.service';
 import { ChromeService } from '@app/services/chrome.service';
@@ -57,7 +57,8 @@ export class AppComponent implements OnInit {
   }
 
   export() {
-    const variables = this.cssGroupsService.export();
+    const variables = [...this.cssGroupsService.export(),
+    ...createColorsExport(this.colors$.getValue()).export()];
 
     navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
       alert('Copied to clipboard.');

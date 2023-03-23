@@ -1,4 +1,4 @@
 export interface Colors {
   template: string | null;
-  list: { [key: string]: string | number };
+  list: { [key: string]: string };
 }
