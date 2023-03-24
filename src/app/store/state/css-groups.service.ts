@@ -1164,7 +1164,7 @@ const ddd: Array<{ moduleClassName: string, vars: string[] }> = [
       '--display_wo-item-component_wo-wrap_wo-footer_wo-goto-add_mobile: none',
       '--width_wo-item-component_wo-wrap_wo-footer_wo-goto-add_mobile: 100%',
       '--padding_wo-item-component_wo-wrap_wo-footer_wo-goto-add_mobile: 0',
-      '--margin_wo-item-component_wo-wrap_wo-footer_wo-goto-add_mobile: 0'
+      '--margin_wo-item-component_wo-wrap_wo-footer_wo-goto-add_mobile: 0',
     ]
   },
   {
