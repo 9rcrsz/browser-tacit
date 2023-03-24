@@ -116,3 +116,8 @@
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_mat-icon: lmi;
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-label: lmi;
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-price: lmi;
+
+--display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: block;
+--display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_laptop: block;
+--display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_tablet: block;
+--display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_mobile: block;
