@@ -97,7 +97,11 @@
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals_li: lmi;
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals_li_first-child_before: lmi;
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals_li_first-child_after: lmi;
---template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges: lmi;
+--width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges: auto;
+--width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_desktop: auto;
+--width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_laptop: auto;
+--width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_tablet: auto;
+--width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_mobile: auto;
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-discount: lmi;
 --template_wo-item-component_wo-wrap_wo-footer_wo-goto-add: lmi;
 --template_paid-with: lmi;

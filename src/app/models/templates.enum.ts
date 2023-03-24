@@ -1,5 +1,8 @@
 export enum TemplatesEnum {
   'order-part' = 'order-part',
+  'button-normal' = 'button-normal',
+  'button-outline' = 'button-outline',
+  'button-text' = 'button-text',
   'txt-h1' = 'txt-h1',
   'txt-h2' = 'txt-h2',
   'txt-h3' = 'txt-h3',
