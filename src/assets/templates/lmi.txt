@@ -56,6 +56,7 @@
 --padding_wo-item-component_wo-wrap_wo-header_laptop: 32px 30px 12px 30px;
 --padding_wo-item-component_wo-wrap_wo-header_tablet: 24px 24px 10px 24px;
 --padding_wo-item-component_wo-wrap_wo-header_mobile: 12px 16px 10px 16px;
+--template_wo-item-component_wo-wrap_wo-header_wo-name: lmi;
 --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name: flex-start;
 --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_laptop: flex-start;
 --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_tablet: flex-start;
@@ -97,12 +98,18 @@
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals_li: lmi;
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals_li_first-child_before: lmi;
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals_li_first-child_after: lmi;
+--template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges: lmi;
 --width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges: auto;
 --width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_desktop: auto;
 --width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_laptop: auto;
 --width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_tablet: auto;
 --width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_mobile: auto;
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-discount: lmi;
+--template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: lmi;
+--display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: block;
+--display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_laptop: block;
+--display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_tablet: block;
+--display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_mobile: block;
 --template_wo-item-component_wo-wrap_wo-footer_wo-goto-add: lmi;
 --template_paid-with: lmi;
 --template_paid-with_header: lmi;
@@ -116,8 +123,3 @@
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_mat-icon: lmi;
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-label: lmi;
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-price: lmi;
-
---display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: block;
---display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_laptop: block;
---display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_tablet: block;
---display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_mobile: block;
