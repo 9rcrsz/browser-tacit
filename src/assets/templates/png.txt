@@ -5,3 +5,6 @@
   --display_order-part_paid-with_header_hr_laptop: none;
   --display_order-part_paid-with_header_hr_tablet: none;
   --display_order-part_paid-with_header_hr_mobile: none;
+  --wo_background: red;
+--wo_background_additional: green;
+--wo_background_warning: purple;

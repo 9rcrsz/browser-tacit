@@ -8,6 +8,7 @@ import { createColors, createColorsExport } from "@app/factories/colors.factory"
 import { CssGroupsQuery } from "@app/store/state/css-groups.query";
 import { CssGroupsService } from '@app/store/state/css-groups.service';
 import { ChromeService } from '@app/services/chrome.service';
+import { ColorsService } from './store/state/colors.service';
 
 @Component({
   selector: 'app-root',
@@ -17,13 +18,13 @@ import { ChromeService } from '@app/services/chrome.service';
 })
 export class AppComponent implements OnInit {
   title = 'browser-tacit';
-  colors$ = new BehaviorSubject<Colors>(createColors());
   templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   constructor(
     protected chromeService: ChromeService,
     protected templatesService: TemplatesService,
     protected cssGroupsService: CssGroupsService,
+    protected colorsService: ColorsService,
     public cssGroupsQuery: CssGroupsQuery) {
   }
 
@@ -39,7 +40,7 @@ export class AppComponent implements OnInit {
       this.templatesService.templates.get(templateName)!
         .pipe(take(1))
         .subscribe(data => {
-          this.colors$.getValue().template = templateName;
+          this.colorsService.setTemplate(templateName, data);
           this.cssGroupsService.setTemplate(templateName, data);
 
           this.chromeService.send({ type: 'remove-variables' });
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit {
         });
     } else {
       this.cssGroupsService.setTemplate(null, new Map());
+      this.colorsService.setTemplate(null, new Map());
       this.chromeService.send({ type: 'remove-variables' });
     }
   }
@@ -58,7 +60,7 @@ export class AppComponent implements OnInit {
 
   export() {
     const variables = [...this.cssGroupsService.export(),
-    ...createColorsExport(this.colors$.getValue()).export()];
+    ...this.colorsService.export()];
 
     navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
       alert('Copied to clipboard.');
@@ -71,6 +73,7 @@ export class AppComponent implements OnInit {
     this.templateName$.next(null);
     localStorage.clear();
     this.cssGroupsService.reset();
+    this.colorsService.reset();
     this.chromeService.send({ type: 'remove-variables' });
   }
 

@@ -12,8 +12,10 @@ export class ColorsExport {
     const variables: Array<string> = [];
 
     for (let i in this.model.list) {
-      const name = (ColorsEnum as any)[i] + ': ' + this.model.list[i] + ';';
-      variables.push(name);
+      if (this.model.list[i]) {
+        const name = (ColorsEnum as any)[i] + ': ' + this.model.list[i] + ';';
+        variables.push(name);
+      }
     }
 
     return variables;

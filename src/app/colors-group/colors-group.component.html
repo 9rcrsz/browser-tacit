@@ -1,15 +1,15 @@
 <article>
   <header>
     <h2>Colors</h2>
-    <select-template [templateName]="colors.template"
-                     (eventSelectTemplate)="colors.template = $event">
+    <select-template [templateName]="(queryService.template$ | async)!.template"
+                     (eventSelectTemplate)="selectTemplate($event)">
     </select-template>
   </header>
 
   <section>
 
     <ul>
-      <li *ngFor='let color of (colors.list | keyvalue)'>
+      <li *ngFor='let color of ((queryService.list$ | async)!.list| keyvalue); trackBy: trackBy'>
         <mat-form-field color="primary" appearance="fill">
           <mat-label>{{color.key}}</mat-label>
           <input matInput [(ngModel)]="color.value" (change)="onChanged(color)" [name]="color.key">

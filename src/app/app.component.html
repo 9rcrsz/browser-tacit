@@ -14,7 +14,7 @@
           Colors
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-colors-group *ngIf="colors$ | async as colors" [colors]="colors"></app-colors-group>
+      <app-colors-group></app-colors-group>
     </mat-expansion-panel>
 
     <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async; trackBy: trackByName">
