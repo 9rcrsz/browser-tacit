@@ -137,3 +137,9 @@
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_mat-icon: lmi;
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-label: lmi;
 --template_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-price: lmi;
+
+--width_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon: auto;
+--width_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_desktop: auto;
+--width_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_laptop: auto;
+--width_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_tablet: auto;
+--width_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_mobile: auto;
