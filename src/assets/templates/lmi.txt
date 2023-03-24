@@ -2,12 +2,13 @@
 --template_wo-items-groups-container_wo-list-container: lmi;
 --template_wo-items-groups-container_wo-health-info: lmi;
 --template_wo-items-groups-container_wo-health-info_p: lmi;
+--template_wo-items-group-component: lmi;
 --padding_wo-items-group-component: 20px 16px 0 16px;
 --padding_wo-items-group-component_desktop: 50px 108px 0 108px;
 --padding_wo-items-group-component_laptop: 50px 147px 0 147px;
 --padding_wo-items-group-component_tablet: 34px 24px 0 24px;
 --padding_wo-items-group-component_mobile: 20px 16px 0 16px;
---template_wo-items-group-component_wo-items-group-name: lmi;
+--color_txt-h3_wo-items-group-component_wo-items-group-name: var(--wo_text_mid_emphasis, rgba(42, 48, 58, 0.6));
 --template_wo-items-group-component_wo-items-group-desc: lmi;
 --template_wo-items-group-component_wo-item-group-img-wrap: lmi;
 --template_wo-items-group-component_wo-item-group-img-wrap_wo-item-group-img: lmi;
@@ -114,6 +115,7 @@
 --width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_tablet: auto;
 --width_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_mobile: auto;
 --template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-discount: lmi;
+--template_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: lmi;
 --display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: block;
 --margin_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: 0 0 0 auto;
 --display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_laptop: block;
