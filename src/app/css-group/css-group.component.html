@@ -13,12 +13,23 @@
     </h3>
     <ul *ngIf="toggle[breakpoint.key]">
       <li *ngFor="let property of breakpoint.value | keyvalue: unsorted">
-        <mat-form-field color="primary" appearance="fill">
-          <mat-label>{{property.key}}</mat-label>
-          <input matInput [(ngModel)]="property.value.current" [name]="'general'+property.key"
-            (change)="onChanged(property, breakpointTypes.general)">
-          <mat-hint *ngIf="property.value.labels?.length">{{property.value.labels!.join(', ')}}</mat-hint>
-        </mat-form-field>
+        <ng-container [ngSwitch]="property.key">
+          <app-select-color *ngSwitchCase="'color'" [(ngModel)]="property.value.current" [placeholder]="property.key"
+            (ngModelChange)="onChanged(property, breakpointTypes.general)">
+          </app-select-color>
+          <app-select-color *ngSwitchCase="'background-color'" [(ngModel)]="property.value.current"
+            [placeholder]="property.key" (ngModelChange)="onChanged(property, breakpointTypes.general)">
+          </app-select-color>
+
+          <mat-form-field color="primary" appearance="fill" *ngSwitchDefault>
+            <mat-label>{{property.key}}</mat-label>
+            <input matInput [(ngModel)]="property.value.current" [name]="'general'+property.key"
+              (change)="onChanged(property, breakpointTypes.general)">
+            <mat-hint *ngIf="property.value.labels?.length">{{property.value.labels!.join(', ')}}</mat-hint>
+          </mat-form-field>
+
+        </ng-container>
+
       </li>
     </ul>
   </main>
