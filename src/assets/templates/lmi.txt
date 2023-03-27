@@ -38,12 +38,11 @@
 --box-shadow_wo-item-component_wo-wrap_focus_tablet: 0 1px 4px 0 rgb(0 0 0 / 16%);
 --background-color_wo-item-component_wo-wrap_focus_mobile: var(--wo_card, #ffffff);
 --box-shadow_wo-item-component_wo-wrap_focus_mobile: 0 1px 4px 0 rgb(0 0 0 / 16%);
---template_wo-item-component_wo-wrap_focus_wo-footer: lmi;
---padding_wo-item-component_wo-wrap_focus_wo-footer: 4px 30px 30px 30px;
---padding_wo-item-component_wo-wrap_focus_wo-footer_desktop: 4px 30px 30px 30px;
---padding_wo-item-component_wo-wrap_focus_wo-footer_laptop: 4px 30px 30px 30px;
---padding_wo-item-component_wo-wrap_focus_wo-footer_tablet: 4px 24px 26px 24px;
---padding_wo-item-component_wo-wrap_focus_wo-footer_mobile: 4px 24px 26px 24px;
+--padding_wo-item-component_wo-wrap_focus_wo-footer: 18px 24px 26px 24px;
+--padding_wo-item-component_wo-wrap_focus_wo-footer_desktop: 18px 30px 30px 30px;
+--padding_wo-item-component_wo-wrap_focus_wo-footer_laptop: 18px 30px 30px 30px;
+--padding_wo-item-component_wo-wrap_focus_wo-footer_tablet: 18px 24px 26px 24px;
+--padding_wo-item-component_wo-wrap_focus_wo-footer_mobile: 18px 24px 26px 24px;
 --template_wo-item-component_wo-wrap_focus_wo-footer_wo-goto-add: lmi;
 --display_wo-item-component_wo-wrap_focus_wo-footer_wo-goto-add: none;
 --display_wo-item-component_wo-wrap_focus_wo-footer_wo-goto-add_desktop: none;
@@ -112,6 +111,7 @@
 --display_txt-body1_wo-item-component_wo-wrap_wo-main_wo-desc_laptop: inline-flex;
 --display_txt-body1_wo-item-component_wo-wrap_wo-main_wo-desc_tablet: inline-flex;
 --display_txt-body1_wo-item-component_wo-wrap_wo-main_wo-desc_mobile: inline-flex;
+--template_wo-item-component_wo-wrap_wo-footer: lmi;
 --padding_wo-item-component_wo-wrap_wo-footer: 18px 24px 26px 24px;
 --padding_wo-item-component_wo-wrap_wo-footer_desktop: 18px 30px 30px 30px;
 --padding_wo-item-component_wo-wrap_wo-footer_laptop: 18px 30px 30px 30px;
