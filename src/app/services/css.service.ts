@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { CssGroup } from "@app/models/css-group.model";
 import { createCssGroup } from "@app/factories/css-group.factory";
 import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
-import { CssPropertyTypes } from "@app/models/css-propert-types.enum";
 import { TemplatesEnum } from "@app/models/templates.enum";
 
 @Injectable({ providedIn: "root" })
@@ -11,18 +10,18 @@ export class CssService {
     const cssGroups = new Map<string, CssGroup>();
 
     data.vars.forEach(tmpVar => {
-      const preparedVariable = this.parseVariable(tmpVar);
+      const splittedVarAndVal = this.splitVarAndValue(tmpVar);
+      const preparedVariable = !!splittedVarAndVal ? this.parseVariable(splittedVarAndVal[0]) : null;
       if (!preparedVariable || preparedVariable.variableParts[0] !== data.moduleClassName) {
         return;
       }
-      // console.log(preparedVariable)
 
       // restore value form the local storage
-      const storageProperty = localStorage.getItem(preparedVariable.origin);
-      let currentValue = preparedVariable.value;
+      const storageProperty = localStorage.getItem(splittedVarAndVal![0]);
+      let currentValue = splittedVarAndVal![1];
       if (storageProperty) {
-        if (storageProperty === preparedVariable.value) {
-          localStorage.removeItem(preparedVariable.origin);
+        if (storageProperty === splittedVarAndVal![1]) {
+          localStorage.removeItem(splittedVarAndVal![0]);
         } else {
           currentValue = storageProperty;
         }
@@ -39,17 +38,27 @@ export class CssService {
       cssGroup!.depth = preparedVariable.variableParts.length;
 
       cssGroup!.bps[preparedVariable.breakpoint][preparedVariable.cssProperty] = {
-        default: preparedVariable.value,
+        default: splittedVarAndVal![1],
         current: currentValue,
         labels: preparedVariable.labels,
         name: tmpVar.split(':')[0].trim()
       }
     });
 
-    console.log(cssGroups)
+    // console.log(cssGroups)
 
     return cssGroups;
   }
+
+  splitVarAndValue(cssVariable: string): Array<string> | null {
+    const varAndVal: Array<string> = cssVariable.split(':');
+    if (varAndVal.length !== 2) {
+      return null;
+    }
+
+    return [varAndVal[0].trim(), varAndVal[1].trim()];
+  }
+
 
   parseVariable(cssVariable: string): null |
   {
@@ -57,10 +66,8 @@ export class CssService {
     variableParts: Array<string>,
     breakpoint: string,
     labels: Array<string>,
-    value: string,
     origin: string
   } {
-
     const labels = [];
     for (let templatesEnumKey in TemplatesEnum) {
       const tmp = cssVariable.replace('_' + templatesEnumKey + '_', '_');
@@ -70,12 +77,7 @@ export class CssService {
       }
     }
 
-    const varAndVal: Array<string> = cssVariable.split(':');
-    if (varAndVal.length !== 2) {
-      return null;
-    }
-
-    const arrVar = varAndVal[0].replace('--', '').split('_');
+    const arrVar = cssVariable.replace('--', '').split('_');
     const cssProperty = arrVar.shift() as string;
 
 
@@ -94,8 +96,7 @@ export class CssService {
       variableParts: arrVar,
       breakpoint,
       labels,
-      value: varAndVal[1].trim(),
-      origin: varAndVal[0].trim()
+      origin: cssVariable
     }
   }
 }
