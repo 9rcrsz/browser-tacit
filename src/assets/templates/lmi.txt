@@ -143,3 +143,5 @@
 --width_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_laptop: auto;
 --width_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_tablet: auto;
 --width_paid-with_wo-main-container_wo-rows_wo-row_wo-line_wo-icon_mobile: auto;
+
+-wo-primary-opacity-10: #fff;
