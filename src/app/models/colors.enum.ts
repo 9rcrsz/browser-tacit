@@ -20,8 +20,12 @@ export enum ColorsEnum {
   card = '--wo-card',
   card_high_emphasis = '--wo-card-high-emphasis',
   card_mid_emphasis = '--wo-card-mid-emphasis',
-  primary_opacity_10 = '--wo-primary-opacity-10',
   menu_item_bg = '--wo-menu-item-bg',
   text_on_error = '--wo-text-on-error',
   box_shadow = '--wo-box-shadow',
+  unknown1 = '--wo-unknown1',
+  unknown2 = '--wo-unknown2',
+  unknown3 = '--wo-unknown3',
+  unknown4 = '--wo-unknown4',
+  unknown5 = '--wo-unknown5',
 }
