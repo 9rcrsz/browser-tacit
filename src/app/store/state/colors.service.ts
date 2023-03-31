@@ -38,6 +38,10 @@ export class ColorsService {
     for (let i in ColorsEnum) {
       if(data.has((ColorsEnum as any)[i])){
         tmpValues[i] =  data.get((ColorsEnum as any)[i])!;
+        localStorage.setItem((ColorsEnum as any)[i], tmpValues[i]);
+        
+      }else{
+        localStorage.removeItem((ColorsEnum as any)[i]);
       }
     }
 

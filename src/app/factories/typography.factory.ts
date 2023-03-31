@@ -7,7 +7,7 @@ import { buildTypographyCssName } from "@app/services/helper.service";
 export function createTypography(params: Partial<Typography>) {
     const tmp: Typography = {
         name: params.name ?? '',
-        template: params.template ?? '',
+        template: params.template ??  localStorage.getItem('--template_' + params.name) ?? null,
         bps: {}
     };
 
