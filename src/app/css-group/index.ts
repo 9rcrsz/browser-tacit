@@ -9,6 +9,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SelectTemplateModule } from "../select-template";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SelectColorModule } from '@app/controls/select-color';
+import { SelectTypographyModule } from '@app/controls/select-typography';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SelectColorModule } from '@app/controls/select-color';
     MatCheckboxModule,
     SelectTemplateModule,
     MatExpansionModule,
-    SelectColorModule
+    SelectColorModule,
+    SelectTypographyModule
   ],
   providers: [],
 })

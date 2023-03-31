@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{placeholder}}</mat-label>
+  <mat-select (valueChange)="onChanged($event)" [(ngModel)]="value">
+    <mat-option [value]="'unset'">unset</mat-option>
+    <ng-container *ngFor="let i of typographyEnum | keyvalue">
+      <mat-option [value]="i.value">{{i.key}}</mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>

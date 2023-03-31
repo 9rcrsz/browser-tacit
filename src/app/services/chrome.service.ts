@@ -6,11 +6,15 @@ declare var chrome: any;
 export class ChromeService {
 
   send(request: { type: string, variables?: [{ key: string, value: string }] | Array<string> } = { type: 'get-variables' }) {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }).then((data: any) => {
-      chrome.tabs.sendMessage(data[0].id, request).then((d: any) => {
-        console.log(d);
-      });
-    })
+    try {
+      chrome.tabs.query({ active: true, lastFocusedWindow: true }).then((data: any) => {
+        chrome.tabs.sendMessage(data[0].id, request).then((d: any) => {
+          console.log(d);
+        });
+      })
+    } catch (e) {
+      console.error('Can\'t send');
+    }
   }
 
   subscribe() {
