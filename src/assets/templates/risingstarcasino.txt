@@ -107,6 +107,11 @@
 --template_wo-menu-footer_wo-disclaimer: risingstarcasino;
 --wo-unknown1: #aeafb1;
 --template_txt-h1: risingstarcasino;
+--typography-font-family_txt-h1: Gotham-Medium;
+--typography-font-size_txt-h1: 48px;
+--typography-line-height_txt-h1: 58px;
+--typography-text-transform_txt-h1: none;
+--typography-letter-spacing_txt-h1: normal;
 --template_txt-h2: risingstarcasino;
 --template_txt-h3: risingstarcasino;
 --template_txt-h4: risingstarcasino;
@@ -119,9 +124,3 @@
 --template_txt-button: risingstarcasino;
 --template_txt-caption: risingstarcasino;
 --template_txt-overline: risingstarcasino;
-
---typography-font-family_txt-h1: Gotham-Medium;
---typography-font-size_txt-h1: 48px;
---typography-line-height_txt-h1: 58px;
---typography-text-transform_txt-h1: none;
---typography-letter-spacing_txt-h1: normal;
