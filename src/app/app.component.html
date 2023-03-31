@@ -17,6 +17,15 @@
       <app-colors-group></app-colors-group>
     </mat-expansion-panel>
 
+    <mat-expansion-panel hideToggle *ngFor="let typography of typographyQuery.all$ | async; trackBy: trackByName">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{typography.name}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-typography-group [typography]="typography"></app-typography-group>
+    </mat-expansion-panel>
+
     <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async; trackBy: trackByName">
       <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled">
         <mat-expansion-panel-header>

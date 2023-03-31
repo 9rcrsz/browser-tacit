@@ -9,6 +9,9 @@ import { CssGroupsQuery } from "@app/store/state/css-groups.query";
 import { CssGroupsService } from '@app/store/state/css-groups.service';
 import { ChromeService } from '@app/services/chrome.service';
 import { ColorsService } from './store/state/colors.service';
+import { TypographyService } from './store/state/typography.service';
+import { TypographyQuery } from './store/state/typography.query';
+import { Typography } from './models/typography.model';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +27,8 @@ export class AppComponent implements OnInit {
     protected chromeService: ChromeService,
     protected templatesService: TemplatesService,
     protected cssGroupsService: CssGroupsService,
+    protected typographyService: TypographyService,
+    protected typographyQuery: TypographyQuery,
     protected colorsService: ColorsService,
     public cssGroupsQuery: CssGroupsQuery) {
   }
@@ -42,16 +47,22 @@ export class AppComponent implements OnInit {
         .subscribe(data => {
           this.colorsService.setTemplate(templateName, data);
           this.cssGroupsService.setTemplate(templateName, data);
+          this.typographyService.setTemplate(templateName, data);
+          // this.typographyService
 
           this.chromeService.send({ type: 'remove-variables' });
 
-          const variables = [...this.cssGroupsService.export(),
-          ...this.colorsService.export()];
+          const variables = [
+            ...this.cssGroupsService.export(),
+            ...this.colorsService.export(),
+            ...this.typographyService.export()
+          ];
           this.chromeService.send({ type: 'set-variables', variables })
         });
     } else {
       this.cssGroupsService.setTemplate(null, new Map());
       this.colorsService.setTemplate(null, new Map());
+      this.typographyService.setTemplate(null, new Map());
       this.chromeService.send({ type: 'remove-variables' });
     }
   }
@@ -62,14 +73,20 @@ export class AppComponent implements OnInit {
 
     this.chromeService.send({ type: 'remove-variables' });
 
-    const variables = [...this.cssGroupsService.export(),
-    ...this.colorsService.export()];
+    const variables = [
+      ...this.cssGroupsService.export(),
+      ...this.colorsService.export(),
+      ...this.typographyService.export()
+    ];
     this.chromeService.send({ type: 'set-variables', variables })
   }
 
   export() {
-    const variables = [...this.cssGroupsService.export(),
-    ...this.colorsService.export()];
+    const variables = [
+      ...this.cssGroupsService.export(),
+      ...this.colorsService.export(),
+      ...this.typographyService.export()
+    ];
 
     navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
       alert('Copied to clipboard.');
@@ -83,10 +100,11 @@ export class AppComponent implements OnInit {
     localStorage.clear();
     this.cssGroupsService.reset();
     this.colorsService.reset();
+    this.typographyService.reset();
     this.chromeService.send({ type: 'remove-variables' });
   }
 
-  trackByName(index: number, cssGroup: CssGroup) {
+  trackByName(index: number, cssGroup: CssGroup | Typography) {
     return cssGroup.name;
   }
 }

@@ -11,6 +11,7 @@ import { ColorsGroupModel } from "./colors-group";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { environment } from '../environments/environment';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { TypographyModule } from './typography-group';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
     HttpClientModule,
     SelectTemplateModule,
     ColorsGroupModel,
+    TypographyModule,
     MatExpansionModule,
     environment.production ? [] : AkitaNgDevtools.forRoot()],
   providers: [],

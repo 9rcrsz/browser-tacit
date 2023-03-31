@@ -8,3 +8,11 @@
   --wo_background: red;
 --wo_background_additional: green;
 --wo_background_warning: purple;
+--typography-font-family_txt-h1: dddddddd;
+--template_txt-h1: png;
+--typography-font-family_txt-h1: dddddddd;
+--template_txt-h2: png;
+--template_txt-h3: png;
+--template_txt-h4: png;
+--template_txt-h5: png;
+--template_txt-h6: png;
