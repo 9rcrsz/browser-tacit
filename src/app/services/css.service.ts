@@ -6,13 +6,13 @@ import { TemplatesEnum } from "@app/models/templates.enum";
 
 @Injectable({ providedIn: "root" })
 export class CssService {
-  buildCssGroupsMap(data: { moduleClassName: string, vars: Array<string> }): Map<string, CssGroup> {
+  buildCssGroupsMap(data: { moduleClassName?: string, vars: Array<string> }): Map<string, CssGroup> {
     const cssGroups = new Map<string, CssGroup>();
 
     data.vars.forEach(tmpVar => {
       const splittedVarAndVal = this.splitVarAndValue(tmpVar);
       const preparedVariable = !!splittedVarAndVal ? this.parseVariable(splittedVarAndVal[0]) : null;
-      if (!preparedVariable || preparedVariable.variableParts[0] !== data.moduleClassName) {
+      if (!preparedVariable /*|| preparedVariable.variableParts[0] !== data.moduleClassName*/) {
         return;
       }
 

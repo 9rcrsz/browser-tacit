@@ -71,14 +71,14 @@ export class AppComponent implements OnInit {
     this.cssGroupsService.get();
     // this.chromeService.send({ type: 'get-variables' })
 
-    this.chromeService.send({ type: 'remove-variables' });
-
-    const variables = [
-      ...this.cssGroupsService.export(),
-      ...this.colorsService.export(),
-      ...this.typographyService.export()
-    ];
-    this.chromeService.send({ type: 'set-variables', variables })
+    // this.chromeService.send({ type: 'remove-variables' });
+    //
+    // const variables = [
+    //   ...this.cssGroupsService.export(),
+    //   ...this.colorsService.export(),
+    //   ...this.typographyService.export()
+    // ];
+    // this.chromeService.send({ type: 'set-variables', variables })
   }
 
   export() {
