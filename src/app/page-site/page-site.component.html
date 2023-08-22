@@ -1,0 +1,14 @@
+<article>
+  <nav>
+    <a mat-button routerLinkActive="mat-primary" [routerLink]="'site-header'">Header</a>
+    <a mat-button routerLinkActive="mat-primary" [routerLink]="'site-footer'">Footer</a>
+    <a mat-button routerLinkActive="mat-primary" [routerLink]="'site-base'">Base</a>
+    <a mat-button routerLinkActive="mat-primary" [routerLink]="'site-menu'">Menu</a>
+    <a mat-button routerLinkActive="mat-primary" [routerLink]="'site-menu-item'">Menu item</a>
+  </nav>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+</article>
