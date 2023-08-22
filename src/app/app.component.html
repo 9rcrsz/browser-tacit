@@ -1,43 +1,53 @@
 <header>
-  <button mat-button (click)="sync()">Get Variables</button>
-  <button mat-button (click)="export()">Export</button>
-  <button mat-button (click)="reset()">Reset</button>
-  <select-template [templateName]="templateName$ | async"
-    (eventSelectTemplate)="templateSelected($event)"></select-template>
+  <nav>
+    <a mat-button [routerLink]="['/']">Site</a>
+    <a mat-button [routerLink]="['/','colors']">Colors</a>
+    <a mat-button [routerLink]="['/','typography']">Typography</a>
+
+    <button mat-button (click)="sync()">Get Variables</button>
+    <button mat-button (click)="export()">Export</button>
+    <button mat-button (click)="reset()">Reset</button>
+
+    <select-template [templateName]="templateName$ | async"
+                     (eventSelectTemplate)="templateSelected($event)"></select-template>
+  </nav>
+
 </header>
 
-<article>
-  <mat-accordion [multi]="true">
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Colors
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-colors-group></app-colors-group>
-    </mat-expansion-panel>
+<router-outlet></router-outlet>
 
-    <mat-expansion-panel hideToggle *ngFor="let typography of typographyQuery.all$ | async; trackBy: trackByName">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{typography.name}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-typography-group [typography]="typography"></app-typography-group>
-    </mat-expansion-panel>
+<!--<article>-->
+<!--  <mat-accordion [multi]="true">-->
+<!--    <mat-expansion-panel hideToggle>-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          Colors-->
+<!--        </mat-panel-title>-->
+<!--      </mat-expansion-panel-header>-->
+<!--      <app-colors-group></app-colors-group>-->
+<!--    </mat-expansion-panel>-->
 
-    <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async; trackBy: trackByName">
-      <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{cssGroup.name}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+<!--    <mat-expansion-panel hideToggle *ngFor="let typography of typographyQuery.all$ | async; trackBy: trackByName">-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          {{typography.name}}-->
+<!--        </mat-panel-title>-->
+<!--      </mat-expansion-panel-header>-->
+<!--      <app-typography-group [typography]="typography"></app-typography-group>-->
+<!--    </mat-expansion-panel>-->
 
-        <app-css-group [cssGroup]="cssGroup"></app-css-group>
-      </mat-expansion-panel>
+<!--    <ng-container *ngFor="let cssGroup of cssGroupsQuery.getFirstLevel$() | async; trackBy: trackByName">-->
+<!--      <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled">-->
+<!--        <mat-expansion-panel-header>-->
+<!--          <mat-panel-title>-->
+<!--            {{cssGroup.name}}-->
+<!--          </mat-panel-title>-->
+<!--        </mat-expansion-panel-header>-->
 
-    </ng-container>
-  </mat-accordion>
+<!--        <app-css-group [cssGroup]="cssGroup"></app-css-group>-->
+<!--      </mat-expansion-panel>-->
 
-</article>
+<!--    </ng-container>-->
+<!--  </mat-accordion>-->
+
+<!--</article>-->

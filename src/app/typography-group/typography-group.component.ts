@@ -15,7 +15,7 @@ import { Typography } from '@app/models/typography.model';
   styleUrls: ['./typography-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CssGroupComponent implements OnInit, OnChanges {
+export class TypographyGroupComponent implements OnInit, OnChanges {
   @Input() typography!: Typography;
   breakpointTypes = BreakpointTypes;
   toggle: { [key: string]: boolean } = {};

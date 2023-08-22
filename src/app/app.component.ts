@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
     protected templatesService: TemplatesService,
     protected cssGroupsService: CssGroupsService,
     protected typographyService: TypographyService,
-    protected typographyQuery: TypographyQuery,
     protected colorsService: ColorsService,
     public cssGroupsQuery: CssGroupsQuery) {
   }

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 
-import {ColorsGroupComponent} from './colors-group.component';
+import {PageColorsComponent} from './page-colors.component';
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {MatInputModule} from "@angular/material/input";
@@ -10,10 +10,10 @@ import {SelectTemplateModule} from "../select-template";
 
 @NgModule({
   declarations: [
-    ColorsGroupComponent
+    PageColorsComponent
   ],
   exports: [
-    ColorsGroupComponent
+    PageColorsComponent
   ],
   imports: [
     FormsModule,
@@ -25,5 +25,5 @@ import {SelectTemplateModule} from "../select-template";
   ],
   providers: [],
 })
-export class ColorsGroupModel {
+export class PageColorsModel {
 }

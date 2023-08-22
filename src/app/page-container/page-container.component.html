@@ -1,0 +1,16 @@
+<article>
+  <mat-accordion [multi]="true">
+    <ng-container *ngFor="let cssGroup of cssGroups$ | async; trackBy: trackByName">
+      <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{cssGroup.name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-css-group [cssGroup]="cssGroup"></app-css-group>
+      </mat-expansion-panel>
+
+    </ng-container>
+  </mat-accordion>
+</article>

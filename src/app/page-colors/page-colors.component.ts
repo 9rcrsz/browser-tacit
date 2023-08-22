@@ -8,12 +8,11 @@ import { ColorsService } from '@app/store/state/colors.service';
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-colors-group',
-  templateUrl: './colors-group.component.html',
-  styleUrls: ['./colors-group.component.scss'],
+  templateUrl: './page-colors.component.html',
+  styleUrls: ['./page-colors.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ColorsGroupComponent {
+export class PageColorsComponent {
 
   constructor(
     public queryService: ColorsQuery,

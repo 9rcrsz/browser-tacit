@@ -8,14 +8,17 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {SelectTemplateModule} from "../select-template";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {SelectColorModule} from '@app/controls/select-color';
-import {TypographyGroupComponent} from './typography-group.component';
+import {PageSiteComponent} from "@app/page-site/page-site.component";
+import {CssGroupModule} from "@app/css-group";
+import {MatButtonModule} from "@angular/material/button";
+import {RouterLinkActive, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 
 @NgModule({
   declarations: [
-    TypographyGroupComponent
+    PageSiteComponent
   ],
   exports: [
-    TypographyGroupComponent
+    PageSiteComponent
   ],
   imports: [
     FormsModule,
@@ -25,9 +28,14 @@ import {TypographyGroupComponent} from './typography-group.component';
     MatCheckboxModule,
     SelectTemplateModule,
     MatExpansionModule,
-    SelectColorModule
+    SelectColorModule,
+    CssGroupModule,
+    MatButtonModule,
+    RouterLinkWithHref,
+    RouterOutlet,
+    RouterLinkActive
   ],
   providers: [],
 })
-export class TypographyGroupModule {
+export class PageSiteModule {
 }
