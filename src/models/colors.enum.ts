@@ -10,6 +10,7 @@ export enum ColorsEnum {
   text_field_surface = '--wo-text-field-surface',
   snackbar = '--wo-snackbar',
   primary = '--wo-primary',
+  primary_button = '--wo-primary-button',
   primary_variant = '--wo-primary-variant',
   secondary = '--wo-secondary',
   secondary_variant = '--wo-secondary-variant',
