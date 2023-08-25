@@ -1,8 +1,8 @@
-import { TypographyExport } from "@app/actions/typography.export";
-import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
-import { TypographyPropertiesEnum } from "@app/models/typography-properties.enum";
-import { Typography } from "@app/models/typography.model";
-import { buildTypographyCssName } from "@app/services/helper.service";
+import { TypographyExport } from "@src/app/actions/typography.export";
+import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
+import { TypographyPropertiesEnum } from "@src/models/typography-properties.enum";
+import { Typography } from "@src/models/typography.model";
+import { buildTypographyCssName } from "@src/services/helper.service";
 
 export function createTypography(params: Partial<Typography>) {
     const tmp: Typography = {

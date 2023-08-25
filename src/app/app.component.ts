@@ -1,17 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from "rxjs";
-import { take } from "rxjs/operators";
-import { Colors } from "@app/models/colors.model";
-import { CssGroup } from "@app/models/css-group.model";
-import { TemplatesService } from "@app/services/templates.service";
-import { createColors, createColorsExport } from "@app/factories/colors.factory";
-import { CssGroupsQuery } from "@app/store/state/css-groups.query";
-import { CssGroupsService } from '@app/store/state/css-groups.service';
-import { ChromeService } from '@app/services/chrome.service';
-import { ColorsService } from './store/state/colors.service';
-import { TypographyService } from './store/state/typography.service';
-import { TypographyQuery } from './store/state/typography.query';
-import { Typography } from './models/typography.model';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {BehaviorSubject} from "rxjs";
+import {take} from "rxjs/operators";
+import {TemplatesService} from "@src/services/templates.service";
+import {CssGroupsService} from '@src/store/state/css-groups.service';
+import {ChromeService} from '@src/services/chrome.service';
+import {ColorsService} from '@src/store/state/colors.service';
+import {TypographyService} from '@src/store/state/typography.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +14,6 @@ import { Typography } from './models/typography.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  title = 'browser-tacit';
   templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   constructor(
@@ -28,12 +21,11 @@ export class AppComponent implements OnInit {
     protected templatesService: TemplatesService,
     protected cssGroupsService: CssGroupsService,
     protected typographyService: TypographyService,
-    protected colorsService: ColorsService,
-    public cssGroupsQuery: CssGroupsQuery) {
+    protected colorsService: ColorsService) {
   }
 
   ngOnInit() {
-
+    this.cssGroupsService.get();
   }
 
   templateSelected(templateName: string | null) {
@@ -49,35 +41,21 @@ export class AppComponent implements OnInit {
           this.typographyService.setTemplate(templateName, data);
           // this.typographyService
 
-          this.chromeService.send({ type: 'remove-variables' });
+          this.chromeService.send({type: 'remove-variables'});
 
           const variables = [
             ...this.cssGroupsService.export(),
             ...this.colorsService.export(),
             ...this.typographyService.export()
           ];
-          this.chromeService.send({ type: 'set-variables', variables })
+          this.chromeService.send({type: 'set-variables', variables})
         });
     } else {
       this.cssGroupsService.setTemplate(null, new Map());
       this.colorsService.setTemplate(null, new Map());
       this.typographyService.setTemplate(null, new Map());
-      this.chromeService.send({ type: 'remove-variables' });
+      this.chromeService.send({type: 'remove-variables'});
     }
-  }
-
-  sync() {
-    this.cssGroupsService.get();
-    // this.chromeService.send({ type: 'get-variables' })
-
-    // this.chromeService.send({ type: 'remove-variables' });
-    //
-    // const variables = [
-    //   ...this.cssGroupsService.export(),
-    //   ...this.colorsService.export(),
-    //   ...this.typographyService.export()
-    // ];
-    // this.chromeService.send({ type: 'set-variables', variables })
   }
 
   export() {
@@ -100,10 +78,6 @@ export class AppComponent implements OnInit {
     this.cssGroupsService.reset();
     this.colorsService.reset();
     this.typographyService.reset();
-    this.chromeService.send({ type: 'remove-variables' });
-  }
-
-  trackByName(index: number, cssGroup: CssGroup | Typography) {
-    return cssGroup.name;
+    this.chromeService.send({type: 'remove-variables'});
   }
 }

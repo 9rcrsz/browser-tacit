@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { createTypography } from '@app/factories/typography.factory';
-import { TypographyEnum } from '@app/models/typography.enum';
-import { Typography } from '@app/models/typography.model';
+import { createTypography } from '@src/factories/typography.factory';
+import { TypographyEnum } from '@src/models/typography.enum';
+import { Typography } from '@src/models/typography.model';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 
 export interface TypographyState extends EntityState<Typography> { }
@@ -14,7 +14,7 @@ export class TypographyStore extends EntityStore<TypographyState> {
     super();
 
     const tmp: { [key: string]: Typography} = {};
-    
+
     Object.values(TypographyEnum).forEach(name => {
       tmp[name] = createTypography({ name });
     })

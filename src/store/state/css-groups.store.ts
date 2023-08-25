@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
-import { CssGroup } from "@app/models/css-group.model";
+import { CssGroup } from "@src/models/css-group.model";
 
 export interface CssGroupsState extends EntityState<CssGroup> {
 }

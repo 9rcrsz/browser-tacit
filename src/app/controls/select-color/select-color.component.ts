@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ColorsEnum } from '@app/models/colors.enum';
+import { ColorsEnum } from '@src/models/colors.enum';
 
 @Component({
   selector: 'app-select-color',

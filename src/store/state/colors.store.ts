@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { createColors } from '@app/factories/colors.factory';
-import { Colors } from '@app/models/colors.model';
+import { createColors } from '@src/factories/colors.factory';
+import { Colors } from '@src/models/colors.model';
 import { Store, StoreConfig } from '@datorama/akita';
 
 @Injectable({ providedIn: 'root' })

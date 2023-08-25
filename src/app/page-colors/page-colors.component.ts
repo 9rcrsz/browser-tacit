@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ColorsEnum } from '@app/models/colors.enum';
-import { Colors } from "@app/models/colors.model";
-import { ChromeService } from '@app/services/chrome.service';
-import { TemplatesService } from '@app/services/templates.service';
-import { ColorsQuery } from '@app/store/state/colors.query';
-import { ColorsService } from '@app/store/state/colors.service';
+import { ColorsEnum } from '@src/models/colors.enum';
+import { Colors } from "@src/models/colors.model";
+import { ChromeService } from '@src/services/chrome.service';
+import { TemplatesService } from '@src/services/templates.service';
+import { ColorsQuery } from '@src/store/state/colors.query';
+import { ColorsService } from '@src/store/state/colors.service';
 import { take } from 'rxjs/operators';
 
 @Component({

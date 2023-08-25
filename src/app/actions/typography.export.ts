@@ -1,6 +1,6 @@
-import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
-import { Typography } from "@app/models/typography.model";
-import { buildTypographyCssName } from "@app/services/helper.service";
+import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
+import { Typography } from "@src/models/typography.model";
+import { buildTypographyCssName } from "@src/services/helper.service";
 
 export class TypographyExport {
   protected model: Typography;

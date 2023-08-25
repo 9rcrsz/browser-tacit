@@ -1,11 +1,11 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {CssGroupsStore} from '@app/store/state/css-groups.store';
-import {CssGroup} from "@app/models/css-group.model";
-import {CssService} from '@app/services/css.service';
-import {createCssGroupExport} from '@app/factories/css-group.factory';
-import {TemplatesEnum} from "@app/models/templates.enum";
-import {BreakpointTypes} from "@app/models/breakpoint-types.enum";
+import {CssGroupsStore} from './css-groups.store';
+import {CssGroup} from "@src/models/css-group.model";
+import {CssService} from '@src/services/css.service';
+import {createCssGroupExport} from '@src/factories/css-group.factory';
+import {TemplatesEnum} from "@src/models/templates.enum";
+import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
 import {map} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})

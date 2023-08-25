@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {PageSiteComponent} from "@app/page-site/page-site.component";
-import {PageColorsComponent} from "@app/page-colors/page-colors.component";
-import {PageContainerComponent} from "@app/page-container/page-container.component";
-import {PageTypographyComponent} from "@app/page-typography/page-typography.component";
+import {PageSiteComponent} from "@src/app/page-site/page-site.component";
+import {PageColorsComponent} from "@src/app/page-colors/page-colors.component";
+import {PageContainerComponent} from "@src/app/page-container/page-container.component";
+import {PageTypographyComponent} from "@src/app/page-typography/page-typography.component";
 
 const routes: Routes = [
   {

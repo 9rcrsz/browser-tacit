@@ -6,8 +6,8 @@ import {CommonModule} from "@angular/common";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {SelectTemplateModule} from "../select-template";
-import {TypographyGroupModule} from "@app/typography-group";
+import {SelectTemplateModule} from "src/app/controls/select-template";
+import {TypographyGroupModule} from "src/app/page-typography/typography-group";
 import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({

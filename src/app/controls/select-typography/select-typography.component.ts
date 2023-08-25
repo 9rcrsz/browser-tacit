@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TypographyEnum } from '@app/models/typography.enum';
+import { TypographyEnum } from '@src/models/typography.enum';
 
 @Component({
   selector: 'app-select-typography',

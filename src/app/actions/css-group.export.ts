@@ -1,4 +1,4 @@
-import { CssGroup } from "@app/models/css-group.model";
+import { CssGroup } from "@src/models/css-group.model";
 
 export class CssGroupExport {
   protected model: CssGroup;

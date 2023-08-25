@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { CssGroup } from "@app/models/css-group.model";
-import { createCssGroup } from "@app/factories/css-group.factory";
-import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
-import { TemplatesEnum } from "@app/models/templates.enum";
+import { CssGroup } from "@src/models/css-group.model";
+import { createCssGroup } from "@src/factories/css-group.factory";
+import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
+import { TemplatesEnum } from "@src/models/templates.enum";
 
 @Injectable({ providedIn: "root" })
 export class CssService {

@@ -1,5 +1,5 @@
-import { ColorsEnum } from "@app/models/colors.enum";
-import { Colors } from "@app/models/colors.model";
+import { ColorsEnum } from "@src/models/colors.enum";
+import { Colors } from "@src/models/colors.model";
 
 export class ColorsExport {
   protected model: Colors;

@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
-import {CssGroupsQuery} from "@app/store/state/css-groups.query";
-import {CssGroup} from "@app/models/css-group.model";
-import {Typography} from "@app/models/typography.model";
+import {CssGroupsQuery} from "@src/store/state/css-groups.query";
+import {CssGroup} from "@src/models/css-group.model";
+import {Typography} from "@src/models/typography.model";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {UnsubscribeService} from "@app/services/unsubscribe.service";
+import {UnsubscribeService} from "@src/services/unsubscribe.service";
 import {BehaviorSubject} from "rxjs";
 
 const nameToGroups: { [key: string]: Array<string> } = {

@@ -1,4 +1,4 @@
-import { CssValue } from "@app/models/css-value.model";
+import { CssValue } from "@src/models/css-value.model";
 
 export interface CssGroup {
   name: string;

@@ -1,9 +1,9 @@
-import {BreakpointTypes} from "@app/models/breakpoint-types.enum";
-import {CssPropertyTypes} from "@app/models/css-propert-types.enum";
-import {CssValue} from "@app/models/css-value.model";
-import {CssGroup} from "@app/models/css-group.model";
-import {CssGroupExport} from "@app/actions/css-group.export";
-import {CssGroupPopulate} from "@app/actions/css-group.populate";
+import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
+import {CssPropertyTypes} from "@src/models/css-propert-types.enum";
+import {CssValue} from "@src/models/css-value.model";
+import {CssGroup} from "@src/models/css-group.model";
+import {CssGroupExport} from "@src/app/actions/css-group.export";
+import {CssGroupPopulate} from "@src/app/actions/css-group.populate";
 
 export function createCssGroup(params?: Partial<CssGroup>): CssGroup {
   const tmp = {

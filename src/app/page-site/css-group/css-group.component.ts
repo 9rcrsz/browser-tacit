@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { CssGroup } from "@app/models/css-group.model";
-import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
-import { CssValue } from "@app/models/css-value.model";
-import { CssGroupsService } from '@app/store/state/css-groups.service';
-import { CssGroupsQuery } from '@app/store/state/css-groups.query';
-import { ChromeService } from '@app/services/chrome.service';
+import { CssGroup } from "@src/models/css-group.model";
+import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
+import { CssValue } from "@src/models/css-value.model";
+import { CssGroupsService } from '@src/store/state/css-groups.service';
+import { CssGroupsQuery } from '@src/store/state/css-groups.query';
+import { ChromeService } from '@src/services/chrome.service';
 import { take } from 'rxjs/operators';
-import { TemplatesService } from '@app/services/templates.service';
-import { TypographyPropertiesEnum } from '@app/models/typography-properties.enum';
-import { buildTypographyCssName } from '@app/services/helper.service';
-import { TypographyEnum } from '@app/models/typography.enum';
+import { TemplatesService } from '@src/services/templates.service';
+import { TypographyPropertiesEnum } from '@src/models/typography-properties.enum';
+import { buildTypographyCssName } from '@src/services/helper.service';
+import { TypographyEnum } from '@src/models/typography.enum';
 
 @Component({
   selector: 'app-css-group',

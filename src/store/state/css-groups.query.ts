@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {QueryEntity} from '@datorama/akita';
-import {CssGroupsStore, CssGroupsState} from '@app/store/state/css-groups.store';
+import {CssGroupsStore, CssGroupsState} from './css-groups.store';
 import {Observable} from 'rxjs';
-import {CssGroup} from '@app/models/css-group.model';
+import {CssGroup} from '@src/models/css-group.model';
 
 @Injectable({providedIn: 'root'})
 export class CssGroupsQuery extends QueryEntity<CssGroupsState> {

@@ -21,10 +21,10 @@
       "dom"
     ],
     "paths": {
-      "@app/*": [
-        "./src/app/*",
-        "./src/app",
-      ],
+      "@src/*": [
+        "./src/*",
+        "./src"
+      ]
     }
   },
   "angularCompilerOptions": {

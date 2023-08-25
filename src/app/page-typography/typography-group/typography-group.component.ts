@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { CssGroup } from "@app/models/css-group.model";
-import { BreakpointTypes } from "@app/models/breakpoint-types.enum";
-import { CssGroupsQuery } from '@app/store/state/css-groups.query';
-import { ChromeService } from '@app/services/chrome.service';
+import { CssGroup } from "@src/models/css-group.model";
+import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
+import { CssGroupsQuery } from '@src/store/state/css-groups.query';
+import { ChromeService } from '@src/services/chrome.service';
 import { take } from 'rxjs/operators';
-import { TemplatesService } from '@app/services/templates.service';
-import { TypographyService } from '@app/store/state/typography.service';
-import { buildTypographyCssName } from '@app/services/helper.service';
-import { Typography } from '@app/models/typography.model';
+import { TemplatesService } from '@src/services/templates.service';
+import { TypographyService } from '@src/store/state/typography.service';
+import { buildTypographyCssName } from '@src/services/helper.service';
+import { Typography } from '@src/models/typography.model';
 
 @Component({
   selector: 'app-typography-group',

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { createColorsExport } from '@app/factories/colors.factory';
-import { ColorsEnum } from '@app/models/colors.enum';
+import { createColorsExport } from '@src/factories/colors.factory';
+import { ColorsEnum } from '@src/models/colors.enum';
 import { ColorsStore } from './colors.store';
 
 @Injectable({ providedIn: 'root' })
@@ -39,7 +39,7 @@ export class ColorsService {
       if(data.has((ColorsEnum as any)[i])){
         tmpValues[i] =  data.get((ColorsEnum as any)[i])!;
         localStorage.setItem((ColorsEnum as any)[i], tmpValues[i]);
-        
+
       }else{
         localStorage.removeItem((ColorsEnum as any)[i]);
       }

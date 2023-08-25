@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Colors } from '@app/models/colors.model';
+import { Colors } from '@src/models/colors.model';
 import { Query } from '@datorama/akita';
 import { Observable } from 'rxjs';
 import { ColorsStore } from './colors.store';

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { createTypographyExport } from '@app/factories/typography.factory';
-import { BreakpointTypes } from '@app/models/breakpoint-types.enum';
-import { Typography } from '@app/models/typography.model';
-import { buildTypographyCssName } from '@app/services/helper.service';
+import { createTypographyExport } from '@src/factories/typography.factory';
+import { BreakpointTypes } from '@src/models/breakpoint-types.enum';
+import { Typography } from '@src/models/typography.model';
+import { buildTypographyCssName } from '@src/services/helper.service';
 import { ID } from '@datorama/akita';
 import { tap } from 'rxjs/operators';
 import { TypographyStore } from './typography.store';
