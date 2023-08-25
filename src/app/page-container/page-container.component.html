@@ -1,4 +1,16 @@
 <article>
+  <form *ngIf="containerName === 'site-custom'">
+    <mat-form-field class="groups-autocomplete">
+      <mat-label>Search css group</mat-label>
+      <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="filterCssGroups($event.option.value)">
+        <mat-option *ngFor="let group of filteredOptions | async" [value]="group.name">
+          {{group.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
   <mat-accordion [multi]="true">
     <ng-container *ngFor="let cssGroup of cssGroups$ | async; trackBy: trackByName">
       <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled">
@@ -8,7 +20,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <app-css-group [cssGroup]="cssGroup"></app-css-group>
+        <app-css-group [cssGroup]="cssGroup" [showChildren]="containerName !== 'site-custom'"></app-css-group>
       </mat-expansion-panel>
 
     </ng-container>

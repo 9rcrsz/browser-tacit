@@ -11,17 +11,21 @@ export class CssGroupsQuery extends QueryEntity<CssGroupsState> {
     super(store);
   }
 
-  getFirstLevel$(selectedNames?: Array<string>): Observable<CssGroup[]> {
+  getFirstLevel$(): Observable<CssGroup[]> {
     return this.selectAll({
-      filterBy: [
-        (g: CssGroup) => {
-          if (selectedNames) {
-            return selectedNames.some(n => n === g.name);
-          } else {
-            return g.depth === 1;
-          }
-        }
-      ]
+      filterBy: [(g: CssGroup) => g.depth === 1]
+    });
+  }
+
+  find$(selectedNames: Array<string>): Observable<CssGroup[]> {
+    return this.selectAll({
+      filterBy: [(g: CssGroup) => selectedNames.some(n => n === g.name)]
+    });
+  }
+
+  filter$(phrase: string): Observable<CssGroup[]> {
+    return this.selectAll({
+      filterBy: [(g: CssGroup) => g.name.indexOf(phrase) > -1]
     });
   }
 

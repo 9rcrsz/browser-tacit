@@ -4,7 +4,9 @@ import {CssGroup} from "@src/models/css-group.model";
 import {Typography} from "@src/models/typography.model";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {UnsubscribeService} from "@src/services/unsubscribe.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
+import {FormControl} from "@angular/forms";
+import {filter, switchMap} from "rxjs/operators";
 
 const nameToGroups: { [key: string]: Array<string> } = {
   'site-header': ['header', 'wo-header-component'],
@@ -28,22 +30,52 @@ export class PageContainerComponent implements OnInit {
   router: Router = inject(Router);
   // Variables
   cssGroups$ = new BehaviorSubject<CssGroup[]>([])
+  // Autocomplete
+  searchControl = new FormControl<string>('');
+  filteredOptions?: Observable<CssGroup[]>;
+  containerName?: string;
 
   ngOnInit(): void {
-    let containerName: string = this.route.snapshot.paramMap.get('containerName')!;
-    this.filterCssGroups(containerName);
+    this.containerName = this.route.snapshot.paramMap.get('containerName')!;
+    this.findCssGroups(this.containerName);
 
     this.unService.handle = this.router.events
       .subscribe(event => {
         if (event instanceof NavigationEnd) {
-          containerName = this.route.snapshot.paramMap.get('containerName')!;
-          this.filterCssGroups(containerName);
+          this.containerName = this.route.snapshot.paramMap.get('containerName')!;
+          this.cssGroups$.next([]);
+          if (this.containerName !== 'site-custom') {
+            this.findCssGroups(this.containerName);
+          }
         }
+      });
+
+    this.filteredOptions = this.searchControl.valueChanges.pipe(
+      switchMap((phrase: any) => {
+        if (!phrase || phrase.length < 6) {
+          return of([]);
+        }
+        return this.cssGroupsQuery.filter$(phrase)
+      })
+    );
+  }
+
+  findCssGroups(containerName: string) {
+    if (!nameToGroups[containerName]) {
+      return;
+    }
+
+    this.unService.handle = this.cssGroupsQuery.find$(nameToGroups[containerName])
+      .subscribe(groups => {
+        this.cssGroups$.next(groups);
       });
   }
 
-  filterCssGroups(containerName: string) {
-    this.unService.handle = this.cssGroupsQuery.getFirstLevel$(nameToGroups[containerName])
+  filterCssGroups(phrase: any) {
+    if (!phrase || phrase.length < 6) {
+      return;
+    }
+    this.unService.handle = this.cssGroupsQuery.filter$(phrase)
       .subscribe(groups => {
         this.cssGroups$.next(groups);
       });

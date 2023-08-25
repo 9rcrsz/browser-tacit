@@ -15,23 +15,23 @@
     <ul *ngIf="toggle[breakpoint.key]">
       <li *ngIf="breakpoint.value['font-size'] && toggle[breakpoint.key]">
         <app-select-typography [(ngModel)]="typography" [placeholder]="'Typography'"
-          (ngModelChange)="changeTypography($event)"></app-select-typography>
+                               (ngModelChange)="changeTypography($event)"></app-select-typography>
       </li>
-      
+
       <ng-container *ngFor="let property of breakpoint.value | keyvalue: unsorted">
-        <li *ngIf="property.key !== 'font-family' && property.key !== 'font-size' && property.key !== 'line-height' && 
+        <li *ngIf="property.key !== 'font-family' && property.key !== 'font-size' && property.key !== 'line-height' &&
         property.key !== 'text-transform' && property.key !== 'letter-spacing'">
 
           <ng-container [ngSwitch]="true">
             <app-select-color *ngSwitchCase="property.key === 'color' || property.key === 'background-color'"
-              [(ngModel)]="property.value.current" [placeholder]="property.key"
-              (ngModelChange)="onChanged(property, breakpointTypes.general)">
+                              [(ngModel)]="property.value.current" [placeholder]="property.key"
+                              (ngModelChange)="onChanged(property, breakpointTypes.general)">
             </app-select-color>
 
             <mat-form-field color="primary" appearance="fill" *ngSwitchDefault>
               <mat-label>{{property.key}}</mat-label>
               <input matInput [(ngModel)]="property.value.current" [name]="'general'+property.key"
-                (change)="onChanged(property, breakpointTypes.general)">
+                     (change)="onChanged(property, breakpointTypes.general)">
               <mat-hint *ngIf="property.value.labels?.length">{{property.value.labels!.join(', ')}}</mat-hint>
             </mat-form-field>
 
@@ -43,27 +43,29 @@
     </ul>
   </main>
 
-  <ng-container *ngIf="cssGroupsQuery.getLevel$(cssGroup.depth+1, cssGroup.name) | async as childCssGroups">
+  <ng-container *ngIf="showChildren">
+    <ng-container *ngIf="cssGroupsQuery.getLevel$(cssGroup.depth+1, cssGroup.name) | async as childCssGroups">
 
-    <mat-accordion [multi]="true">
-      <ng-container *ngFor="let cssGroup of childCssGroups; trackBy: trackByName">
-        <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled" (opened)="childToggle(cssGroup.name, true)"
-          (closed)="childToggle(cssGroup.name, false)">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{cssGroup.name}}
-            </mat-panel-title>
-            <mat-panel-description>
-              {{cssGroup.depth}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
+      <mat-accordion [multi]="true">
+        <ng-container *ngFor="let cssGroup of childCssGroups; trackBy: trackByName">
+          <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled" (opened)="childToggle(cssGroup.name, true)"
+                               (closed)="childToggle(cssGroup.name, false)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{cssGroup.name}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{cssGroup.depth}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-          <app-css-group *ngIf="childOppenedMap.get(cssGroup.name)" [cssGroup]="cssGroup"></app-css-group>
+            <app-css-group *ngIf="childOppenedMap.get(cssGroup.name)" [cssGroup]="cssGroup"></app-css-group>
 
-        </mat-expansion-panel>
-      </ng-container>
-    </mat-accordion>
+          </mat-expansion-panel>
+        </ng-container>
+      </mat-accordion>
 
+    </ng-container>
   </ng-container>
 
 </article>

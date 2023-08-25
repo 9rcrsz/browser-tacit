@@ -1,7 +1,15 @@
 :host {
-  .mat-accordion {
-    .mat-expansion-panel {
-      margin: 16px 0;
+  > article {
+    padding: 24px;
+
+    .mat-accordion {
+      .mat-expansion-panel {
+        margin: 16px 0;
+      }
+    }
+
+    .groups-autocomplete {
+      width: 100%;
     }
   }
 }

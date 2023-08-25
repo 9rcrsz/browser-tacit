@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {take} from "rxjs/operators";
 import {TemplatesService} from "@src/services/templates.service";
@@ -15,14 +15,11 @@ import {TypographyFacade} from '@src/store/typography/typography.facade';
 })
 export class AppComponent implements OnInit {
   templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-
-  constructor(
-    protected chromeService: ChromeService,
-    protected templatesService: TemplatesService,
-    protected cssGroupsFacade: CssGroupsFacade,
-    protected typographyFacade: TypographyFacade,
-    protected colorsFacade: ColorsFacade) {
-  }
+  protected chromeService: ChromeService = inject(ChromeService);
+  protected templatesService: TemplatesService = inject(TemplatesService);
+  protected cssGroupsFacade: CssGroupsFacade = inject(CssGroupsFacade);
+  protected typographyFacade: TypographyFacade = inject(TypographyFacade);
+  protected colorsFacade: ColorsFacade = inject(ColorsFacade);
 
   ngOnInit() {
     this.cssGroupsFacade.get();

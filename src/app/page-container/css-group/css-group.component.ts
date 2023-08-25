@@ -1,15 +1,24 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { CssGroup } from "@src/models/css-group.model";
-import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
-import { CssValue } from "@src/models/css-value.model";
-import { CssGroupsFacade } from '@src/store/css-groups/css-groups.facade';
-import { CssGroupsQuery } from '@src/store/css-groups/css-groups.query';
-import { ChromeService } from '@src/services/chrome.service';
-import { take } from 'rxjs/operators';
-import { TemplatesService } from '@src/services/templates.service';
-import { TypographyPropertiesEnum } from '@src/models/typography-properties.enum';
-import { buildTypographyCssName } from '@src/services/helper.service';
-import { TypographyEnum } from '@src/models/typography.enum';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+import {CssGroup} from "@src/models/css-group.model";
+import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
+import {CssValue} from "@src/models/css-value.model";
+import {CssGroupsFacade} from '@src/store/css-groups/css-groups.facade';
+import {CssGroupsQuery} from '@src/store/css-groups/css-groups.query';
+import {ChromeService} from '@src/services/chrome.service';
+import {take} from 'rxjs/operators';
+import {TemplatesService} from '@src/services/templates.service';
+import {TypographyPropertiesEnum} from '@src/models/typography-properties.enum';
+import {buildTypographyCssName} from '@src/services/helper.service';
+import {TypographyEnum} from '@src/models/typography.enum';
 
 @Component({
   selector: 'app-css-group',
@@ -19,6 +28,7 @@ import { TypographyEnum } from '@src/models/typography.enum';
 })
 export class CssGroupComponent implements OnInit, OnChanges {
   @Input() cssGroup!: CssGroup;
+  @Input() showChildren: boolean = true;
   breakpointTypes = BreakpointTypes;
   toggle: { [key: string]: boolean } = {};
   typography?: string;
@@ -74,7 +84,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
           localStorage.removeItem(cssValue.name);
         }
 
-        this.chromeService.send({ type: 'set-variables', variables: [{ key: cssValue.name, value: cssValue.current }] });
+        this.chromeService.send({type: 'set-variables', variables: [{key: cssValue.name, value: cssValue.current}]});
       }
     }
 
@@ -88,7 +98,10 @@ export class CssGroupComponent implements OnInit, OnChanges {
     this.cssGroupsFacade.update(this.cssGroup.name, this.cssGroup);
 
     localStorage.setItem(property.value.name, property.value.current);
-    this.chromeService.send({ type: 'set-variables', variables: [{ key: property.value.name, value: property.value.current }] });
+    this.chromeService.send({
+      type: 'set-variables',
+      variables: [{key: property.value.name, value: property.value.current}]
+    });
 
     console.log(property.value.name, property, this.cssGroup)
   }
@@ -112,7 +125,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
       this.childOppenedMap.delete(name);
     }
 
-    this.cssGroupsFacade.update(this.cssGroup.name, { disabled: !!this.childOppenedMap.size });
+    this.cssGroupsFacade.update(this.cssGroup.name, {disabled: !!this.childOppenedMap.size});
   }
 
   trackByName(index: number, cssGroup: CssGroup) {
