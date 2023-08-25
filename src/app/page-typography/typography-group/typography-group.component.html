@@ -18,14 +18,13 @@
                     [(ngModel)]="isCopyForAllBreakpoints">
         Copy for all breakpoints
       </mat-checkbox>
-
       <ul>
         <li *ngFor="let property of breakpoint.value | keyvalue: unsorted">
           <ng-container [ngSwitch]="property.key">
             <mat-form-field color="primary" appearance="fill" *ngSwitchDefault>
               <mat-label>{{property.key}}</mat-label>
               <input matInput [(ngModel)]="property.value" [name]="'general'+property.key"
-                     (change)="onChanged(property, breakpointTypes.general)">
+                     (change)="onChanged(property, breakpoint.key)">
             </mat-form-field>
 
           </ng-container>

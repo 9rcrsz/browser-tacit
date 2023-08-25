@@ -44,7 +44,7 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
     }
   }
 
-  onChanged(property: { key: string, value: string }, breakpoint: BreakpointTypes) {
+  onChanged(property: { key: string, value: string }, breakpoint: BreakpointTypes | string) {
     const toSend: Array<{ key: string, value: string }> = [];
     if (this.isCopyForAllBreakpoints && breakpoint === BreakpointTypes.general) {
       for (let bpsKey in this.typography.bps) {
@@ -57,7 +57,7 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
     } else {
       this.typography.bps[breakpoint][property.key] = property.value;
 
-      const cssName = buildTypographyCssName(property.key, this.typography.name, breakpoint);
+      const cssName = buildTypographyCssName(property.key, this.typography.name, breakpoint as BreakpointTypes);
       localStorage.setItem(cssName, property.value);
       toSend.push({key: cssName, value: property.value})
     }
