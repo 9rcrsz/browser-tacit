@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CssGroup } from "@src/models/css-group.model";
 import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
-import { CssGroupsQuery } from '@src/store/state/css-groups.query';
+import { CssGroupsQuery } from '@src/store/css-groups/css-groups.query';
 import { ChromeService } from '@src/services/chrome.service';
 import { take } from 'rxjs/operators';
 import { TemplatesService } from '@src/services/templates.service';
-import { TypographyService } from '@src/store/state/typography.service';
+import { TypographyFacade } from '@src/store/typography/typography.facade';
 import { buildTypographyCssName } from '@src/services/helper.service';
 import { Typography } from '@src/models/typography.model';
 
@@ -21,7 +21,7 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
   toggle: { [key: string]: boolean } = {};
 
   constructor(
-    protected typographyService: TypographyService,
+    protected typographyFacade: TypographyFacade,
     protected chromeService: ChromeService,
     protected templatesService: TemplatesService,
     public cssGroupsQuery: CssGroupsQuery) {
@@ -46,7 +46,7 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
   onChanged(property: { key: string, value: string }, breakpoint: BreakpointTypes) {
     this.typography.bps[breakpoint][property.key] = property.value;
     this.typography.template = null;
-    this.typographyService.update(this.typography.name, this.typography);
+    this.typographyFacade.update(this.typography.name, this.typography);
 
     const cssName = buildTypographyCssName(property.key, this.typography.name, breakpoint);
     localStorage.setItem(cssName, property.value);
@@ -58,10 +58,10 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
       this.templatesService.templates.get(templateName)!
         .pipe(take(1))
         .subscribe(data => {
-          this.typographyService.setCascadeTemplate(this.typography, templateName, data);
+          this.typographyFacade.setCascadeTemplate(this.typography, templateName, data);
         });
     } else {
-      this.typographyService.setCascadeTemplate(this.typography, null, new Map());
+      this.typographyFacade.setCascadeTemplate(this.typography, null, new Map());
     }
   }
 

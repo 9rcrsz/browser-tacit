@@ -1,4 +1,4 @@
-import { Colors } from "@src/models/colors.model";
+import {Colors} from "@src/models/colors.model";
 
 export class ColorsPopulate {
   protected model: Colors;

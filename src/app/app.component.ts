@@ -2,10 +2,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {take} from "rxjs/operators";
 import {TemplatesService} from "@src/services/templates.service";
-import {CssGroupsService} from '@src/store/state/css-groups.service';
+import {CssGroupsFacade} from '@src/store/css-groups/css-groups.facade';
 import {ChromeService} from '@src/services/chrome.service';
-import {ColorsService} from '@src/store/state/colors.service';
-import {TypographyService} from '@src/store/state/typography.service';
+import {ColorsFacade} from '@src/store/colors/colors.facade';
+import {TypographyFacade} from '@src/store/typography/typography.facade';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +19,13 @@ export class AppComponent implements OnInit {
   constructor(
     protected chromeService: ChromeService,
     protected templatesService: TemplatesService,
-    protected cssGroupsService: CssGroupsService,
-    protected typographyService: TypographyService,
-    protected colorsService: ColorsService) {
+    protected cssGroupsFacade: CssGroupsFacade,
+    protected typographyFacade: TypographyFacade,
+    protected colorsFacade: ColorsFacade) {
   }
 
   ngOnInit() {
-    this.cssGroupsService.get();
+    this.cssGroupsFacade.get();
   }
 
   templateSelected(templateName: string | null) {
@@ -36,33 +36,32 @@ export class AppComponent implements OnInit {
       this.templatesService.templates.get(templateName)!
         .pipe(take(1))
         .subscribe(data => {
-          this.colorsService.setTemplate(templateName, data);
-          this.cssGroupsService.setTemplate(templateName, data);
-          this.typographyService.setTemplate(templateName, data);
-          // this.typographyService
+          this.colorsFacade.setTemplate(templateName, data);
+          this.cssGroupsFacade.setTemplate(templateName, data);
+          this.typographyFacade.setTemplate(templateName, data);
 
           this.chromeService.send({type: 'remove-variables'});
 
           const variables = [
-            ...this.cssGroupsService.export(),
-            ...this.colorsService.export(),
-            ...this.typographyService.export()
+            ...this.cssGroupsFacade.export(),
+            ...this.colorsFacade.export(),
+            ...this.typographyFacade.export()
           ];
           this.chromeService.send({type: 'set-variables', variables})
         });
     } else {
-      this.cssGroupsService.setTemplate(null, new Map());
-      this.colorsService.setTemplate(null, new Map());
-      this.typographyService.setTemplate(null, new Map());
+      this.cssGroupsFacade.setTemplate(null, new Map());
+      this.colorsFacade.setTemplate(null, new Map());
+      this.typographyFacade.setTemplate(null, new Map());
       this.chromeService.send({type: 'remove-variables'});
     }
   }
 
   export() {
     const variables = [
-      ...this.cssGroupsService.export(),
-      ...this.colorsService.export(),
-      ...this.typographyService.export()
+      ...this.cssGroupsFacade.export(),
+      ...this.colorsFacade.export(),
+      ...this.typographyFacade.export()
     ];
 
     navigator.clipboard.writeText(variables.join("\r\n")).then(function () {
@@ -75,9 +74,9 @@ export class AppComponent implements OnInit {
   reset() {
     this.templateName$.next(null);
     localStorage.clear();
-    this.cssGroupsService.reset();
-    this.colorsService.reset();
-    this.typographyService.reset();
+    this.cssGroupsFacade.reset();
+    this.colorsFacade.reset();
+    this.typographyFacade.reset();
     this.chromeService.send({type: 'remove-variables'});
   }
 }

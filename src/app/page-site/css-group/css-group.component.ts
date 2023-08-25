@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnI
 import { CssGroup } from "@src/models/css-group.model";
 import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
 import { CssValue } from "@src/models/css-value.model";
-import { CssGroupsService } from '@src/store/state/css-groups.service';
-import { CssGroupsQuery } from '@src/store/state/css-groups.query';
+import { CssGroupsFacade } from '@src/store/css-groups/css-groups.facade';
+import { CssGroupsQuery } from '@src/store/css-groups/css-groups.query';
 import { ChromeService } from '@src/services/chrome.service';
 import { take } from 'rxjs/operators';
 import { TemplatesService } from '@src/services/templates.service';
@@ -26,7 +26,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
   childOppenedMap: Map<string, boolean> = new Map();
 
   constructor(
-    protected cssGroupsService: CssGroupsService,
+    protected cssGroupsFacade: CssGroupsFacade,
     protected chromeService: ChromeService,
     protected templatesService: TemplatesService,
     public cssGroupsQuery: CssGroupsQuery) {
@@ -79,13 +79,13 @@ export class CssGroupComponent implements OnInit, OnChanges {
     }
 
     this.cssGroup.template = null;
-    this.cssGroupsService.update(this.cssGroup.name, this.cssGroup);
+    this.cssGroupsFacade.update(this.cssGroup.name, this.cssGroup);
   }
 
   onChanged(property: { key: string, value: CssValue }, breakpoint: BreakpointTypes) {
     this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
     this.cssGroup.template = null;
-    this.cssGroupsService.update(this.cssGroup.name, this.cssGroup);
+    this.cssGroupsFacade.update(this.cssGroup.name, this.cssGroup);
 
     localStorage.setItem(property.value.name, property.value.current);
     this.chromeService.send({ type: 'set-variables', variables: [{ key: property.value.name, value: property.value.current }] });
@@ -98,10 +98,10 @@ export class CssGroupComponent implements OnInit, OnChanges {
       this.templatesService.templates.get(templateName)!
         .pipe(take(1))
         .subscribe(data => {
-          this.cssGroupsService.setCascadeTemplate(this.cssGroup, templateName, data);
+          this.cssGroupsFacade.setCascadeTemplate(this.cssGroup, templateName, data);
         });
     } else {
-      this.cssGroupsService.setCascadeTemplate(this.cssGroup, null, new Map());
+      this.cssGroupsFacade.setCascadeTemplate(this.cssGroup, null, new Map());
     }
   }
 
@@ -112,7 +112,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
       this.childOppenedMap.delete(name);
     }
 
-    this.cssGroupsService.update(this.cssGroup.name, { disabled: !!this.childOppenedMap.size });
+    this.cssGroupsFacade.update(this.cssGroup.name, { disabled: !!this.childOppenedMap.size });
   }
 
   trackByName(index: number, cssGroup: CssGroup) {

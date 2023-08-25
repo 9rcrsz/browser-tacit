@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
-import {CssGroupsQuery} from "@src/store/state/css-groups.query";
+import {CssGroupsQuery} from "@src/store/css-groups/css-groups.query";
 import {CssGroup} from "@src/models/css-group.model";
 import {Typography} from "@src/models/typography.model";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";

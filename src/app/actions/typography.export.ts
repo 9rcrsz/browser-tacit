@@ -1,6 +1,6 @@
-import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
-import { Typography } from "@src/models/typography.model";
-import { buildTypographyCssName } from "@src/services/helper.service";
+import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
+import {Typography} from "@src/models/typography.model";
+import {buildTypographyCssName} from "@src/services/helper.service";
 
 export class TypographyExport {
   protected model: Typography;
@@ -12,7 +12,6 @@ export class TypographyExport {
   export(): Array<string> {
     const variables: Array<string> = [];
 
-    console.log(this.model.template)
     if (this.model.template) {
       variables.push('--template_' + this.model.name + ': ' + this.model.template + ';');
     }

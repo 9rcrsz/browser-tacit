@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {TypographyQuery} from "@src/store/state/typography.query";
+import {TypographyQuery} from "@src/store/typography/typography.query";
 import {Typography} from "@src/models/typography.model";
 
 @Component({

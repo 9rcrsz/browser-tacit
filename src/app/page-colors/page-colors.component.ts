@@ -3,8 +3,8 @@ import { ColorsEnum } from '@src/models/colors.enum';
 import { Colors } from "@src/models/colors.model";
 import { ChromeService } from '@src/services/chrome.service';
 import { TemplatesService } from '@src/services/templates.service';
-import { ColorsQuery } from '@src/store/state/colors.query';
-import { ColorsService } from '@src/store/state/colors.service';
+import { ColorsQuery } from '@src/store/colors/colors.query';
+import { ColorsFacade } from '@src/store/colors/colors.facade';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -16,7 +16,7 @@ export class PageColorsComponent {
 
   constructor(
     public queryService: ColorsQuery,
-    protected colorsService: ColorsService,
+    protected colorsFacade: ColorsFacade,
     protected chromeService: ChromeService,
     protected templatesService: TemplatesService) {
   }
@@ -26,10 +26,10 @@ export class PageColorsComponent {
       this.templatesService.templates.get(templateName)!
         .pipe(take(1))
         .subscribe(data => {
-          this.colorsService.setTemplate(templateName, data);
+          this.colorsFacade.setTemplate(templateName, data);
         });
     } else {
-      this.colorsService.setTemplate(null, new Map());
+      this.colorsFacade.setTemplate(null, new Map());
     }
   }
 
@@ -37,8 +37,8 @@ export class PageColorsComponent {
     const varName = (ColorsEnum as any)[property.key];
     const varValue = property.value;
 
-    this.colorsService.updateTemplate(null);
-    this.colorsService.updateColor(property.key, varValue);
+    this.colorsFacade.updateTemplate(null);
+    this.colorsFacade.updateColor(property.key, varValue);
     localStorage.setItem(varName, varValue);
     this.chromeService.send({ type: 'set-variables', variables: [{ key: varName, value: varValue }] });
   }

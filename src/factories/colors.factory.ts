@@ -1,6 +1,6 @@
-import { ColorsExport } from "@src/app/actions/colors.export";
-import { ColorsEnum } from "@src/models/colors.enum";
-import { Colors } from "@src/models/colors.model";
+import {ColorsExport} from "@src/app/actions/colors.export";
+import {ColorsEnum} from "@src/models/colors.enum";
+import {Colors} from "@src/models/colors.model";
 
 export function createColors(params?: Partial<Colors>): Colors {
 

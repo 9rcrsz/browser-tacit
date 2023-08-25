@@ -9,7 +9,7 @@ import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
 import {map} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
-export class CssGroupsService {
+export class CssGroupsFacade {
 
   constructor(
     private cssGroupsStore: CssGroupsStore,

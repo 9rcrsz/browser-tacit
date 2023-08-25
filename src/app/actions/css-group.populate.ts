@@ -7,7 +7,7 @@ export class CssGroupPopulate {
     this.model = m;
   }
 
-  populate(template: Map<string, string>) {
+  populate(template: Map<string, string>): void {
     // this.model.breakpoints.forEach(breakpoint => {
     //   breakpoint.forEach(cssValue => {
     //     const templateValue = template.get(cssValue.name);

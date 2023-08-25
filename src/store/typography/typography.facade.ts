@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 import { TypographyStore } from './typography.store';
 
 @Injectable({ providedIn: 'root' })
-export class TypographyService {
+export class TypographyFacade {
 
   constructor(private typographyStore: TypographyStore, private http: HttpClient) {
   }

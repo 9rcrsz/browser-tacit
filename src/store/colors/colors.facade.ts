@@ -5,7 +5,7 @@ import { ColorsEnum } from '@src/models/colors.enum';
 import { ColorsStore } from './colors.store';
 
 @Injectable({ providedIn: 'root' })
-export class ColorsService {
+export class ColorsFacade {
 
   constructor(private colorsStore: ColorsStore, private http: HttpClient) {
   }

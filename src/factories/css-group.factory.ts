@@ -1,6 +1,4 @@
 import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
-import {CssPropertyTypes} from "@src/models/css-propert-types.enum";
-import {CssValue} from "@src/models/css-value.model";
 import {CssGroup} from "@src/models/css-group.model";
 import {CssGroupExport} from "@src/app/actions/css-group.export";
 import {CssGroupPopulate} from "@src/app/actions/css-group.populate";
@@ -14,7 +12,7 @@ export function createCssGroup(params?: Partial<CssGroup>): CssGroup {
   } as CssGroup;
 
   for (let breakpointTypesKey in BreakpointTypes) {
-    tmp.bps[breakpointTypesKey]={};
+    tmp.bps[breakpointTypesKey] = {};
   }
 
   return tmp;
