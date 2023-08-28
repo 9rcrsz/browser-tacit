@@ -9,10 +9,27 @@ import {FormControl} from "@angular/forms";
 import {filter, switchMap} from "rxjs/operators";
 
 const nameToGroups: { [key: string]: Array<string> } = {
-  'site-header': ['header', 'wo-header-component'],
+  'site-header': [
+    'wo-header-component',
+    'wo-logo-container',
+    'wo-hamburger', 
+    'wo-main-nav',
+    'wo-my-program',
+    'wo-select-lang',
+    'wo-auth-section',
+    'wo-bag'
+  ],
   'site-footer': ['wo-footer-component'],
-  'site-menu': ['wo-menu-title-component', 'wo-menu-footer', 'wo-menu-breadcrumbs-component'],
-  'site-base': ['body'],
+  'site-menu': [
+    'wo-menus-component',
+    'wo-menu-title-component',
+    'wo-items-groups-container',
+    'wo-menu-footer',
+    'wo-menu-breadcrumbs-component',
+    'wo-menu-and-categories',
+    'wo-items-group-component'
+  ],
+  'site-base': ['html', 'body', 'wo-base-component'],
   'site-menu-item': ['wo-item-component'],
 }
 

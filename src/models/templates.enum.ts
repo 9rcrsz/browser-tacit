@@ -3,6 +3,7 @@ export enum TemplatesEnum {
   'button-normal' = 'button-normal',
   'button-outline' = 'button-outline',
   'button-text' = 'button-text',
+  'txt-icon' = 'txt-icon',
   'txt-h1' = 'txt-h1',
   'txt-h2' = 'txt-h2',
   'txt-h3' = 'txt-h3',
