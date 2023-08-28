@@ -17,7 +17,7 @@ import {ChromeService} from '@src/services/chrome.service';
 import {take} from 'rxjs/operators';
 import {TemplatesService} from '@src/services/templates.service';
 import {TypographyPropertiesEnum} from '@src/models/typography-properties.enum';
-import {buildTypographyCssName} from '@src/services/helper.service';
+import {buildCssName, buildTypographyCssName} from '@src/services/helper.service';
 import {TypographyEnum} from '@src/models/typography.enum';
 
 @Component({
@@ -34,6 +34,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
   typography?: string;
   typographyPropertiesEnum = TypographyPropertiesEnum;
   childOppenedMap: Map<string, boolean> = new Map();
+  isCopyForAllBreakpoints: boolean = false;
 
   constructor(
     protected cssGroupsFacade: CssGroupsFacade,
@@ -93,14 +94,27 @@ export class CssGroupComponent implements OnInit, OnChanges {
   }
 
   onChanged(property: { key: string, value: CssValue }, breakpoint: BreakpointTypes) {
-    this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
+    const toSend: Array<{ key: string, value: string }> = [];
+    if (this.isCopyForAllBreakpoints && breakpoint === BreakpointTypes.general) {
+      for (let bpsKey in this.cssGroup.bps) {
+        this.cssGroup.bps[bpsKey][property.key] = property.value;
+
+        const cssName = buildCssName(property.key, this.cssGroup.name, bpsKey as BreakpointTypes);
+        localStorage.setItem(cssName, property.value.current);
+        toSend.push({key: cssName, value: property.value.current})
+      }
+    } else {
+      this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
+      localStorage.setItem(property.value.name, property.value.current);
+      toSend.push({key: property.value.name, value: property.value.current});
+    }
+
     this.cssGroup.template = null;
     this.cssGroupsFacade.update(this.cssGroup.name, this.cssGroup);
 
-    localStorage.setItem(property.value.name, property.value.current);
     this.chromeService.send({
       type: 'set-variables',
-      variables: [{key: property.value.name, value: property.value.current}]
+      variables: toSend
     });
 
     console.log(property.value.name, property, this.cssGroup)
