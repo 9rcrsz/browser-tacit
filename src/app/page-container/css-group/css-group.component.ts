@@ -99,8 +99,9 @@ export class CssGroupComponent implements OnInit, OnChanges {
       for (let bpsKey in this.cssGroup.bps) {
         this.cssGroup.bps[bpsKey][property.key].current = property.value.current;
 
-        localStorage.setItem(property.value.name + '_' + bpsKey, property.value.current);
-        toSend.push({key: property.value.name + '_' + bpsKey, value: property.value.current})
+        const cssName = property.value.name + (bpsKey === BreakpointTypes.general ? '' : '_' + bpsKey);
+        localStorage.setItem(cssName, property.value.current);
+        toSend.push({key: cssName, value: property.value.current})
       }
     } else {
       this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
