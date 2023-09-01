@@ -97,11 +97,10 @@ export class CssGroupComponent implements OnInit, OnChanges {
     const toSend: Array<{ key: string, value: string }> = [];
     if (this.isCopyForAllBreakpoints && breakpoint === BreakpointTypes.general) {
       for (let bpsKey in this.cssGroup.bps) {
-        this.cssGroup.bps[bpsKey][property.key] = property.value;
+        this.cssGroup.bps[bpsKey][property.key].current = property.value.current;
 
-        const cssName = buildCssName(property.key, this.cssGroup.name, bpsKey as BreakpointTypes);
-        localStorage.setItem(cssName, property.value.current);
-        toSend.push({key: cssName, value: property.value.current})
+        localStorage.setItem(property.value.name + '_' + bpsKey, property.value.current);
+        toSend.push({key: property.value.name + '_' + bpsKey, value: property.value.current})
       }
     } else {
       this.cssGroup.bps[breakpoint][property.key].current = property.value.current;

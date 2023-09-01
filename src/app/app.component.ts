@@ -22,7 +22,16 @@ export class AppComponent implements OnInit {
   protected colorsFacade: ColorsFacade = inject(ColorsFacade);
 
   ngOnInit() {
-    this.cssGroupsFacade.get();
+    this.cssGroupsFacade.get().subscribe(() => {
+      this.chromeService.send({type: 'remove-variables'});
+
+      const variables = [
+        ...this.cssGroupsFacade.export(),
+        ...this.colorsFacade.export(),
+        ...this.typographyFacade.export()
+      ];
+      this.chromeService.send({type: 'set-variables', variables})
+    });
   }
 
   templateSelected(templateName: string | null) {

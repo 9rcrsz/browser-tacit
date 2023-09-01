@@ -18,11 +18,13 @@ export class CssGroupsFacade {
   }
 
   get() {
-    this.http.get('/assets/all.json')
-      .subscribe((all: any) => {
-        const tmp = this.cssService.buildCssGroupsMap({vars: all});
-        this.cssGroupsStore.set([...tmp.values()]);
-      });
+    return this.http.get('/assets/all.json')
+      .pipe(
+        map((all: any) => {
+          const tmp = this.cssService.buildCssGroupsMap({vars: all});
+          this.cssGroupsStore.set([...tmp.values()]);
+        })
+      );
   }
 
   add(cssGroup: CssGroup) {
