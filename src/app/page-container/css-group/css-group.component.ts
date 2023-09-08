@@ -93,7 +93,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
     this.cssGroupsFacade.update(this.cssGroup.name, this.cssGroup);
   }
 
-  onChanged(property: { key: string, value: CssValue }, breakpoint: BreakpointTypes) {
+  onChanged(property: { key: string, value: CssValue }, breakpoint: string) {
     const toSend: Array<{ key: string, value: string }> = [];
     if (this.isCopyForAllBreakpoints && breakpoint === BreakpointTypes.general) {
       for (let bpsKey in this.cssGroup.bps) {
@@ -104,6 +104,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
         toSend.push({key: cssName, value: property.value.current})
       }
     } else {
+      console.log(breakpoint)
       this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
       localStorage.setItem(property.value.name, property.value.current);
       toSend.push({key: property.value.name, value: property.value.current});

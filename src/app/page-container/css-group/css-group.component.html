@@ -32,13 +32,13 @@
             <ng-container [ngSwitch]="true">
               <app-select-color *ngSwitchCase="property.key === 'color' || property.key === 'background-color'"
                                 [(ngModel)]="property.value.current" [placeholder]="property.key"
-                                (ngModelChange)="onChanged(property, breakpointTypes.general)">
+                                (ngModelChange)="onChanged(property, breakpoint.key)">
               </app-select-color>
 
               <mat-form-field color="primary" appearance="fill" *ngSwitchDefault>
                 <mat-label>{{property.key}}</mat-label>
                 <input matInput [(ngModel)]="property.value.current" [name]="'general'+property.key"
-                       (change)="onChanged(property, breakpointTypes.general)">
+                       (change)="onChanged(property, breakpoint.key)">
                 <mat-hint *ngIf="property.value.labels?.length">{{property.value.labels!.join(', ')}}</mat-hint>
               </mat-form-field>
 
