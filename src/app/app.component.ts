@@ -15,7 +15,6 @@ import {FirebaseService} from '@src/services/firebase.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  templateName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   protected chromeService: ChromeService = inject(ChromeService);
   protected templatesService: TemplatesService = inject(TemplatesService);
   protected cssGroupsFacade: CssGroupsFacade = inject(CssGroupsFacade);
@@ -38,14 +37,13 @@ export class AppComponent implements OnInit {
   }
 
   templateSelected(templateName: string | null) {
-    this.templateName$.next(templateName);
-    localStorage.clear();
+    this.templatesService.templateName$.next(templateName)
 
     if (templateName !== null) {
       forkJoin([
-        this.fbService.getSomething('colors'),
-        this.fbService.getSomething('css-groups'),
-        this.fbService.getSomething('typography')
+        this.fbService.getSomething(this.templatesService.templateName$.value, 'colors'),
+        this.fbService.getSomething(this.templatesService.templateName$.value, 'css-groups'),
+        this.fbService.getSomething(this.templatesService.templateName$.value, 'typography')
       ]).subscribe(([colors, cssGroups, typography]) => {
 
         console.log(colors.data(), cssGroups.data(), typography.data());
@@ -85,7 +83,7 @@ export class AppComponent implements OnInit {
   }
 
   reset() {
-    this.templateName$.next(null);
+    this.templatesService.templateName$.next(null);
     localStorage.clear();
     this.cssGroupsFacade.reset();
     this.colorsFacade.reset();

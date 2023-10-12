@@ -11,7 +11,7 @@ import {TemplatesService} from "@src/services/templates.service";
 export class SelectTemplateComponent {
   @Output() eventSelectTemplate = new EventEmitter<string | null>();
   @Input() templateName: string | null = null;
-  @Input() placeHolder: string = 'Template';
+  @Input() placeHolder: string = 'Clone template';
 
   constructor(protected tService: TemplatesService) {
   }

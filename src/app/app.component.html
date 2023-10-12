@@ -7,7 +7,7 @@
     <button mat-button (click)="export()">Export</button>
     <button mat-button (click)="reset()">Reset</button>
 
-    <select-template [templateName]="templateName$ | async"
+    <select-template [templateName]="templatesService.templateName$ | async"
                      [placeHolder]="'Project'"
                      (eventSelectTemplate)="templateSelected($event)"></select-template>
   </nav>

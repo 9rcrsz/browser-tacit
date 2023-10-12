@@ -82,10 +82,10 @@ export class CssGroupComponent implements OnInit, OnChanges {
         const cssValue = this.cssGroup.bps[breakpoint][property];
         if (e !== 'unset') {
           cssValue.current = 'var(' + buildTypographyCssName(property, e, breakpoint as BreakpointTypes) + ')'
-          this.fbService.setSomething(`css-groups`, {[cssValue.name]: cssValue.current});
+          this.fbService.setSomething(this.templatesService.templateName$.value,`css-groups`, {[cssValue.name]: cssValue.current});
         } else {
           cssValue.current = cssValue.default;
-          this.fbService.removeField(`css-groups`, cssValue.name);
+          this.fbService.removeField(this.templatesService.templateName$.value,`css-groups`, cssValue.name);
         }
 
         this.chromeService.send({type: 'set-variables', variables: [{key: cssValue.name, value: cssValue.current}]});
@@ -103,13 +103,13 @@ export class CssGroupComponent implements OnInit, OnChanges {
         this.cssGroup.bps[bpsKey][property.key].current = property.value.current;
 
         const cssName = property.value.name + (bpsKey === BreakpointTypes.general ? '' : '_' + bpsKey);
-        this.fbService.setSomething(`css-groups`, {[cssName]: property.value.current});
+        this.fbService.setSomething(this.templatesService.templateName$.value,`css-groups`, {[cssName]: property.value.current});
         toSend.push({key: cssName, value: property.value.current})
       }
     } else {
       console.log(breakpoint)
       this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
-      this.fbService.setSomething(`css-groups`, {[property.value.name]: property.value.current});
+      this.fbService.setSomething(this.templatesService.templateName$.value,`css-groups`, {[property.value.name]: property.value.current});
       toSend.push({key: property.value.name, value: property.value.current});
     }
 

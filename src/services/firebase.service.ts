@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {initializeApp} from 'firebase/app';
 import {doc, getFirestore, setDoc, getDoc, updateDoc, deleteField} from 'firebase/firestore';
-import {from, Observable} from 'rxjs';
+import {from, Observable, of} from 'rxjs';
 
 @Injectable({providedIn: "root"})
 export class FirebaseService {
@@ -16,21 +16,33 @@ export class FirebaseService {
   protected app = initializeApp(this.firebaseConfig);
   protected db = getFirestore(this.app);
 
-  async setSomething(path: string, data: any) {
+  async setSomething(project: string | null, path: string, data: any) {
+    if (!project) {
+      return;
+    }
+
     try {
-      const docRef = await setDoc(doc(this.db, "png", path), data, {merge: true});
+      const docRef = await setDoc(doc(this.db, project, path), data, {merge: true});
       console.log("Document written with ID: ", docRef);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   }
 
-  getSomething(path: string): Observable<any> {
-    return from(getDoc(doc(this.db, "png", path)));
+  getSomething(project: string | null, path: string): Observable<any> {
+    if (!project) {
+      return of({});
+    }
+
+    return from(getDoc(doc(this.db, project, path)));
   }
 
-  removeField(path: string, field: string): Observable<any> {
-    return from(updateDoc(doc(this.db, 'png', path), {
+  removeField(project: string | null, path: string, field: string): Observable<any> {
+    if (!project) {
+      return of({});
+    }
+
+    return from(updateDoc(doc(this.db, project, path), {
       [field]: deleteField()
     }));
   }

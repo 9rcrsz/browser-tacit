@@ -13,13 +13,13 @@ import {FirebaseService} from '@src/services/firebase.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageColorsComponent {
+  templatesService = inject(TemplatesService);
   protected fbService = inject(FirebaseService);
 
   constructor(
     public queryService: ColorsQuery,
     protected colorsFacade: ColorsFacade,
-    protected chromeService: ChromeService,
-    protected templatesService: TemplatesService) {
+    protected chromeService: ChromeService) {
   }
 
   selectTemplate(templateName: string | null) {
@@ -41,7 +41,7 @@ export class PageColorsComponent {
     this.colorsFacade.updateTemplate(null);
     this.colorsFacade.updateColor(property.key, varValue);
 
-    this.fbService.setSomething(`colors`, {[varName]: varValue});
+    this.fbService.setSomething(this.templatesService.templateName$.value, `colors`, {[varName]: varValue});
 
     this.chromeService.send({type: 'set-variables', variables: [{key: varName, value: varValue}]});
   }

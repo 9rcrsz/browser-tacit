@@ -54,14 +54,14 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
         this.typography.bps[bpsKey][property.key] = property.value;
 
         const cssName = buildTypographyCssName(property.key, this.typography.name, bpsKey as BreakpointTypes);
-        this.fbService.setSomething(`typography`, {[cssName]: property.value});
+        this.fbService.setSomething(this.templatesService.templateName$.value, `typography`, {[cssName]: property.value});
         toSend.push({key: cssName, value: property.value})
       }
     } else {
       this.typography.bps[breakpoint][property.key] = property.value;
 
       const cssName = buildTypographyCssName(property.key, this.typography.name, breakpoint as BreakpointTypes);
-      this.fbService.setSomething(`typography`, {[cssName]: property.value});
+      this.fbService.setSomething(this.templatesService.templateName$.value, `typography`, {[cssName]: property.value});
       toSend.push({key: cssName, value: property.value})
     }
 
