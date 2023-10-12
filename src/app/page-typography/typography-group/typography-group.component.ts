@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CssGroup} from "@src/models/css-group.model";
 import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
 import {CssGroupsQuery} from '@src/store/css-groups/css-groups.query';
@@ -8,6 +8,7 @@ import {TemplatesService} from '@src/services/templates.service';
 import {TypographyFacade} from '@src/store/typography/typography.facade';
 import {buildTypographyCssName} from '@src/services/helper.service';
 import {Typography} from '@src/models/typography.model';
+import {FirebaseService} from '@src/services/firebase.service';
 
 @Component({
   selector: 'app-typography-group',
@@ -16,6 +17,8 @@ import {Typography} from '@src/models/typography.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TypographyGroupComponent implements OnInit, OnChanges {
+  protected fbService = inject(FirebaseService);
+
   @Input() typography!: Typography;
   breakpointTypes = BreakpointTypes;
   isCopyForAllBreakpoints: boolean = false;
@@ -51,14 +54,14 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
         this.typography.bps[bpsKey][property.key] = property.value;
 
         const cssName = buildTypographyCssName(property.key, this.typography.name, bpsKey as BreakpointTypes);
-        localStorage.setItem(cssName, property.value);
+        this.fbService.setSomething(`typography`, {[cssName]: property.value});
         toSend.push({key: cssName, value: property.value})
       }
     } else {
       this.typography.bps[breakpoint][property.key] = property.value;
 
       const cssName = buildTypographyCssName(property.key, this.typography.name, breakpoint as BreakpointTypes);
-      localStorage.setItem(cssName, property.value);
+      this.fbService.setSomething(`typography`, {[cssName]: property.value});
       toSend.push({key: cssName, value: property.value})
     }
 

@@ -64,21 +64,9 @@ export class CssGroupsFacade {
     return variables;
   }
 
-  setTemplate(templateName: string | null, data: Map<string, string>) {
+  setProject(data: Map<string, string>) {
     const cssGroups: Array<CssGroup> = Object.values(JSON.parse(JSON.stringify(this.cssGroupsStore.getValue().entities)));
     cssGroups.forEach((cssGroup: CssGroup) => {
-      let realTemplateName = templateName;
-      if (templateName && data.has('--template_' + cssGroup.name)) {
-        realTemplateName = data.get('--template_' + cssGroup.name)!;
-      }
-
-      cssGroup.template = realTemplateName;
-      if (realTemplateName) {
-        localStorage.setItem('--template_' + cssGroup.name, realTemplateName);
-      } else {
-        localStorage.removeItem('--template_' + cssGroup.name);
-      }
-
       for (const breakpoint in cssGroup.bps) {
         for (const property in cssGroup.bps[breakpoint]) {
           const cssValue = cssGroup.bps[breakpoint][property];
@@ -86,7 +74,6 @@ export class CssGroupsFacade {
           cssValue.current = cssValue.default;
           if (data.has(cssValue.name)) {
             cssValue.current = data.get(cssValue.name)!;
-            localStorage.setItem(cssValue.name, cssValue.current);
           }
         }
       }

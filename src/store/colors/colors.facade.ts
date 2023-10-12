@@ -1,17 +1,17 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { createColorsExport } from '@src/factories/colors.factory';
-import { ColorsEnum } from '@src/models/colors.enum';
-import { ColorsStore } from './colors.store';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {createColorsExport} from '@src/factories/colors.factory';
+import {ColorsEnum} from '@src/models/colors.enum';
+import {ColorsStore} from './colors.store';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class ColorsFacade {
 
   constructor(private colorsStore: ColorsStore, private http: HttpClient) {
   }
 
   updateTemplate(value: string | null) {
-    this.colorsStore.update({ template: value })
+    this.colorsStore.update({template: value})
   }
 
   updateColor(property: string, value: string) {
@@ -22,7 +22,7 @@ export class ColorsFacade {
 
     this.colorsStore.update(state => ({
       ...state,
-      list: { ...state.list, ...tmp }
+      list: {...state.list, ...tmp}
     }));
   }
 
@@ -30,24 +30,19 @@ export class ColorsFacade {
     return createColorsExport(this.colorsStore.getValue()).export();
   }
 
-  setTemplate(templateName: string | null, data: Map<string, string>) {
+  setProject(data: Map<string, string>) {
     this.reset();
-    this.updateTemplate(templateName);
 
     const tmpValues: { [key: string]: string } = {};
     for (let i in ColorsEnum) {
-      if(data.has((ColorsEnum as any)[i])){
-        tmpValues[i] =  data.get((ColorsEnum as any)[i])!;
-        localStorage.setItem((ColorsEnum as any)[i], tmpValues[i]);
-
-      }else{
-        localStorage.removeItem((ColorsEnum as any)[i]);
+      if (data.has((ColorsEnum as any)[i])) {
+        tmpValues[i] = data.get((ColorsEnum as any)[i])!;
       }
     }
 
     this.colorsStore.update(state => ({
       ...state,
-      list: { ...state.list, ...tmpValues }
+      list: {...state.list, ...tmpValues}
     }));
   }
 

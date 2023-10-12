@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
+  EventEmitter, inject,
   Input,
   OnChanges,
   OnInit,
@@ -19,6 +19,7 @@ import {TemplatesService} from '@src/services/templates.service';
 import {TypographyPropertiesEnum} from '@src/models/typography-properties.enum';
 import {buildCssName, buildTypographyCssName} from '@src/services/helper.service';
 import {TypographyEnum} from '@src/models/typography.enum';
+import {FirebaseService} from '@src/services/firebase.service';
 
 @Component({
   selector: 'app-css-group',
@@ -27,6 +28,8 @@ import {TypographyEnum} from '@src/models/typography.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CssGroupComponent implements OnInit, OnChanges {
+  protected fbService = inject(FirebaseService);
+
   @Input() cssGroup!: CssGroup;
   @Input() showChildren: boolean = true;
   breakpointTypes = BreakpointTypes;
@@ -79,10 +82,10 @@ export class CssGroupComponent implements OnInit, OnChanges {
         const cssValue = this.cssGroup.bps[breakpoint][property];
         if (e !== 'unset') {
           cssValue.current = 'var(' + buildTypographyCssName(property, e, breakpoint as BreakpointTypes) + ')'
-          localStorage.setItem(cssValue.name, cssValue.current);
+          this.fbService.setSomething(`css-groups`, {[cssValue.name]: cssValue.current});
         } else {
           cssValue.current = cssValue.default;
-          localStorage.removeItem(cssValue.name);
+          this.fbService.removeField(`css-groups`, cssValue.name);
         }
 
         this.chromeService.send({type: 'set-variables', variables: [{key: cssValue.name, value: cssValue.current}]});
@@ -100,13 +103,13 @@ export class CssGroupComponent implements OnInit, OnChanges {
         this.cssGroup.bps[bpsKey][property.key].current = property.value.current;
 
         const cssName = property.value.name + (bpsKey === BreakpointTypes.general ? '' : '_' + bpsKey);
-        localStorage.setItem(cssName, property.value.current);
+        this.fbService.setSomething(`css-groups`, {[cssName]: property.value.current});
         toSend.push({key: cssName, value: property.value.current})
       }
     } else {
       console.log(breakpoint)
       this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
-      localStorage.setItem(property.value.name, property.value.current);
+      this.fbService.setSomething(`css-groups`, {[property.value.name]: property.value.current});
       toSend.push({key: property.value.name, value: property.value.current});
     }
 

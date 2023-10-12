@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ColorsEnum } from '@src/models/colors.enum';
-import { Colors } from "@src/models/colors.model";
-import { ChromeService } from '@src/services/chrome.service';
-import { TemplatesService } from '@src/services/templates.service';
-import { ColorsQuery } from '@src/store/colors/colors.query';
-import { ColorsFacade } from '@src/store/colors/colors.facade';
-import { take } from 'rxjs/operators';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ColorsEnum} from '@src/models/colors.enum';
+import {ChromeService} from '@src/services/chrome.service';
+import {TemplatesService} from '@src/services/templates.service';
+import {ColorsQuery} from '@src/store/colors/colors.query';
+import {ColorsFacade} from '@src/store/colors/colors.facade';
+import {take} from 'rxjs/operators';
+import {FirebaseService} from '@src/services/firebase.service';
 
 @Component({
   templateUrl: './page-colors.component.html',
@@ -13,6 +13,7 @@ import { take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageColorsComponent {
+  protected fbService = inject(FirebaseService);
 
   constructor(
     public queryService: ColorsQuery,
@@ -26,10 +27,10 @@ export class PageColorsComponent {
       this.templatesService.templates.get(templateName)!
         .pipe(take(1))
         .subscribe(data => {
-          this.colorsFacade.setTemplate(templateName, data);
+          this.colorsFacade.setProject(data);
         });
     } else {
-      this.colorsFacade.setTemplate(null, new Map());
+      this.colorsFacade.setProject(new Map());
     }
   }
 
@@ -39,8 +40,10 @@ export class PageColorsComponent {
 
     this.colorsFacade.updateTemplate(null);
     this.colorsFacade.updateColor(property.key, varValue);
-    localStorage.setItem(varName, varValue);
-    this.chromeService.send({ type: 'set-variables', variables: [{ key: varName, value: varValue }] });
+
+    this.fbService.setSomething(`colors`, {[varName]: varValue});
+
+    this.chromeService.send({type: 'set-variables', variables: [{key: varName, value: varValue}]});
   }
 
   trackBy(index: number, a: any) {

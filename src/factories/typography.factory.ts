@@ -7,7 +7,7 @@ import {buildTypographyCssName} from "@src/services/helper.service";
 export function createTypography(params: Partial<Typography>) {
   const tmp: Typography = {
     name: params.name ?? '',
-    template: params.template ?? localStorage.getItem('--template_' + params.name) ?? null,
+    template: params.template ?? null,
     bps: {}
   };
 
@@ -16,7 +16,7 @@ export function createTypography(params: Partial<Typography>) {
 
     for (const property in TypographyPropertiesEnum) {
       const cssName = buildTypographyCssName(property, tmp.name, type as BreakpointTypes);
-      tmp.bps[type][property] = localStorage.getItem(cssName) ?? '';
+      tmp.bps[type][property] = '';
     }
   }
 

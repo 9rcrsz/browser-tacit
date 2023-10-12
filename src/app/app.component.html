@@ -8,6 +8,7 @@
     <button mat-button (click)="reset()">Reset</button>
 
     <select-template [templateName]="templateName$ | async"
+                     [placeHolder]="'Project'"
                      (eventSelectTemplate)="templateSelected($event)"></select-template>
   </nav>
 

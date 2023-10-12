@@ -11,15 +11,12 @@ import {TemplatesService} from "@src/services/templates.service";
 export class SelectTemplateComponent {
   @Output() eventSelectTemplate = new EventEmitter<string | null>();
   @Input() templateName: string | null = null;
+  @Input() placeHolder: string = 'Template';
 
   constructor(protected tService: TemplatesService) {
   }
 
   onChanged(selectedTemplateName: string | null) {
-    if (selectedTemplateName !== null) {
-      this.tService.loadTemplate(selectedTemplateName);
-    }
-
     this.eventSelectTemplate.emit(selectedTemplateName)
   }
 }

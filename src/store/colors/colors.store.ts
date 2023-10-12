@@ -9,6 +9,7 @@ export class ColorsStore extends Store<Colors> {
 
   constructor() {
     super(createColors());
+    console.log('colors')
   }
 
 }

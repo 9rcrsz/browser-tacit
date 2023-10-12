@@ -6,7 +6,7 @@ export function createColors(params?: Partial<Colors>): Colors {
 
   const tmpValues: { [key: string]: string } = {};
   for (let i in ColorsEnum) {
-    tmpValues[i] = localStorage.getItem((ColorsEnum as any)[i]) ?? '';
+    tmpValues[i] = '';
   }
 
   return {

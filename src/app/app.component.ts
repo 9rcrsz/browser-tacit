@@ -1,11 +1,12 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, forkJoin} from "rxjs";
 import {take} from "rxjs/operators";
 import {TemplatesService} from "@src/services/templates.service";
 import {CssGroupsFacade} from '@src/store/css-groups/css-groups.facade';
 import {ChromeService} from '@src/services/chrome.service';
 import {ColorsFacade} from '@src/store/colors/colors.facade';
 import {TypographyFacade} from '@src/store/typography/typography.facade';
+import {FirebaseService} from '@src/services/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,8 @@ export class AppComponent implements OnInit {
   protected cssGroupsFacade: CssGroupsFacade = inject(CssGroupsFacade);
   protected typographyFacade: TypographyFacade = inject(TypographyFacade);
   protected colorsFacade: ColorsFacade = inject(ColorsFacade);
+
+  protected fbService: FirebaseService = inject(FirebaseService);
 
   ngOnInit() {
     this.cssGroupsFacade.get().subscribe(() => {
@@ -39,26 +42,30 @@ export class AppComponent implements OnInit {
     localStorage.clear();
 
     if (templateName !== null) {
-      this.templatesService.templates.get(templateName)!
-        .pipe(take(1))
-        .subscribe(data => {
-          this.colorsFacade.setTemplate(templateName, data);
-          this.cssGroupsFacade.setTemplate(templateName, data);
-          this.typographyFacade.setTemplate(templateName, data);
+      forkJoin([
+        this.fbService.getSomething('colors'),
+        this.fbService.getSomething('css-groups'),
+        this.fbService.getSomething('typography')
+      ]).subscribe(([colors, cssGroups, typography]) => {
 
-          this.chromeService.send({type: 'remove-variables'});
+        console.log(colors.data(), cssGroups.data(), typography.data());
+        this.colorsFacade.setProject(new Map(Object.entries(colors.data() ?? {})));
+        this.cssGroupsFacade.setProject(new Map(Object.entries(cssGroups.data() ?? {})));
+        this.typographyFacade.setProject(new Map(Object.entries(typography.data() ?? {})));
 
-          const variables = [
-            ...this.cssGroupsFacade.export(),
-            ...this.colorsFacade.export(),
-            ...this.typographyFacade.export()
-          ];
-          this.chromeService.send({type: 'set-variables', variables})
-        });
+        this.chromeService.send({type: 'remove-variables'});
+
+        const variables = [
+          ...this.cssGroupsFacade.export(),
+          ...this.colorsFacade.export(),
+          ...this.typographyFacade.export()
+        ];
+        this.chromeService.send({type: 'set-variables', variables});
+      });
     } else {
-      this.cssGroupsFacade.setTemplate(null, new Map());
-      this.colorsFacade.setTemplate(null, new Map());
-      this.typographyFacade.setTemplate(null, new Map());
+      this.cssGroupsFacade.setProject(new Map());
+      this.colorsFacade.setProject(new Map());
+      this.typographyFacade.setProject(new Map());
       this.chromeService.send({type: 'remove-variables'});
     }
   }
