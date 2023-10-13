@@ -11,6 +11,9 @@ export class CssService {
 
     data.vars.forEach(tmpVar => {
       const splittedVarAndVal = this.splitVarAndValue(tmpVar);
+      if(!splittedVarAndVal){
+        return;
+      }
       const currentValue = splittedVarAndVal![1];
       const preparedVariable = !!splittedVarAndVal ? this.parseVariable(splittedVarAndVal[0]) : null;
       if (!preparedVariable /*|| preparedVariable.variableParts[0] !== data.moduleClassName*/) {

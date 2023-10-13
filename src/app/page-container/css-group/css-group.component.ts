@@ -132,14 +132,15 @@ export class CssGroupComponent implements OnInit, OnChanges {
           return this.cssGroupsFacade.cloneTemplate(
             this.cssGroup,
             this.templatesService.templateName$.value,
-            new Map(Object.entries(res.data() ?? {}))
+            new Map(Object.entries(res.data() ?? {})),
+            this.showChildren
           )
         })).subscribe(() => {
           this.loading$.next(false);
           EventService.refreshSiteVariables.emit();
         });
     } else {
-      this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map());
+      this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map(), this.showChildren);
       EventService.refreshSiteVariables.emit();
     }
   }

@@ -87,7 +87,7 @@ export class CssGroupsFacade {
     this.cssGroupsStore.set(cssGroups);
   }
 
-  cloneTemplate(cssGroup: CssGroup, templateName: string | null, data: Map<string, string>) {
+  cloneTemplate(cssGroup: CssGroup, templateName: string | null, data: Map<string, string>, withChildren: boolean) {
     const fieldsToSave: { [key: string]: string } = {};
     const fieldsToRemove: Array<string> = [];
 
@@ -105,8 +105,13 @@ export class CssGroupsFacade {
         }
       }
     }
-    
+
     this.cssGroupsStore.update(cssGroup.name, cssGroup);
+
+    if (!withChildren) {
+      return of(null);
+    }
+
     return forkJoin([
       this.fbService.setSomething(templateName, `css-groups`, fieldsToSave),
       this.fbService.removeFields(templateName, `css-groups`, fieldsToRemove)
@@ -122,7 +127,7 @@ export class CssGroupsFacade {
         const tmp: Array<Observable<any>> = [];
         groups.forEach(cssGroup => {
           console.log('Updating: ', cssGroup.name)
-          tmp.push(this.cloneTemplate(JSON.parse(JSON.stringify(cssGroup)), templateName, data));
+          tmp.push(this.cloneTemplate(JSON.parse(JSON.stringify(cssGroup)), templateName, data, true));
         })
 
         return forkJoin(tmp);
