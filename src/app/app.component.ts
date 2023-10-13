@@ -7,6 +7,7 @@ import {ChromeService} from '@src/services/chrome.service';
 import {ColorsFacade} from '@src/store/colors/colors.facade';
 import {TypographyFacade} from '@src/store/typography/typography.facade';
 import {FirebaseService} from '@src/services/firebase.service';
+import {EventService} from '@src/services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,19 @@ export class AppComponent implements OnInit {
         this.templateSelected(projectName);
       }
     });
+
+    EventService.refreshSiteVariables.subscribe(
+      () => {
+        this.chromeService.send({type: 'remove-variables'});
+
+        const variables = [
+          ...this.cssGroupsFacade.export(),
+          ...this.colorsFacade.export(),
+          ...this.typographyFacade.export()
+        ];
+        this.chromeService.send({type: 'set-variables', variables});
+      }
+    );
   }
 
   templateSelected(templateName: string | null) {

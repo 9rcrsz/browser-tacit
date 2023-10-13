@@ -6,6 +6,7 @@ import {ColorsQuery} from '@src/store/colors/colors.query';
 import {ColorsFacade} from '@src/store/colors/colors.facade';
 import {take} from 'rxjs/operators';
 import {FirebaseService} from '@src/services/firebase.service';
+import {EventService} from '@src/services/event.service';
 
 @Component({
   templateUrl: './page-colors.component.html',
@@ -27,9 +28,11 @@ export class PageColorsComponent {
       this.fbService.getSomething(templateName, `colors`)
         .subscribe(res => {
           this.colorsFacade.cloneTemplate(this.templatesService.templateName$.value, new Map(Object.entries(res.data() ?? {})));
+          EventService.refreshSiteVariables.emit();
         });
     } else {
       this.colorsFacade.cloneTemplate(this.templatesService.templateName$.value, new Map());
+      EventService.refreshSiteVariables.emit();
     }
   }
 

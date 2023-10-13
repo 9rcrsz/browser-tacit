@@ -10,6 +10,7 @@ import {buildTypographyCssName} from '@src/services/helper.service';
 import {Typography} from '@src/models/typography.model';
 import {FirebaseService} from '@src/services/firebase.service';
 import {UnsubscribeService} from '@src/services/unsubscribe.service';
+import {EventService} from '@src/services/event.service';
 
 @Component({
   selector: 'app-typography-group',
@@ -76,9 +77,11 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
       this.unService.handle = this.fbService.getSomething(templateName, `typography`)
         .subscribe(res => {
           this.typographyFacade.cloneTemplate(this.typography, this.templatesService.templateName$.value, new Map(Object.entries(res.data() ?? {})));
+          EventService.refreshSiteVariables.emit();
         });
     } else {
       this.typographyFacade.cloneTemplate(this.typography, this.templatesService.templateName$.value, new Map());
+      EventService.refreshSiteVariables.emit();
     }
   }
 

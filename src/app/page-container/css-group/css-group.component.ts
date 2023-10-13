@@ -22,6 +22,7 @@ import {TypographyEnum} from '@src/models/typography.enum';
 import {FirebaseService} from '@src/services/firebase.service';
 import {BehaviorSubject} from 'rxjs';
 import {UnsubscribeService} from '@src/services/unsubscribe.service';
+import {EventService} from '@src/services/event.service';
 
 @Component({
   selector: 'app-css-group',
@@ -134,10 +135,12 @@ export class CssGroupComponent implements OnInit, OnChanges {
             new Map(Object.entries(res.data() ?? {}))
           )
         })).subscribe(() => {
-          this.loading$.next(false)
+          this.loading$.next(false);
+          EventService.refreshSiteVariables.emit();
         });
     } else {
       this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map());
+      EventService.refreshSiteVariables.emit();
     }
   }
 
