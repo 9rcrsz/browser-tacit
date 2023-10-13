@@ -14,24 +14,27 @@ import {PageTypographyModule} from '@src/app/page-typography';
 import {AppRoutingModule} from "@src/app/app-routing.module";
 import {PageSiteModule} from "@src/app/page-site";
 import {PageContainer} from "@src/app/page-container";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    CssGroupModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    HttpClientModule,
-    SelectTemplateModule,
-    PageColorsModel,
-    PageTypographyModule,
-    PageSiteModule,
-    PageContainer,
-    environment.production ? [] : AkitaNgDevtools.forRoot()],
+        imports: [
+                AppRoutingModule,
+                BrowserModule,
+                CssGroupModule,
+                BrowserAnimationsModule,
+                MatButtonModule,
+                HttpClientModule,
+                SelectTemplateModule,
+                PageColorsModel,
+                PageTypographyModule,
+                PageSiteModule,
+                PageContainer,
+                environment.production ? [] : AkitaNgDevtools.forRoot(),
+                MatProgressBarModule
+        ],
   providers: [],
   bootstrap: [AppComponent]
 })

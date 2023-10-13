@@ -22,17 +22,14 @@ export class AppComponent implements OnInit {
   protected colorsFacade: ColorsFacade = inject(ColorsFacade);
 
   protected fbService: FirebaseService = inject(FirebaseService);
+  loaging$ = new BehaviorSubject(false);
 
   ngOnInit() {
     this.cssGroupsFacade.get().subscribe(() => {
-      this.chromeService.send({type: 'remove-variables'});
-
-      const variables = [
-        ...this.cssGroupsFacade.export(),
-        ...this.colorsFacade.export(),
-        ...this.typographyFacade.export()
-      ];
-      this.chromeService.send({type: 'set-variables', variables})
+      const projectName = localStorage.getItem('project-name');
+      if (projectName) {
+        this.templateSelected(projectName);
+      }
     });
   }
 
@@ -40,13 +37,13 @@ export class AppComponent implements OnInit {
     this.templatesService.templateName$.next(templateName)
 
     if (templateName !== null) {
+      this.loaging$.next(true);
+      localStorage.setItem('project-name', templateName);
       forkJoin([
         this.fbService.getSomething(this.templatesService.templateName$.value, 'colors'),
         this.fbService.getSomething(this.templatesService.templateName$.value, 'css-groups'),
         this.fbService.getSomething(this.templatesService.templateName$.value, 'typography')
       ]).subscribe(([colors, cssGroups, typography]) => {
-
-        console.log(colors.data(), cssGroups.data(), typography.data());
         this.colorsFacade.setProject(new Map(Object.entries(colors.data() ?? {})));
         this.cssGroupsFacade.setProject(new Map(Object.entries(cssGroups.data() ?? {})));
         this.typographyFacade.setProject(new Map(Object.entries(typography.data() ?? {})));
@@ -59,8 +56,10 @@ export class AppComponent implements OnInit {
           ...this.typographyFacade.export()
         ];
         this.chromeService.send({type: 'set-variables', variables});
+        this.loaging$.next(false);
       });
     } else {
+      localStorage.removeItem('project-name');
       this.cssGroupsFacade.setProject(new Map());
       this.colorsFacade.setProject(new Map());
       this.typographyFacade.setProject(new Map());
@@ -82,11 +81,45 @@ export class AppComponent implements OnInit {
     });
   }
 
-  reset() {
-    this.templatesService.templateName$.next(null);
-    this.cssGroupsFacade.reset();
-    this.colorsFacade.reset();
-    this.typographyFacade.reset();
-    this.chromeService.send({type: 'remove-variables'});
+  reset(templateName: string | null) {
+    if (!templateName) {
+      return;
+    }
+
+    this.loaging$.next(true);
+    this.templatesService.loadTemplate(templateName)
+      .subscribe(
+        data => {
+          const colors: any = {};
+          const typography: any = {};
+          const cssGroups: any = {};
+          data.forEach((cssValue, cssKey) => {
+            if (cssKey.indexOf('--template_') === 0) {
+              return;
+            }
+            if (cssKey.indexOf('--wo_') === 0) {
+              colors[cssKey] = cssValue;
+              return;
+            }
+            if (cssKey.indexOf('--typography') === 0) {
+              typography[cssKey] = cssValue;
+              return;
+            }
+
+            cssGroups[cssKey] = cssValue;
+          })
+
+          forkJoin([
+            this.fbService.setSomething(templateName, 'colors', colors, false),
+            this.fbService.setSomething(templateName, 'typography', typography, false),
+            this.fbService.setSomething(templateName, 'css-groups', cssGroups, false)
+          ]).subscribe(
+            () => {
+              this.templateSelected(templateName);
+              this.loaging$.next(false);
+            }
+          )
+        }
+      )
   }
 }
