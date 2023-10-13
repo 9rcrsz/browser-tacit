@@ -16,13 +16,13 @@ export class FirebaseService {
   protected app = initializeApp(this.firebaseConfig);
   protected db = getFirestore(this.app);
 
-  async setSomething(project: string | null, path: string, data: any) {
+  async setSomething(project: string | null, path: string, data: any, isMerge = true) {
     if (!project) {
       return;
     }
 
     try {
-      const docRef = await setDoc(doc(this.db, project, path), data, {merge: true});
+      const docRef = await setDoc(doc(this.db, project, path), data, {merge: isMerge});
       console.log("Document written with ID: ", docRef);
     } catch (e) {
       console.error("Error adding document: ", e);

@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {createTypographyExport} from '@src/factories/typography.factory';
 import {BreakpointTypes} from '@src/models/breakpoint-types.enum';
 import {Typography} from '@src/models/typography.model';
@@ -7,9 +7,11 @@ import {buildTypographyCssName} from '@src/services/helper.service';
 import {ID} from '@datorama/akita';
 import {tap} from 'rxjs/operators';
 import {TypographyStore} from './typography.store';
+import {FirebaseService} from '@src/services/firebase.service';
 
 @Injectable({providedIn: 'root'})
 export class TypographyFacade {
+  protected fbService = inject(FirebaseService);
 
   constructor(private typographyStore: TypographyStore, private http: HttpClient) {
   }
@@ -76,34 +78,22 @@ export class TypographyFacade {
     this.typographyStore.set(typographyGroups);
   }
 
-  setCascadeTemplate(typography: Typography, templateName: string | null, data: Map<string, string>) {
-    let realTemplateName = templateName;
-    if (templateName && data.has('--template_' + typography.name)) {
-      realTemplateName = data.get('--template_' + typography.name)!;
-    }
-
-    typography.template = realTemplateName;
-    if (realTemplateName) {
-      localStorage.setItem('--template_' + typography.name, realTemplateName);
-    } else {
-      localStorage.removeItem('--template_' + typography.name);
-    }
+  cloneTemplate(typography: Typography, templateName: string | null, data: Map<string, string>) {
+    const fieldsToSave: { [key: string]: string } = {};
 
     for (const breakpoint in typography.bps) {
       for (const property in typography.bps[breakpoint]) {
-        const cssValue = typography.bps[breakpoint][property];
-
         const cssName = buildTypographyCssName(property, typography.name, breakpoint as BreakpointTypes);
         if (data.has(cssName)) {
           typography.bps[breakpoint][property] = data.get(cssName)!;
-          localStorage.setItem(cssName, typography.bps[breakpoint][property]);
+          fieldsToSave[cssName] = typography.bps[breakpoint][property];
         } else {
           typography.bps[breakpoint][property] = '';
-          localStorage.removeItem(cssName);
         }
       }
     }
 
+    this.fbService.setSomething(templateName, `typography`, fieldsToSave, false);
     this.typographyStore.update(typography.name, typography);
   }
 

@@ -24,13 +24,12 @@ export class PageColorsComponent {
 
   selectTemplate(templateName: string | null) {
     if (templateName !== null) {
-      this.templatesService.templates.get(templateName)!
-        .pipe(take(1))
-        .subscribe(data => {
-          this.colorsFacade.setProject(data);
+      this.fbService.getSomething(templateName, `colors`)
+        .subscribe(res => {
+          this.colorsFacade.cloneTemplate(this.templatesService.templateName$.value, new Map(Object.entries(res.data() ?? {})));
         });
     } else {
-      this.colorsFacade.setProject(new Map());
+      this.colorsFacade.cloneTemplate(this.templatesService.templateName$.value, new Map());
     }
   }
 

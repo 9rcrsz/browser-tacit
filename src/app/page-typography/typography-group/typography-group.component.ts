@@ -73,13 +73,12 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
 
   templateSelected(templateName: string | null) {
     if (templateName !== null) {
-      this.templatesService.templates.get(templateName)!
-        .pipe(take(1))
-        .subscribe(data => {
-          this.typographyFacade.setCascadeTemplate(this.typography, templateName, data);
+      this.fbService.getSomething(templateName, `typography`)
+        .subscribe(res => {
+          this.typographyFacade.cloneTemplate(this.typography, this.templatesService.templateName$.value, new Map(Object.entries(res.data() ?? {})));
         });
     } else {
-      this.typographyFacade.setCascadeTemplate(this.typography, null, new Map());
+      this.typographyFacade.cloneTemplate(this.typography, this.templatesService.templateName$.value, new Map());
     }
   }
 

@@ -1,11 +1,13 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {createColorsExport} from '@src/factories/colors.factory';
 import {ColorsEnum} from '@src/models/colors.enum';
 import {ColorsStore} from './colors.store';
+import {FirebaseService} from '@src/services/firebase.service';
 
 @Injectable({providedIn: 'root'})
 export class ColorsFacade {
+  protected fbService = inject(FirebaseService);
 
   constructor(private colorsStore: ColorsStore, private http: HttpClient) {
   }
@@ -40,6 +42,23 @@ export class ColorsFacade {
       }
     }
 
+    this.colorsStore.update(state => ({
+      ...state,
+      list: {...state.list, ...tmpValues}
+    }));
+  }
+
+  cloneTemplate(templateName: string | null, data: Map<string, string>) {
+
+    const tmpValues: { [key: string]: string } = {};
+    for (let i in ColorsEnum) {
+      if (data.has((ColorsEnum as any)[i])) {
+        tmpValues[i] = data.get((ColorsEnum as any)[i])!;
+      }
+    }
+
+    this.fbService.setSomething(templateName, `colors`, tmpValues, false);
+    this.reset();
     this.colorsStore.update(state => ({
       ...state,
       list: {...state.list, ...tmpValues}
