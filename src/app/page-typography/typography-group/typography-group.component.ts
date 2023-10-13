@@ -9,27 +9,27 @@ import {TypographyFacade} from '@src/store/typography/typography.facade';
 import {buildTypographyCssName} from '@src/services/helper.service';
 import {Typography} from '@src/models/typography.model';
 import {FirebaseService} from '@src/services/firebase.service';
+import {UnsubscribeService} from '@src/services/unsubscribe.service';
 
 @Component({
   selector: 'app-typography-group',
   templateUrl: './typography-group.component.html',
   styleUrls: ['./typography-group.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TypographyGroupComponent implements OnInit, OnChanges {
+  cssGroupsQuery = inject(CssGroupsQuery);
   protected fbService = inject(FirebaseService);
+  protected unService = inject(UnsubscribeService);
+  protected typographyFacade = inject(TypographyFacade);
+  protected chromeService = inject(ChromeService);
+  protected templatesService = inject(TemplatesService)
 
   @Input() typography!: Typography;
   breakpointTypes = BreakpointTypes;
   isCopyForAllBreakpoints: boolean = false;
   toggle: { [key: string]: boolean } = {};
-
-  constructor(
-    protected typographyFacade: TypographyFacade,
-    protected chromeService: ChromeService,
-    protected templatesService: TemplatesService,
-    public cssGroupsQuery: CssGroupsQuery) {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.typography && this.typography) {
@@ -73,7 +73,7 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
 
   templateSelected(templateName: string | null) {
     if (templateName !== null) {
-      this.fbService.getSomething(templateName, `typography`)
+      this.unService.handle = this.fbService.getSomething(templateName, `typography`)
         .subscribe(res => {
           this.typographyFacade.cloneTemplate(this.typography, this.templatesService.templateName$.value, new Map(Object.entries(res.data() ?? {})));
         });

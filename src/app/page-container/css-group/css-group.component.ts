@@ -14,22 +14,29 @@ import {CssValue} from "@src/models/css-value.model";
 import {CssGroupsFacade} from '@src/store/css-groups/css-groups.facade';
 import {CssGroupsQuery} from '@src/store/css-groups/css-groups.query';
 import {ChromeService} from '@src/services/chrome.service';
-import {take} from 'rxjs/operators';
+import {switchMap, take} from 'rxjs/operators';
 import {TemplatesService} from '@src/services/templates.service';
 import {TypographyPropertiesEnum} from '@src/models/typography-properties.enum';
 import {buildCssName, buildTypographyCssName} from '@src/services/helper.service';
 import {TypographyEnum} from '@src/models/typography.enum';
 import {FirebaseService} from '@src/services/firebase.service';
 import {BehaviorSubject} from 'rxjs';
+import {UnsubscribeService} from '@src/services/unsubscribe.service';
 
 @Component({
   selector: 'app-css-group',
   templateUrl: './css-group.component.html',
   styleUrls: ['./css-group.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CssGroupComponent implements OnInit, OnChanges {
+  cssGroupsQuery = inject(CssGroupsQuery);
   protected fbService = inject(FirebaseService);
+  protected unService = inject(UnsubscribeService);
+  protected cssGroupsFacade = inject(CssGroupsFacade);
+  protected chromeService = inject(ChromeService);
+  protected templatesService = inject(TemplatesService);
 
   @Input() cssGroup!: CssGroup;
   @Input() showChildren: boolean = true;
@@ -40,13 +47,6 @@ export class CssGroupComponent implements OnInit, OnChanges {
   childOppenedMap: Map<string, boolean> = new Map();
   isCopyForAllBreakpoints: boolean = false;
   loading$ = new BehaviorSubject(false);
-
-  constructor(
-    protected cssGroupsFacade: CssGroupsFacade,
-    protected chromeService: ChromeService,
-    protected templatesService: TemplatesService,
-    public cssGroupsQuery: CssGroupsQuery) {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.cssGroup && this.cssGroup) {
@@ -126,15 +126,15 @@ export class CssGroupComponent implements OnInit, OnChanges {
   templateSelected(templateName: string | null) {
     if (templateName !== null) {
       this.loading$.next(true)
-      this.fbService.getSomething(templateName, `css-groups`)
-        .subscribe(res => {
-          this.cssGroupsFacade.cloneTemplate(
+      this.unService.handle = this.fbService.getSomething(templateName, `css-groups`)
+        .pipe(switchMap(res => {
+          return this.cssGroupsFacade.cloneTemplate(
             this.cssGroup,
             this.templatesService.templateName$.value,
             new Map(Object.entries(res.data() ?? {}))
-          ).subscribe(() => {
-            this.loading$.next(false)
-          });
+          )
+        })).subscribe(() => {
+          this.loading$.next(false)
         });
     } else {
       this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map());
