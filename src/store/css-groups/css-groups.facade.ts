@@ -6,12 +6,15 @@ import {CssService} from '@src/services/css.service';
 import {createCssGroupExport} from '@src/factories/css-group.factory';
 import {TemplatesEnum} from "@src/models/templates.enum";
 import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
-import {map} from "rxjs/operators";
+import {map, switchMap, take} from "rxjs/operators";
 import {FirebaseService} from '@src/services/firebase.service';
+import {CssGroupsQuery} from '@src/store/css-groups/css-groups.query';
+import {forkJoin, Observable, of} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class CssGroupsFacade {
   protected fbService = inject(FirebaseService);
+  protected cssGroupsQuery = inject(CssGroupsQuery);
 
   constructor(
     private cssGroupsStore: CssGroupsStore,
@@ -102,10 +105,28 @@ export class CssGroupsFacade {
         }
       }
     }
-
-    this.fbService.setSomething(templateName, `css-groups`, fieldsToSave);
-    this.fbService.removeFields(templateName, `css-groups`, fieldsToRemove);
+    
     this.cssGroupsStore.update(cssGroup.name, cssGroup);
-  }
+    return forkJoin([
+      this.fbService.setSomething(templateName, `css-groups`, fieldsToSave),
+      this.fbService.removeFields(templateName, `css-groups`, fieldsToRemove)
+    ]).pipe(
+      switchMap(() => {
+        return this.cssGroupsQuery.getLevel$(cssGroup.depth + 1, cssGroup.name).pipe(take(1));
+      }),
+      switchMap(groups => {
+        if (!Array.isArray(groups) || !groups.length) {
+          return of(null);
+        }
 
+        const tmp: Array<Observable<any>> = [];
+        groups.forEach(cssGroup => {
+          console.log('Updating: ', cssGroup.name)
+          tmp.push(this.cloneTemplate(JSON.parse(JSON.stringify(cssGroup)), templateName, data));
+        })
+
+        return forkJoin(tmp);
+      })
+    );
+  }
 }

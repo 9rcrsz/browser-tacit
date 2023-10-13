@@ -1,4 +1,7 @@
 <article [class.wo-child-oppened]="childOppenedMap.size > 0">
+  <article class="progress" *ngIf="loading$ | async">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </article>
   <header class="wo-header">
     <h2>
       {{cssGroup.name}}
