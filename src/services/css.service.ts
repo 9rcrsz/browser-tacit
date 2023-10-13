@@ -1,31 +1,22 @@
-import { Injectable } from "@angular/core";
-import { CssGroup } from "@src/models/css-group.model";
-import { createCssGroup } from "@src/factories/css-group.factory";
-import { BreakpointTypes } from "@src/models/breakpoint-types.enum";
-import { TemplatesEnum } from "@src/models/templates.enum";
+import {Injectable} from "@angular/core";
+import {CssGroup} from "@src/models/css-group.model";
+import {createCssGroup} from "@src/factories/css-group.factory";
+import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
+import {TemplatesEnum} from "@src/models/templates.enum";
 
-@Injectable({ providedIn: "root" })
+@Injectable({providedIn: "root"})
 export class CssService {
   buildCssGroupsMap(data: { moduleClassName?: string, vars: Array<string> }): Map<string, CssGroup> {
     const cssGroups = new Map<string, CssGroup>();
 
     data.vars.forEach(tmpVar => {
       const splittedVarAndVal = this.splitVarAndValue(tmpVar);
+      const currentValue = splittedVarAndVal![1];
       const preparedVariable = !!splittedVarAndVal ? this.parseVariable(splittedVarAndVal[0]) : null;
       if (!preparedVariable /*|| preparedVariable.variableParts[0] !== data.moduleClassName*/) {
         return;
       }
 
-      // restore value form the local storage
-      const storageProperty = localStorage.getItem(splittedVarAndVal![0]);
-      let currentValue = splittedVarAndVal![1];
-      if (storageProperty) {
-        if (storageProperty === splittedVarAndVal![1]) {
-          localStorage.removeItem(splittedVarAndVal![0]);
-        } else {
-          currentValue = storageProperty;
-        }
-      }
 
       const groupName = preparedVariable.variableParts.join('_');
       if (!cssGroups.get(groupName)) {
@@ -34,7 +25,6 @@ export class CssService {
 
       const cssGroup = cssGroups.get(groupName);
       cssGroup!.name = groupName;
-      cssGroup!.template = localStorage.getItem('--template_' + groupName) ?? null;
       cssGroup!.depth = preparedVariable.variableParts.length;
 
       cssGroup!.bps[preparedVariable.breakpoint][preparedVariable.cssProperty] = {
@@ -61,13 +51,13 @@ export class CssService {
 
 
   parseVariable(cssVariable: string): null |
-  {
-    cssProperty: string,
-    variableParts: Array<string>,
-    breakpoint: string,
-    labels: Array<string>,
-    origin: string
-  } {
+    {
+      cssProperty: string,
+      variableParts: Array<string>,
+      breakpoint: string,
+      labels: Array<string>,
+      origin: string
+    } {
     const labels = [];
     for (let templatesEnumKey in TemplatesEnum) {
       const tmp = cssVariable.replace('_' + templatesEnumKey + '_', '_');

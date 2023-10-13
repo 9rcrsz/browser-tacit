@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {CssGroupsStore} from './css-groups.store';
 import {CssGroup} from "@src/models/css-group.model";
 import {CssService} from '@src/services/css.service';
@@ -7,9 +7,11 @@ import {createCssGroupExport} from '@src/factories/css-group.factory';
 import {TemplatesEnum} from "@src/models/templates.enum";
 import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
 import {map} from "rxjs/operators";
+import {FirebaseService} from '@src/services/firebase.service';
 
 @Injectable({providedIn: 'root'})
 export class CssGroupsFacade {
+  protected fbService = inject(FirebaseService);
 
   constructor(
     private cssGroupsStore: CssGroupsStore,
@@ -82,18 +84,9 @@ export class CssGroupsFacade {
     this.cssGroupsStore.set(cssGroups);
   }
 
-  setCascadeTemplate(cssGroup: CssGroup, templateName: string | null, data: Map<string, string>) {
-    let realTemplateName = templateName;
-    if (templateName && data.has('--template_' + cssGroup.name)) {
-      realTemplateName = data.get('--template_' + cssGroup.name)!;
-    }
-
-    cssGroup.template = realTemplateName;
-    if (realTemplateName) {
-      localStorage.setItem('--template_' + cssGroup.name, realTemplateName);
-    } else {
-      localStorage.removeItem('--template_' + cssGroup.name);
-    }
+  cloneTemplate(cssGroup: CssGroup, templateName: string | null, data: Map<string, string>) {
+    const fieldsToSave: { [key: string]: string } = {};
+    const fieldsToRemove: Array<string> = [];
 
     for (const breakpoint in cssGroup.bps) {
       for (const property in cssGroup.bps[breakpoint]) {
@@ -102,11 +95,16 @@ export class CssGroupsFacade {
         cssValue.current = cssValue.default;
         if (data.has(cssValue.name)) {
           cssValue.current = data.get(cssValue.name)!;
-          localStorage.setItem(cssValue.name, cssValue.current);
+          fieldsToSave[cssValue.name] = cssValue.current;
+        } else {
+          cssValue.current = cssValue.default;
+          fieldsToRemove.push(cssValue.name);
         }
       }
     }
 
+    this.fbService.setSomething(templateName, `css-groups`, fieldsToSave);
+    this.fbService.removeFields(templateName, `css-groups`, fieldsToRemove);
     this.cssGroupsStore.update(cssGroup.name, cssGroup);
   }
 

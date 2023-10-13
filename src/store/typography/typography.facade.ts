@@ -80,6 +80,7 @@ export class TypographyFacade {
 
   cloneTemplate(typography: Typography, templateName: string | null, data: Map<string, string>) {
     const fieldsToSave: { [key: string]: string } = {};
+    const fieldsToRemove: Array<string> = [];
 
     for (const breakpoint in typography.bps) {
       for (const property in typography.bps[breakpoint]) {
@@ -89,11 +90,13 @@ export class TypographyFacade {
           fieldsToSave[cssName] = typography.bps[breakpoint][property];
         } else {
           typography.bps[breakpoint][property] = '';
+          fieldsToRemove.push(cssName);
         }
       }
     }
 
-    this.fbService.setSomething(templateName, `typography`, fieldsToSave, false);
+    this.fbService.setSomething(templateName, `typography`, fieldsToSave);
+    this.fbService.removeFields(templateName, `css-groups`, fieldsToRemove);
     this.typographyStore.update(typography.name, typography);
   }
 

@@ -84,7 +84,6 @@ export class AppComponent implements OnInit {
 
   reset() {
     this.templatesService.templateName$.next(null);
-    localStorage.clear();
     this.cssGroupsFacade.reset();
     this.colorsFacade.reset();
     this.typographyFacade.reset();

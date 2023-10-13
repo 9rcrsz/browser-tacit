@@ -46,4 +46,17 @@ export class FirebaseService {
       [field]: deleteField()
     }));
   }
+
+  removeFields(project: string | null, path: string, fields: Array<string>): Observable<any> {
+    if (!project || !fields.length) {
+      return of({});
+    }
+
+    const toRemove: any = {};
+    fields.forEach(f => {
+      toRemove[f] = deleteField();
+    });
+
+    return from(updateDoc(doc(this.db, project, path), toRemove));
+  }
 }

@@ -107,7 +107,6 @@ export class CssGroupComponent implements OnInit, OnChanges {
         toSend.push({key: cssName, value: property.value.current})
       }
     } else {
-      console.log(breakpoint)
       this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
       this.fbService.setSomething(this.templatesService.templateName$.value,`css-groups`, {[property.value.name]: property.value.current});
       toSend.push({key: property.value.name, value: property.value.current});
@@ -120,19 +119,16 @@ export class CssGroupComponent implements OnInit, OnChanges {
       type: 'set-variables',
       variables: toSend
     });
-
-    console.log(property.value.name, property, this.cssGroup)
   }
 
   templateSelected(templateName: string | null) {
     if (templateName !== null) {
-      this.templatesService.templates.get(templateName)!
-        .pipe(take(1))
-        .subscribe(data => {
-          this.cssGroupsFacade.setCascadeTemplate(this.cssGroup, templateName, data);
+      this.fbService.getSomething(templateName, `css-groups`)
+        .subscribe(res => {
+          this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map(Object.entries(res.data() ?? {})));
         });
     } else {
-      this.cssGroupsFacade.setCascadeTemplate(this.cssGroup, null, new Map());
+      this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map());
     }
   }
 
