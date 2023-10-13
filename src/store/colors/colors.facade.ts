@@ -49,15 +49,16 @@ export class ColorsFacade {
   }
 
   cloneTemplate(templateName: string | null, data: Map<string, string>) {
-
     const tmpValues: { [key: string]: string } = {};
+    const tmpSaveValues: { [key: string]: string } = {};
     for (let i in ColorsEnum) {
       if (data.has((ColorsEnum as any)[i])) {
         tmpValues[i] = data.get((ColorsEnum as any)[i])!;
+        tmpSaveValues[(ColorsEnum as any)[i]] = data.get((ColorsEnum as any)[i])!;
       }
     }
 
-    this.fbService.setSomething(templateName, `colors`, tmpValues, false);
+    this.fbService.setSomething(templateName, `colors`, tmpSaveValues, false);
     this.reset();
     this.colorsStore.update(state => ({
       ...state,
