@@ -7,7 +7,7 @@ export enum ColorsEnum {
   medium_emphasis = '--wo_text_mid_emphasis',
   outline_input = '--wo_text_field_underline',
   outline_basic = '--wo_separator',
-  outline_main = '--outline_main',
+  outline_main = '--wo_outline_main',
   input_field = '--wo_text_field_surface',
   container_alt = '--wo_snackbar',
   surface_header = '--wo_surface_header',

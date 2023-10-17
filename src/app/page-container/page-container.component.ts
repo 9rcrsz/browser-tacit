@@ -12,7 +12,7 @@ const nameToGroups: { [key: string]: Array<string> } = {
   'site-header': [
     'wo-header-component',
     'wo-logo-container',
-    'wo-hamburger', 
+    'wo-hamburger',
     'wo-main-nav',
     'wo-my-program',
     'wo-select-lang',
@@ -31,6 +31,7 @@ const nameToGroups: { [key: string]: Array<string> } = {
   ],
   'site-base': ['html', 'body', 'wo-base-component'],
   'site-menu-item': ['wo-item-component'],
+  'site-campus': ['wo-top-banner']
 }
 
 @Component({
