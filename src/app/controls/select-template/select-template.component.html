@@ -9,12 +9,12 @@
     <mat-option *ngIf="!filter" [value]="'risingstarcasino'">Rising Star Casino</mat-option>
     <mat-option *ngIf="!filter" [value]="'kernels'">Kernels</mat-option>
 
-    <mat-option *ngIf="filter === 'site-header'" [value]="'empty'">Header default</mat-option>
-    <mat-option *ngIf="filter === 'site-header'" [value]="'header-old'">Header old</mat-option>
+    <mat-option [value]="'empty'">Header default</mat-option>
+    <mat-option [value]="'header-old'">Header old</mat-option>
 
-    <mat-option *ngIf="filter === 'site-campus'" [value]="'empty'">Top banner 1</mat-option>
-    <mat-option *ngIf="filter === 'site-campus'" [value]="'top-banner-2'">Top banner 2</mat-option>
-    <mat-option *ngIf="filter === 'site-campus'" [value]="'top-banner-3'">Top banner 3</mat-option>
+    <mat-option [value]="'empty'">Top banner 1</mat-option>
+    <mat-option [value]="'top-banner-2'">Top banner 2</mat-option>
+    <mat-option [value]="'top-banner-3'">Top banner 3</mat-option>
   </mat-select>
 </mat-form-field>
 
