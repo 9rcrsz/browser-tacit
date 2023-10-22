@@ -2,6 +2,7 @@
   <mat-label>{{placeHolder}}</mat-label>
   <mat-select [(ngModel)]="templateName" (valueChange)="onChanged($event)">
     <mat-option [value]="null">Default</mat-option>
+    <mat-option [value]="'empty'">Empty</mat-option>
     <mat-option [value]="'campus'">Campus</mat-option>
     <mat-option [value]="'png'">PNG</mat-option>
     <mat-option [value]="'lmi'">LMI</mat-option>
