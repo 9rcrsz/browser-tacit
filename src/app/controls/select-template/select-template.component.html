@@ -2,12 +2,19 @@
   <mat-label>{{placeHolder}}</mat-label>
   <mat-select [(ngModel)]="templateName" (valueChange)="onChanged($event)">
     <mat-option [value]="null">Default</mat-option>
-    <mat-option [value]="'empty'">Empty</mat-option>
-    <mat-option [value]="'campus'">Campus</mat-option>
-    <mat-option [value]="'png'">PNG</mat-option>
-    <mat-option [value]="'lmi'">LMI</mat-option>
-    <mat-option [value]="'risingstarcasino'">Rising Star Casino</mat-option>
-    <mat-option [value]="'kernels'">Kernels</mat-option>
+    <mat-option *ngIf="!filter" [value]="'empty'">Empty</mat-option>
+    <mat-option *ngIf="!filter" [value]="'campus'">Campus</mat-option>
+    <mat-option *ngIf="!filter" [value]="'png'">PNG</mat-option>
+    <mat-option *ngIf="!filter" [value]="'lmi'">LMI</mat-option>
+    <mat-option *ngIf="!filter" [value]="'risingstarcasino'">Rising Star Casino</mat-option>
+    <mat-option *ngIf="!filter" [value]="'kernels'">Kernels</mat-option>
+
+    <mat-option *ngIf="filter === 'site-header'" [value]="'empty'">Header default</mat-option>
+    <mat-option *ngIf="filter === 'site-header'" [value]="'header-old'">Header old</mat-option>
+
+    <mat-option *ngIf="filter === 'site-campus'" [value]="'empty'">Top banner 1</mat-option>
+    <mat-option *ngIf="filter === 'site-campus'" [value]="'top-banner-2'">Top banner 2</mat-option>
+    <mat-option *ngIf="filter === 'site-campus'" [value]="'top-banner-3'">Top banner 3</mat-option>
   </mat-select>
 </mat-form-field>
 

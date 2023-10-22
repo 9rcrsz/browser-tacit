@@ -1,6 +1,13 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {take} from "rxjs/operators";
-import {TemplatesService} from "@src/services/templates.service";
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 
 @Component({
   selector: 'select-template',
@@ -8,12 +15,19 @@ import {TemplatesService} from "@src/services/templates.service";
   styleUrls: ['./select-template.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectTemplateComponent {
+export class SelectTemplateComponent implements OnChanges {
+  cdr = inject(ChangeDetectorRef);
+
   @Output() eventSelectTemplate = new EventEmitter<string | null>();
   @Input() templateName: string | null = null;
   @Input() placeHolder: string = 'Clone template';
+  @Input() filter?: string;
 
-  constructor(protected tService: TemplatesService) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.filter) {
+      this.templateName = null;
+      this.cdr.markForCheck();
+    }
   }
 
   onChanged(selectedTemplateName: string | null) {

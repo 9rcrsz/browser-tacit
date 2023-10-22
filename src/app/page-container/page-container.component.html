@@ -1,4 +1,8 @@
 <article>
+  <article class="progress" *ngIf="loading$ | async">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </article>
+
   <form *ngIf="containerName === 'site-custom'">
     <mat-form-field class="groups-autocomplete">
       <mat-label>Search css group</mat-label>
@@ -11,6 +15,12 @@
     </mat-form-field>
   </form>
 
+  <header *ngIf="containerName !== 'site-custom'">
+    <select-template [placeHolder]="'Clone templates'"
+                     [filter]="containerName"
+                     (eventSelectTemplate)="templateSelected($event)"></select-template>
+  </header>
+
   <mat-accordion [multi]="true">
     <ng-container *ngFor="let cssGroup of cssGroups$ | async; trackBy: trackByName">
       <mat-expansion-panel hideToggle [disabled]="cssGroup.disabled">
@@ -20,7 +30,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <app-css-group [cssGroup]="cssGroup" [showChildren]="containerName !== 'site-custom'"></app-css-group>
+        <app-css-group #cmp [cssGroup]="cssGroup" [showChildren]="containerName !== 'site-custom'"></app-css-group>
       </mat-expansion-panel>
 
     </ng-container>

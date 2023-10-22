@@ -13,6 +13,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {PageContainerComponent} from "@src/app/page-container/page-container.component";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -21,22 +22,23 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
   exports: [
     PageContainerComponent
   ],
-  imports: [
-    FormsModule,
-    CommonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    SelectTemplateModule,
-    MatExpansionModule,
-    SelectColorModule,
-    CssGroupModule,
-    MatButtonModule,
-    RouterLinkWithHref,
-    RouterOutlet,
-    MatAutocompleteModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        FormsModule,
+        CommonModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        SelectTemplateModule,
+        MatExpansionModule,
+        SelectColorModule,
+        CssGroupModule,
+        MatButtonModule,
+        RouterLinkWithHref,
+        RouterOutlet,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+        MatProgressBarModule
+    ],
   providers: [],
 })
 export class PageContainer {

@@ -1,6 +1,23 @@
 :host {
+  position: relative;
+
   > article {
     padding: 24px;
+
+    .progress {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.6);
+      height: 100%;
+      width: 100%;
+      z-index: 9;
+      left: 0;
+      top: 0;
+    }
+
+    > header {
+      display: flex;
+      justify-content: flex-end;
+    }
 
     .mat-accordion {
       .mat-expansion-panel {

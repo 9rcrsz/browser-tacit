@@ -124,7 +124,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
     });
   }
 
-  templateSelected(templateName: string | null) {
+  templateSelected(templateName: string | null, cb?: any) {
     if (templateName !== null) {
       this.loading$.next(true)
       this.unService.handle = this.fbService.getSomething(templateName, `css-groups`)
@@ -138,10 +138,17 @@ export class CssGroupComponent implements OnInit, OnChanges {
         })).subscribe(() => {
           this.loading$.next(false);
           EventService.refreshSiteVariables.emit();
+
+          if (cb) {
+            cb();
+          }
         });
     } else {
       this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map(), this.showChildren);
       EventService.refreshSiteVariables.emit();
+      if (cb) {
+        cb();
+      }
     }
   }
 

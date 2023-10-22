@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {CssGroupsQuery} from "@src/store/css-groups/css-groups.query";
 import {CssGroup} from "@src/models/css-group.model";
 import {Typography} from "@src/models/typography.model";
@@ -7,6 +7,7 @@ import {UnsubscribeService} from "@src/services/unsubscribe.service";
 import {BehaviorSubject, Observable, of} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {filter, switchMap} from "rxjs/operators";
+import {CssGroupComponent} from '@src/app/page-container/css-group/css-group.component';
 
 const nameToGroups: { [key: string]: Array<string> } = {
   'site-header': [
@@ -41,6 +42,8 @@ const nameToGroups: { [key: string]: Array<string> } = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageContainerComponent implements OnInit {
+  @ViewChildren('cmp') cmp?: QueryList<CssGroupComponent>;
+
   // Injectors
   cssGroupsQuery: CssGroupsQuery = inject(CssGroupsQuery);
   unService: UnsubscribeService = inject(UnsubscribeService);
@@ -48,6 +51,7 @@ export class PageContainerComponent implements OnInit {
   router: Router = inject(Router);
   // Variables
   cssGroups$ = new BehaviorSubject<CssGroup[]>([])
+  loading$ = new BehaviorSubject(false);
   // Autocomplete
   searchControl = new FormControl<string>('');
   filteredOptions?: Observable<CssGroup[]>;
@@ -76,6 +80,20 @@ export class PageContainerComponent implements OnInit {
         return this.cssGroupsQuery.filter$(phrase)
       })
     );
+  }
+
+  templateSelected(template: string | null) {
+    let counter = 0;
+    this.loading$.next(true);
+    this.cmp?.forEach(component => {
+      component.templateSelected(template, () => this.tryToDisableLoading(++counter));
+    })
+  }
+
+  protected tryToDisableLoading(counter: number) {
+    if (this.cmp?.length === counter) {
+      this.loading$.next(false);
+    }
   }
 
   findCssGroups(containerName: string) {
