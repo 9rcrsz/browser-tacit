@@ -12,7 +12,7 @@ export enum ColorsEnum {
   container_alt = '--wo_snackbar',
   surface_header = '--wo_surface_header',
   section_container = '--wo_section_container',
-  container1 = '--wo_container1',
+  container1 = '--wo_card',
   greeting_container = '--wo_greeting_container',
   primary = '--wo_primary',
   primary_alt = '--wo_primary_alt',
