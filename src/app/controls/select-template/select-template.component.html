@@ -2,19 +2,16 @@
   <mat-label>{{placeHolder}}</mat-label>
   <mat-select [(ngModel)]="templateName" (valueChange)="onChanged($event)">
     <mat-option [value]="null">Default</mat-option>
-    <mat-option *ngIf="!filter" [value]="'empty'">Empty</mat-option>
-    <mat-option *ngIf="!filter" [value]="'campus'">Campus</mat-option>
-    <mat-option *ngIf="!filter" [value]="'png'">PNG</mat-option>
-    <mat-option *ngIf="!filter" [value]="'lmi'">LMI</mat-option>
-    <mat-option *ngIf="!filter" [value]="'risingstarcasino'">Rising Star Casino</mat-option>
-    <mat-option *ngIf="!filter" [value]="'kernels'">Kernels</mat-option>
-
-    <mat-option [value]="'empty'">Header default</mat-option>
-    <mat-option [value]="'header-old'">Header old</mat-option>
-
-    <mat-option [value]="'empty'">Top banner 1</mat-option>
-    <mat-option [value]="'top-banner-2'">Top banner 2</mat-option>
-    <mat-option [value]="'top-banner-3'">Top banner 3</mat-option>
+    <mat-optgroup label="CAMPUS">
+      <mat-option [value]="'campus'">Campus</mat-option>
+      <mat-option [value]="'png'">PNG</mat-option>
+      <mat-option [value]="'lmi'">LMI</mat-option>
+      <mat-option [value]="'risingstarcasino'">Rising Star Casino</mat-option>
+      <mat-option [value]="'kernels'">Kernels</mat-option>
+    </mat-optgroup>
+    <mat-optgroup label="WHITE_LABELS">
+      <mat-option [value]="'charlestons'">charlestons</mat-option>
+    </mat-optgroup>
   </mat-select>
 </mat-form-field>
 
