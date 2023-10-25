@@ -8,6 +8,7 @@ import {BehaviorSubject, Observable, of} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {filter, switchMap} from "rxjs/operators";
 import {CssGroupComponent} from '@src/app/page-container/css-group/css-group.component';
+import {BreakpointTypes} from '@src/models/breakpoint-types.enum';
 
 const nameToGroups: { [key: string]: Array<string> } = {
   'site-header': [
@@ -76,6 +77,18 @@ export class PageContainerComponent implements OnInit {
       switchMap((phrase: any) => {
         if (!phrase || phrase.length < 6) {
           return of([]);
+        }
+
+        phrase = phrase.replace('_' + BreakpointTypes.general + ',', ',');
+        phrase = phrase.replace('_' + BreakpointTypes.desktop + ',', ',');
+        phrase = phrase.replace('_' + BreakpointTypes.laptop + ',', ',');
+        phrase = phrase.replace('_' + BreakpointTypes.tablet + ',', ',');
+        phrase = phrase.replace('_' + BreakpointTypes.mobile + ',', ',');
+        if (phrase.indexOf('_wo') > 0) {
+          phrase = phrase.substring(phrase.indexOf('_wo') + 1);
+        }
+        if (phrase.indexOf(',') > 0) {
+          phrase = phrase.substring(0, phrase.indexOf(','));
         }
         return this.cssGroupsQuery.filter$(phrase)
       })
