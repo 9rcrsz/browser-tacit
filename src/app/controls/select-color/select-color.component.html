@@ -2,6 +2,7 @@
   <mat-label>{{placeholder}}</mat-label>
   <mat-select (valueChange)="onChanged($event)" [(ngModel)]="value">
     <mat-option [value]="'unset'">unset</mat-option>
+    <mat-option [value]="'transporent'">transporent</mat-option>
     <ng-container *ngFor="let i of colorsEnum | keyvalue">
       <mat-option [value]="'var('+i.value+')'">{{i.key}}</mat-option>
     </ng-container>
