@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{placeholder}}</mat-label>
+  <mat-select (valueChange)="onChanged($event)" [(ngModel)]="value">
+    <mat-option [value]="'unset'">unset</mat-option>
+    <mat-option [value]="'column'">column</mat-option>
+    <mat-option [value]="'row'">row</mat-option>
+  </mat-select>
+</mat-form-field>

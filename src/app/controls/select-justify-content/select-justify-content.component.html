@@ -1,0 +1,11 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{placeholder}}</mat-label>
+  <mat-select (valueChange)="onChanged($event)" [(ngModel)]="value">
+    <mat-option [value]="'unset'">unset</mat-option>
+    <mat-option [value]="'center'">center</mat-option>
+    <mat-option [value]="'flex-start'">flex-start</mat-option>
+    <mat-option [value]="'flex-end'">flex-end</mat-option>
+    <mat-option [value]="'space-between'">space-between</mat-option>
+    <mat-option [value]="'stretch'">stretch</mat-option>
+  </mat-select>
+</mat-form-field>

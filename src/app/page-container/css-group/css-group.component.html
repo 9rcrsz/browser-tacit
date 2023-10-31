@@ -38,6 +38,21 @@
                                 (ngModelChange)="onChanged(property, breakpoint.key)">
               </app-select-color>
 
+              <app-select-justify-content *ngSwitchCase="property.key === 'justify-content' || property.key === 'align-items'"
+                                [(ngModel)]="property.value.current" [placeholder]="property.key"
+                                (ngModelChange)="onChanged(property, breakpoint.key)">
+              </app-select-justify-content>
+
+              <app-select-display *ngSwitchCase="property.key === 'display'"
+                                [(ngModel)]="property.value.current" [placeholder]="property.key"
+                                (ngModelChange)="onChanged(property, breakpoint.key)">
+              </app-select-display>
+
+              <app-select-flex-direction *ngSwitchCase="property.key === 'flex-direction'"
+                                [(ngModel)]="property.value.current" [placeholder]="property.key"
+                                (ngModelChange)="onChanged(property, breakpoint.key)">
+              </app-select-flex-direction>
+
               <mat-form-field color="primary" appearance="fill" *ngSwitchDefault>
                 <mat-label>{{property.key}}</mat-label>
                 <input matInput [(ngModel)]="property.value.current" [name]="'general'+property.key"
