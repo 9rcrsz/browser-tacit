@@ -1,4 +1,5 @@
 export enum ColorsEnum {
+  success = '--wo_success',
   background = '--wo_background',
   surface_main = '--wo_background_additional',
   warning_variant = '--wo_background_warning',
