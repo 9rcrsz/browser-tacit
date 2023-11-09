@@ -26,13 +26,13 @@ const nameToGroups: { [key: string]: Array<string> } = {
     'wo-menus-component',
     'wo-menu-title-component',
     'wo-items-groups-container',
+    'wo-item-component',
     'wo-menu-footer',
     'wo-menu-breadcrumbs-component',
     'wo-menu-and-categories',
     'wo-items-group-component'
   ],
   'site-base': ['html', 'body', 'wo-base-component'],
-  'site-menu-item': ['wo-item-component'],
   'site-campus': ['wo-top-banner']
 }
 
