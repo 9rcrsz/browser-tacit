@@ -34,6 +34,7 @@
 --background-color_wo-top-banner_wo-banner-info_wo-guest_laptop: transporent;
 --background-color_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: transporent;
 --padding_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: 0;
+--background-color_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_wo-guest_mobile: transporent;
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1: left;
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_desktop: left;
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_laptop: left;
