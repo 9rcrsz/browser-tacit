@@ -17,6 +17,7 @@
 --align-items_wo-top-banner_wo-banner-info_laptop: flex-start;
 --background-color_wo-top-banner_wo-banner-info_laptop: transporent;
 --padding_wo-top-banner_wo-banner-info_laptop: 0;
+--background-color_wo-top-banner_wo-banner-info_tablet: transporent;
 --width_wo-top-banner_wo-banner-info_tablet: 100%;
 --height_wo-top-banner_wo-banner-info_mobile: 100%;
 --padding_wo-top-banner_wo-banner-info_mobile: 16px 16px 32px 16px;
