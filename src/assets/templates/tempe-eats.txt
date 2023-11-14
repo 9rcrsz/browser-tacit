@@ -136,6 +136,11 @@
   --display_wo-select-lang_laptop: none;
   --display_wo-select-lang_tablet: none;
   --display_wo-select-lang_mobile: none;
+  --padding_txt-body1_wo-row_wo-data: 4px 0 0 0;
+  --padding_txt-body1_wo-row_wo-data_desktop: 4px 0 0 0;
+  --padding_txt-body1_wo-row_wo-data_laptop: 4px 0 0 0;
+  --padding_txt-body1_wo-row_wo-data_tablet: 4px 0 0 0;
+  --padding_txt-body1_wo-row_wo-data_mobile: 4px 0 0 0;
   --color_txt-button_wo-scan-qr-wrap_wo-scan-qr-component_wo-scan-qr-header_wo-right_wo-close-btn: var(--wo_text_high_emphasis);
   --color_txt-button_wo-scan-qr-wrap_wo-scan-qr-component_wo-scan-qr-header_wo-right_wo-close-btn_desktop: var(--wo_text_high_emphasis);
   --color_txt-button_wo-scan-qr-wrap_wo-scan-qr-component_wo-scan-qr-header_wo-right_wo-close-btn_laptop: var(--wo_text_high_emphasis);
