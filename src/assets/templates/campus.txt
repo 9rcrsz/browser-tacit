@@ -11,7 +11,7 @@
 --wo_snackbar: rgba(18, 18, 18, 1);
 --wo_surface_header: rgba(255, 255, 255, 1);
 --wo_section_container: rgba(250, 250, 250, 1);
---wo_container1: rgba(255, 255, 255, 1);
+--wo_card: rgba(255, 255, 255, 1);
 --wo_greeting_container: rgba(255, 255, 255, 0.95);
 --wo_primary: rgba(5, 52, 218, 1);
 --wo_primary_alt: rgba(146, 209, 236, 1);
@@ -27,6 +27,7 @@
 --wo_on_button_container: rgba(0, 0, 0, 1);
 --wo_on_primary: rgba(255, 255, 255, 1);
 --wo_on_secondary: rgba(255, 255, 255, 1);
+--wo_box_shadow: rgba(0, 0, 0, 0.25);
 --typography-font-family_txt-h1: Roboto-Medium;
 --typography-font-size_txt-h1: 40px;
 --typography-line-height_txt-h1: 57px;

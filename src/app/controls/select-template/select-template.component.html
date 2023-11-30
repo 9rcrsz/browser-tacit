@@ -4,6 +4,7 @@
     <mat-option [value]="null">Default</mat-option>
     <mat-optgroup *ngIf="!filter" label="CAMPUS">
       <mat-option *ngIf="!filter" [value]="'empty'">Empty</mat-option>
+      <mat-option *ngIf="!filter" [value]="'dark'">Dark</mat-option>
       <mat-option *ngIf="!filter" [value]="'campus'">Campus</mat-option>
       <mat-option *ngIf="!filter" [value]="'png'">PNG</mat-option>
       <mat-option *ngIf="!filter" [value]="'lmi'">LMI</mat-option>
@@ -26,6 +27,11 @@
       <mat-option [value]="'empty'">Top banner 1</mat-option>
       <mat-option [value]="'top-banner-2'">Top banner 2</mat-option>
       <mat-option [value]="'top-banner-3'">Top banner 3</mat-option>
+    </mat-optgroup>
+    <mat-optgroup label="Item tile">
+      <mat-option [value]="'empty'">Item tile 1</mat-option>
+      <mat-option [value]="'item-tile-2'">Item tile 2</mat-option>
+      <mat-option [value]="'item-tile-3'">Item tile 3</mat-option>
     </mat-optgroup>
   </mat-select>
 </mat-form-field>

@@ -17,6 +17,7 @@
 --align-items_wo-top-banner_wo-banner-info_laptop: flex-start;
 --background-color_wo-top-banner_wo-banner-info_laptop: transporent;
 --padding_wo-top-banner_wo-banner-info_laptop: 0;
+--background-color_wo-top-banner_wo-banner-info_tablet: transporent;
 --width_wo-top-banner_wo-banner-info_tablet: 100%;
 --height_wo-top-banner_wo-banner-info_mobile: 100%;
 --padding_wo-top-banner_wo-banner-info_mobile: 16px 16px 32px 16px;
@@ -34,6 +35,7 @@
 --background-color_wo-top-banner_wo-banner-info_wo-guest_laptop: transporent;
 --background-color_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: transporent;
 --padding_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: 0;
+--background-color_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_wo-guest_mobile: transporent;
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1: left;
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_desktop: left;
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_laptop: left;
