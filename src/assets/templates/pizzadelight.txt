@@ -16,6 +16,11 @@
 --order_wo-item-breadcrumbs-component_laptop: 0;
 --order_wo-item-breadcrumbs-component_tablet: 0;
 --order_wo-item-breadcrumbs-component_mobile: 0;
+--display_wo-items-group-component_wo-item-group-img-wrap: none;
+--display_wo-items-group-component_wo-item-group-img-wrap_desktop: none;
+--display_wo-items-group-component_wo-item-group-img-wrap_laptop: none;
+--display_wo-items-group-component_wo-item-group-img-wrap_tablet: none;
+--display_wo-items-group-component_wo-item-group-img-wrap_mobile: none;
 --order_wo-locations-breadcrumbs-component: 0;
 --order_wo-locations-breadcrumbs-component_desktop: 0;
 --order_wo-locations-breadcrumbs-component_laptop: 0;
