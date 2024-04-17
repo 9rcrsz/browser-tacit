@@ -13,7 +13,7 @@
 --padding_wo-top-banner_wo-banner-info_tablet: 24px;
 --width_wo-top-banner_wo-banner-info_tablet: 100%;
 --align-items_wo-top-banner_wo-banner-info_mobile: flex-start;
---background-color_wo-top-banner_wo-banner-info_mobile: unset;
+--background-color_wo-top-banner_wo-banner-info_mobile: var(--wo_greeting_container);
 --padding_wo-top-banner_wo-banner-info_mobile: 16px;
 --display_wo-top-banner_wo-banner-info_wo-location-info: none;
 --display_wo-top-banner_wo-banner-info_wo-location-info_desktop: none;
@@ -32,7 +32,7 @@
 --justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap_mobile: flex-start;
 --padding_wo-top-banner_wo-banner-info_wo-actions-wrap_mobile: 0;
 --background-color_wo-top-banner_wo-banner-info_wo-guest_mobile: var(--wo_greeting_container);
---background-color_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: var(--wo_background);
+--background-color_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: transparent;
 --padding_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: 0;
 --display_txt-body1_wo-top-banner_wo-banner-info_wo-support-text: inline-flex;
 --margin_txt-body1_wo-top-banner_wo-banner-info_wo-support-text: 16px 0 24px 0;
