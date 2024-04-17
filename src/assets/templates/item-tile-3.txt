@@ -70,6 +70,11 @@
 --height_wo-item-component_wo-wrap_wo-footer_mobile: 100%;
 --margin_wo-item-component_wo-wrap_wo-footer_mobile: 0;
 --padding_wo-item-component_wo-wrap_wo-footer_mobile: 4px 24px 24px 24px;
+--margin_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges: auto 18px 0 auto;
+--margin_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_desktop: auto 18px 0 auto;
+--margin_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_laptop: auto 18px 0 auto;
+--margin_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_tablet: auto 18px 0 auto;
+--margin_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-badges_mobile: auto 18px 0 auto;
 --margin_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals: auto 0 0 0;
 --margin_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals_desktop: auto 0 0 0;
 --margin_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-cals_laptop: auto 0 0 0;
