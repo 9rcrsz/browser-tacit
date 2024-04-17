@@ -17,10 +17,16 @@
 --align-items_wo-top-banner_wo-banner-info_laptop: flex-start;
 --background-color_wo-top-banner_wo-banner-info_laptop: transporent;
 --padding_wo-top-banner_wo-banner-info_laptop: 0;
---background-color_wo-top-banner_wo-banner-info_tablet: transporent;
+--align-items_wo-top-banner_wo-banner-info_tablet: flex-start;
+--background-color_wo-top-banner_wo-banner-info_tablet: var(--wo_greeting_container);
+--padding_wo-top-banner_wo-banner-info_tablet: 40px 24px;
 --width_wo-top-banner_wo-banner-info_tablet: 100%;
---height_wo-top-banner_wo-banner-info_mobile: 100%;
---padding_wo-top-banner_wo-banner-info_mobile: 16px 16px 32px 16px;
+--background-color_wo-top-banner_wo-banner-info_mobile: var(--wo_greeting_container);
+--margin_wo-top-banner_wo-banner-info_mobile: auto 0 0;
+--padding_wo-top-banner_wo-banner-info_mobile: 24px 24px;
+--justify-content_wo-top-banner_wo-banner-info_wo-location-info_tablet: flex-start;
+--justify-content_wo-top-banner_wo-banner-info_wo-location-info_mobile: flex-start;
+--padding_wo-top-banner_wo-banner-info_wo-location-info_mobile: 8px 0 16px 0;
 --height_wo-top-banner_wo-banner-info_wo-small-screen-wrap_mobile: auto;
 --padding_wo-top-banner_wo-banner-info_wo-small-screen-wrap_mobile: 0;
 --position_wo-top-banner_picture_tablet: relative;
@@ -28,6 +34,7 @@
 --justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap: flex-start;
 --justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap_desktop: flex-start;
 --justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap_laptop: flex-start;
+--justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap_tablet: flex-start;
 --padding_wo-top-banner_wo-banner-info_wo-actions-wrap_mobile: 0;
 --background-color_wo-top-banner_wo-banner-info_wo-actions-wrap_wo-guest_mobile: transporent;
 --background-color_wo-top-banner_wo-banner-info_wo-guest: transporent;
@@ -39,3 +46,4 @@
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1: left;
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_desktop: left;
 --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_laptop: left;
+--text-align_txt-h1_wo-top-banner_wo-banner-info_h1_mobile: left;
