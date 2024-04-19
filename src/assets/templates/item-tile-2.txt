@@ -20,6 +20,10 @@
 --margin_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_tablet: 0 0 0 auto;
 --display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_mobile: flex;
 --margin_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_mobile: 0 0 0 auto;
+--display_txt-icon_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-prices_wo-loyalty-icon_desktop: none;
+--display_txt-icon_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-prices_wo-loyalty-icon_laptop: none;
+--display_txt-icon_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-prices_wo-loyalty-icon_tablet: none;
+--display_txt-icon_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-prices_wo-loyalty-icon_mobile: none;
 --background-color_wo-item-component_wo-wrap_focus: var(--wo_card);
 --padding_wo-item-component_wo-wrap_focus: 30px;
 --background-color_wo-item-component_wo-wrap_focus_desktop: var(--wo_card);
