@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {BehaviorSubject, forkJoin} from "rxjs";
-import {take} from "rxjs/operators";
-import {TemplatesService} from "@src/services/templates.service";
+import {DomainTemplatesService} from "@src/services/domain-templates.service";
 import {CssGroupsFacade} from '@src/store/css-groups/css-groups.facade';
 import {ChromeService} from '@src/services/chrome.service';
 import {ColorsFacade} from '@src/store/colors/colors.facade';
@@ -17,7 +16,7 @@ import {EventService} from '@src/services/event.service';
 })
 export class AppComponent implements OnInit {
   protected chromeService: ChromeService = inject(ChromeService);
-  protected templatesService: TemplatesService = inject(TemplatesService);
+  protected domainTemplatesService: DomainTemplatesService = inject(DomainTemplatesService);
   protected cssGroupsFacade: CssGroupsFacade = inject(CssGroupsFacade);
   protected typographyFacade: TypographyFacade = inject(TypographyFacade);
   protected colorsFacade: ColorsFacade = inject(ColorsFacade);
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit {
     this.cssGroupsFacade.get().subscribe(() => {
       const projectName = localStorage.getItem('project-name');
       if (projectName) {
-        this.templateSelected(projectName);
+        this.domainSelected(projectName);
       }
     });
 
@@ -47,16 +46,16 @@ export class AppComponent implements OnInit {
     );
   }
 
-  templateSelected(templateName: string | null) {
-    this.templatesService.templateName$.next(templateName)
+  domainSelected(domainName: string | null) {
+    this.domainTemplatesService.domainName$.next(domainName)
 
-    if (templateName !== null) {
+    if (domainName !== null) {
       this.loaging$.next(true);
-      localStorage.setItem('project-name', templateName);
+      localStorage.setItem('project-name', domainName);
       forkJoin([
-        this.fbService.getSomething(this.templatesService.templateName$.value, 'colors'),
-        this.fbService.getSomething(this.templatesService.templateName$.value, 'css-groups'),
-        this.fbService.getSomething(this.templatesService.templateName$.value, 'typography')
+        this.fbService.getSomething(this.domainTemplatesService.domainName$.value, 'colors'),
+        this.fbService.getSomething(this.domainTemplatesService.domainName$.value, 'css-groups'),
+        this.fbService.getSomething(this.domainTemplatesService.domainName$.value, 'typography')
       ]).subscribe(([colors, cssGroups, typography]) => {
         this.colorsFacade.setProject(new Map(Object.entries(colors.data() ?? {})));
         this.cssGroupsFacade.setProject(new Map(Object.entries(cssGroups.data() ?? {})));
@@ -95,13 +94,13 @@ export class AppComponent implements OnInit {
     });
   }
 
-  reset(templateName: string | null) {
-    if (!templateName) {
+  reset(domainName: string | null) {
+    if (!domainName) {
       return;
     }
 
     this.loaging$.next(true);
-    this.templatesService.loadTemplate(templateName)
+    this.domainTemplatesService.loadDomainTemplate(domainName)
       .subscribe(
         data => {
           const colors: any = {};
@@ -124,12 +123,12 @@ export class AppComponent implements OnInit {
           })
 
           forkJoin([
-            this.fbService.setSomething(templateName, 'colors', colors, false),
-            this.fbService.setSomething(templateName, 'typography', typography, false),
-            this.fbService.setSomething(templateName, 'css-groups', cssGroups, false)
+            this.fbService.setSomething(domainName, 'colors', colors, false),
+            this.fbService.setSomething(domainName, 'typography', typography, false),
+            this.fbService.setSomething(domainName, 'css-groups', cssGroups, false)
           ]).subscribe(
             () => {
-              this.templateSelected(templateName);
+              this.domainSelected(domainName);
               this.loaging$.next(false);
             }
           )

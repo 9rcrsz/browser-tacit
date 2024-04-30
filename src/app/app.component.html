@@ -8,11 +8,11 @@
     <a mat-button [routerLink]="['/','typography']">Typography</a>
 
     <button mat-button (click)="export()">Export</button>
-    <button mat-button (click)="reset(templatesService.templateName$.value)">Restore from file</button>
+    <button mat-button (click)="reset(domainTemplatesService.domainName$.value)">Restore from file</button>
 
-    <select-template [templateName]="templatesService.templateName$ | async"
-                     [placeHolder]="'Project'"
-                     (eventSelectTemplate)="templateSelected($event)"></select-template>
+    <select-domain [domainName]="domainTemplatesService.domainName$ | async"
+                   [placeHolder]="'Domain'"
+                   (eventSelectDomain)="domainSelected($event)"></select-domain>
   </nav>
 
 </header>
