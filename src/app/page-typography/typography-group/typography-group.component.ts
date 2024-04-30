@@ -2,8 +2,6 @@ import {ChangeDetectionStrategy, Component, inject, Input, OnChanges, OnInit, Si
 import {CssGroup} from "@src/models/css-group.model";
 import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
 import {CssGroupsQuery} from '@src/store/css-groups/css-groups.query';
-import {ChromeService} from '@src/services/chrome.service';
-import {take} from 'rxjs/operators';
 import {TemplatesService} from '@src/services/templates.service';
 import {TypographyFacade} from '@src/store/typography/typography.facade';
 import {buildTypographyCssName} from '@src/services/helper.service';
@@ -24,7 +22,6 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
   protected fbService = inject(FirebaseService);
   protected unService = inject(UnsubscribeService);
   protected typographyFacade = inject(TypographyFacade);
-  protected chromeService = inject(ChromeService);
   protected templatesService = inject(TemplatesService)
 
   @Input() typography!: Typography;
@@ -55,21 +52,20 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
         this.typography.bps[bpsKey][property.key] = property.value;
 
         const cssName = buildTypographyCssName(property.key, this.typography.name, bpsKey as BreakpointTypes);
-        this.fbService.setSomething(this.templatesService.templateName$.value, `typography`, {[cssName]: property.value});
+        this.fbService.setSomething(localStorage.getItem('project-name'), `typography`, {[cssName]: property.value});
         toSend.push({key: cssName, value: property.value})
       }
     } else {
       this.typography.bps[breakpoint][property.key] = property.value;
 
       const cssName = buildTypographyCssName(property.key, this.typography.name, breakpoint as BreakpointTypes);
-      this.fbService.setSomething(this.templatesService.templateName$.value, `typography`, {[cssName]: property.value});
+      this.fbService.setSomething(localStorage.getItem('project-name'), `typography`, {[cssName]: property.value});
       toSend.push({key: cssName, value: property.value})
     }
 
     this.typography.template = null;
     this.typographyFacade.update(this.typography.name, this.typography);
 
-    this.chromeService.send({type: 'set-variables', variables: toSend});
   }
 
   templateSelected(templateName: string | null) {
@@ -77,11 +73,9 @@ export class TypographyGroupComponent implements OnInit, OnChanges {
       this.unService.handle = this.fbService.getSomething(templateName, `typography`)
         .subscribe(res => {
           this.typographyFacade.cloneTemplate(this.typography, this.templatesService.templateName$.value, new Map(Object.entries(res.data() ?? {})));
-          EventService.refreshSiteVariables.emit();
         });
     } else {
       this.typographyFacade.cloneTemplate(this.typography, this.templatesService.templateName$.value, new Map());
-      EventService.refreshSiteVariables.emit();
     }
   }
 

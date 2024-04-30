@@ -13,7 +13,6 @@ import {BreakpointTypes} from "@src/models/breakpoint-types.enum";
 import {CssValue} from "@src/models/css-value.model";
 import {CssGroupsFacade} from '@src/store/css-groups/css-groups.facade';
 import {CssGroupsQuery} from '@src/store/css-groups/css-groups.query';
-import {ChromeService} from '@src/services/chrome.service';
 import {switchMap, take} from 'rxjs/operators';
 import {TemplatesService} from '@src/services/templates.service';
 import {TypographyPropertiesEnum} from '@src/models/typography-properties.enum';
@@ -36,7 +35,6 @@ export class CssGroupComponent implements OnInit, OnChanges {
   protected fbService = inject(FirebaseService);
   protected unService = inject(UnsubscribeService);
   protected cssGroupsFacade = inject(CssGroupsFacade);
-  protected chromeService = inject(ChromeService);
   protected templatesService = inject(TemplatesService);
 
   @Input() cssGroup!: CssGroup;
@@ -85,13 +83,11 @@ export class CssGroupComponent implements OnInit, OnChanges {
         const cssValue = this.cssGroup.bps[breakpoint][property];
         if (e !== 'unset') {
           cssValue.current = 'var(' + buildTypographyCssName(property, e, breakpoint as BreakpointTypes) + ')'
-          this.fbService.setSomething(this.templatesService.templateName$.value, `css-groups`, {[cssValue.name]: cssValue.current});
+          this.fbService.setSomething(localStorage.getItem('project-name'), `css-groups`, {[cssValue.name]: cssValue.current});
         } else {
           cssValue.current = cssValue.default;
-          this.fbService.removeField(this.templatesService.templateName$.value, `css-groups`, cssValue.name);
+          this.fbService.removeField(localStorage.getItem('project-name'), `css-groups`, cssValue.name);
         }
-
-        this.chromeService.send({type: 'set-variables', variables: [{key: cssValue.name, value: cssValue.current}]});
       }
     }
 
@@ -106,22 +102,17 @@ export class CssGroupComponent implements OnInit, OnChanges {
         this.cssGroup.bps[bpsKey][property.key].current = property.value.current;
 
         const cssName = property.value.name + (bpsKey === BreakpointTypes.general ? '' : '_' + bpsKey);
-        this.fbService.setSomething(this.templatesService.templateName$.value, `css-groups`, {[cssName]: property.value.current});
+        this.fbService.setSomething(localStorage.getItem('project-name'), `css-groups`, {[cssName]: property.value.current});
         toSend.push({key: cssName, value: property.value.current})
       }
     } else {
       this.cssGroup.bps[breakpoint][property.key].current = property.value.current;
-      this.fbService.setSomething(this.templatesService.templateName$.value, `css-groups`, {[property.value.name]: property.value.current});
+      this.fbService.setSomething(localStorage.getItem('project-name'), `css-groups`, {[property.value.name]: property.value.current});
       toSend.push({key: property.value.name, value: property.value.current});
     }
 
     this.cssGroup.template = null;
     this.cssGroupsFacade.update(this.cssGroup.name, this.cssGroup);
-
-    this.chromeService.send({
-      type: 'set-variables',
-      variables: toSend
-    });
   }
 
   templateSelected(templateName: string | null, cb?: any) {
@@ -137,7 +128,6 @@ export class CssGroupComponent implements OnInit, OnChanges {
           )
         })).subscribe(() => {
           this.loading$.next(false);
-          EventService.refreshSiteVariables.emit();
 
           if (cb) {
             cb();
@@ -145,7 +135,6 @@ export class CssGroupComponent implements OnInit, OnChanges {
         });
     } else {
       this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map(), this.showChildren);
-      EventService.refreshSiteVariables.emit();
       if (cb) {
         cb();
       }

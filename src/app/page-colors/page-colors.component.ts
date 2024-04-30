@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {ColorsEnum} from '@src/models/colors.enum';
-import {ChromeService} from '@src/services/chrome.service';
 import {TemplatesService} from '@src/services/templates.service';
 import {ColorsQuery} from '@src/store/colors/colors.query';
 import {ColorsFacade} from '@src/store/colors/colors.facade';
@@ -19,8 +18,7 @@ export class PageColorsComponent {
 
   constructor(
     public queryService: ColorsQuery,
-    protected colorsFacade: ColorsFacade,
-    protected chromeService: ChromeService) {
+    protected colorsFacade: ColorsFacade) {
   }
 
   selectTemplate(templateName: string | null) {
@@ -28,11 +26,9 @@ export class PageColorsComponent {
       this.fbService.getSomething(templateName, `colors`)
         .subscribe(res => {
           this.colorsFacade.cloneTemplate(this.templatesService.templateName$.value, new Map(Object.entries(res.data() ?? {})));
-          EventService.refreshSiteVariables.emit();
         });
     } else {
       this.colorsFacade.cloneTemplate(this.templatesService.templateName$.value, new Map());
-      EventService.refreshSiteVariables.emit();
     }
   }
 
@@ -43,9 +39,7 @@ export class PageColorsComponent {
     this.colorsFacade.updateTemplate(null);
     this.colorsFacade.updateColor(property.key, varValue);
 
-    this.fbService.setSomething(this.templatesService.templateName$.value, `colors`, {[varName]: varValue});
-
-    this.chromeService.send({type: 'set-variables', variables: [{key: varName, value: varValue}]});
+    this.fbService.setSomething(localStorage.getItem('project-name'), `colors`, {[varName]: varValue});
   }
 
   trackBy(index: number, a: any) {

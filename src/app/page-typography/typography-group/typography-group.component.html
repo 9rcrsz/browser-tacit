@@ -3,8 +3,8 @@
     <h2>
       {{typography.name}}
     </h2>
-    <select-template [templateName]="templatesService.templateName$ | async" (eventSelectTemplate)="templateSelected($event)">
-    </select-template>
+<!--    <select-template [templateName]="templatesService.templateName$ | async" (eventSelectTemplate)="templateSelected($event)">-->
+<!--    </select-template>-->
   </header>
 
   <main class="wo-main" *ngFor='let breakpoint of (typography.bps | keyvalue: unsorted)'>

@@ -2,11 +2,9 @@ import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core'
 import {BehaviorSubject, forkJoin} from "rxjs";
 import {DomainTemplatesService} from "@src/services/domain-templates.service";
 import {CssGroupsFacade} from '@src/store/css-groups/css-groups.facade';
-import {ChromeService} from '@src/services/chrome.service';
 import {ColorsFacade} from '@src/store/colors/colors.facade';
 import {TypographyFacade} from '@src/store/typography/typography.facade';
 import {FirebaseService} from '@src/services/firebase.service';
-import {EventService} from '@src/services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +13,6 @@ import {EventService} from '@src/services/event.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  protected chromeService: ChromeService = inject(ChromeService);
   protected domainTemplatesService: DomainTemplatesService = inject(DomainTemplatesService);
   protected cssGroupsFacade: CssGroupsFacade = inject(CssGroupsFacade);
   protected typographyFacade: TypographyFacade = inject(TypographyFacade);
@@ -31,19 +28,6 @@ export class AppComponent implements OnInit {
         this.domainSelected(projectName);
       }
     });
-
-    EventService.refreshSiteVariables.subscribe(
-      () => {
-        this.chromeService.send({type: 'remove-variables'});
-
-        const variables = [
-          ...this.cssGroupsFacade.export(),
-          ...this.colorsFacade.export(),
-          ...this.typographyFacade.export()
-        ];
-        this.chromeService.send({type: 'set-variables', variables});
-      }
-    );
   }
 
   domainSelected(domainName: string | null) {
@@ -60,15 +44,6 @@ export class AppComponent implements OnInit {
         this.colorsFacade.setProject(new Map(Object.entries(colors.data() ?? {})));
         this.cssGroupsFacade.setProject(new Map(Object.entries(cssGroups.data() ?? {})));
         this.typographyFacade.setProject(new Map(Object.entries(typography.data() ?? {})));
-
-        this.chromeService.send({type: 'remove-variables'});
-
-        const variables = [
-          ...this.cssGroupsFacade.export(),
-          ...this.colorsFacade.export(),
-          ...this.typographyFacade.export()
-        ];
-        this.chromeService.send({type: 'set-variables', variables});
         this.loaging$.next(false);
       });
     } else {
@@ -76,7 +51,6 @@ export class AppComponent implements OnInit {
       this.cssGroupsFacade.setProject(new Map());
       this.colorsFacade.setProject(new Map());
       this.typographyFacade.setProject(new Map());
-      this.chromeService.send({type: 'remove-variables'});
     }
   }
 
