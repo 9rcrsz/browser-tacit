@@ -122,7 +122,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
         .pipe(switchMap(res => {
           return this.cssGroupsFacade.cloneTemplate(
             this.cssGroup,
-            this.templatesService.templateName$.value,
+            localStorage.getItem('project-name'),
             new Map(Object.entries(res.data() ?? {})),
             this.showChildren
           )
@@ -134,7 +134,7 @@ export class CssGroupComponent implements OnInit, OnChanges {
           }
         });
     } else {
-      this.cssGroupsFacade.cloneTemplate(this.cssGroup, this.templatesService.templateName$.value, new Map(), this.showChildren);
+      this.cssGroupsFacade.cloneTemplate(this.cssGroup, localStorage.getItem('project-name'), new Map(), this.showChildren);
       if (cb) {
         cb();
       }
