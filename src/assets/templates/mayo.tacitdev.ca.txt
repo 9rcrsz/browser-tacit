@@ -77,47 +77,46 @@
   --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_tablet: flex-start;
   --color_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_mobile: var(--wo_text_high_emphasis);
   --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_mobile: flex-start;
-  --wo_success: #2F9E44; /* Example: a green shade for success */
-  --wo_background: #F4F4F5; /* Example: a light grey shade for background */
-  --wo_background_additional: #FFFFFF; /* Example: pure white for additional background */
-  --wo_background_warning: #FFE3E3; /* Example: a light red shade for background warning */
-  --wo_text_high_emphasis: rgba(0, 0, 0, 0.87); /* Black with high emphasis */
-  --wo_high_emphasis_alt: rgba(255, 255, 255, 0.87); /* White with high emphasis */
-  --wo_text_mid_emphasis: rgba(0, 0, 0, 0.6); /* Black with medium emphasis */
-  --wo_medium_emphasis_alt: rgba(255, 255, 255, 0.6); /* White with medium emphasis */
-  --wo_text_field_underline: rgba(0, 0, 0, 0.2); /* Black with low emphasis for underline */
-  --wo_separator: rgba(0, 0, 0, 0.15); /* Black with very low emphasis for separator */
-  --wo_outline_main: rgba(0, 0, 0, 0.87); /* Black with high emphasis for outline */
-  --wo_text_field_surface: rgba(0, 0, 0, 0.03); /* Very light black for text field surface */
-  --wo_input_field_alt: #FFFFFF; /* Pure white for input field */
-  --wo_snackbar: #121212; /* Dark shade for snackbar */
-  --wo_surface_header: #FFFFFF; /* Pure white for surface header */
-  --wo_section_container: #F0EFEF; /* Very light grey for section container */
-  --wo_card: #FFFFFF; /* Pure white for card */
-  --wo_container2: #F8F9FA; /* Light grey for container */
-  --wo_container3: #E9ECEF; /* Another light grey shade for container */
-  --wo_container4: #DEE2E6; /* Slightly darker grey for container */
-  --wo_greeting_container: rgba(255, 255, 255, 0.95); /* White with slight transparency for greeting container */
-  --wo_primary: #007BFF; /* Example: a blue shade for primary */
-  --wo_primary_alt: #5A9FFF; /* Lighter blue for primary alternate */
-  --wo_primary_button: #0056B3; /* Darker blue for primary button */
-  --wo_primary_variant: #D1E9FF; /* Very light blue for primary variant */
-  --wo_secondary: #6C757D; /* Grey shade for secondary */
-  --wo_secondary_variant: #ADB5BD; /* Lighter grey for secondary variant */
-  --wo_modifier_overlay: rgba(108, 117, 125, 0.1); /* Grey with transparency for modifier overlay */
-  --wo_modifier_container: rgba(255, 255, 255, 0.87); /* White with high transparency for modifier container */
-  --wo_error: #DC3545; /* Red shade for error */
-  --wo_skeleton1: #E9ECEF; /* Light grey for skeleton 1 */
-  --wo_skeleton2: #F8F9FA; /* Lighter grey for skeleton 2 */
-  --wo_backdrop: rgba(0, 0, 0, 0.38); /* Black with transparency for backdrop */
-  --wo_text_on_error: #FFFFFF; /* White for text on error */
-  --wo_on_search_overlay: rgba(255, 255, 255, 0.6); /* White with medium transparency for search overlay */
-  --wo_on_button_container: #000000; /* Black for button container */
-  --wo_on_primary: #FFFFFF; /* White for on primary */
-  --wo_on_secondary: #FFFFFF; /* White for on secondary */
-  --wo_box_shadow: rgba(0, 0, 0, 0.25); /* Black with some transparency for box shadow */
-  --wo_placeholder: #EAEAEA; /* Light grey for placeholder */
-
+  --wo_success: #01803B;
+  --wo_background: #F4F4F5;
+  --wo_background_additional: #FCFCFC;
+  --wo_background_warning: #FFE3E3;
+  --wo_text_high_emphasis: rgba(0, 0, 0, 0.87);
+  --wo_high_emphasis_alt: rgba(255, 255, 255, 0.87);
+  --wo_text_mid_emphasis: rgba(0, 0, 0, 0.6);
+  --wo_medium_emphasis_alt: rgba(255, 255, 255, 0.6);
+  --wo_text_field_underline: rgba(0, 0, 0, 0.2);
+  --wo_separator: rgba(0, 0, 0, 0.15);
+  --wo_outline_main: rgba(0, 0, 0, 0.87);
+  --wo_text_field_surface: rgba(0, 0, 0, 0.03);
+  --wo_input_field_alt: #FFFFFF;
+  --wo_snackbar: #121212;
+  --wo_surface_header: #FFFFFF;
+  --wo_section_container: #F0EFEF;
+  --wo_card: #FFFFFF;
+  --wo_container2: #FFFFFF;
+  --wo_container3: #FFFFFF;
+  --wo_container4: #FFFFFF;
+  --wo_greeting_container: rgba(255, 255, 255, 0.95);
+  --wo_primary: #0534DA;
+  --wo_primary_alt: #92D1EC;
+  --wo_primary_button: #9BAEF0;
+  --wo_primary_variant: #EBF0F9;
+  --wo_secondary: #238001;
+  --wo_secondary_variant: #EDFAED;
+  --wo_modifier_overlay: rgba(35, 116, 62, 0.1);
+  --wo_modifier_container: rgba(255, 255, 255, 0.87);
+  --wo_error: #D00020;
+  --wo_skeleton1: #EBEAEB;
+  --wo_skeleton2: #FCFCFC;
+  --wo_backdrop: rgba(0, 0, 0, 0.38);
+  --wo_text_on_error: #FFFFFF;
+  --wo_on_search_overlay: rgba(255, 255, 255, 0.6);
+  --wo_on_button_container: #000000;
+  --wo_on_primary: #FFFFFF;
+  --wo_on_secondary: #FFFFFF;
+  --wo_box_shadow: rgba(0, 0, 0, 0.25);
+  --wo_placeholder: #EAEAEA;
   --typography-font-family_txt-h1: FSAlbertPro-Bold;
   --typography-font-size_txt-h1: 40px;
   --typography-line-height_txt-h1: 57px;
