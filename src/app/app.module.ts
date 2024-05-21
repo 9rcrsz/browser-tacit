@@ -16,6 +16,7 @@ import {PageSiteModule} from "@src/app/page-site";
 import {PageContainer} from "@src/app/page-container";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {SelectDomainModule} from '@src/app/controls/select-domain';
+import {PageAssetsModule} from '@src/app/page-assets';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {SelectDomainModule} from '@src/app/controls/select-domain';
     SelectTemplateModule,
     PageColorsModel,
     PageTypographyModule,
+    PageAssetsModule,
     PageSiteModule,
     PageContainer,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
