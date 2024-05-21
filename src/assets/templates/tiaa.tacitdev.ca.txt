@@ -1,44 +1,182 @@
-  --wo_success: #2F9E44; /* Example: a green shade for success */
-  --wo_background: #F4F4F5; /* Example: a light grey shade for background */
-  --wo_background_additional: #FFFFFF; /* Example: pure white for additional background */
-  --wo_background_warning: #FFE3E3; /* Example: a light red shade for background warning */
-  --wo_text_high_emphasis: rgba(0, 0, 0, 0.87); /* Black with high emphasis */
-  --wo_high_emphasis_alt: rgba(255, 255, 255, 0.87); /* White with high emphasis */
-  --wo_text_mid_emphasis: rgba(0, 0, 0, 0.6); /* Black with medium emphasis */
-  --wo_medium_emphasis_alt: rgba(255, 255, 255, 0.6); /* White with medium emphasis */
-  --wo_text_field_underline: rgba(0, 0, 0, 0.2); /* Black with low emphasis for underline */
-  --wo_separator: rgba(0, 0, 0, 0.15); /* Black with very low emphasis for separator */
-  --wo_outline_main: rgba(0, 0, 0, 0.87); /* Black with high emphasis for outline */
-  --wo_text_field_surface: rgba(0, 0, 0, 0.03); /* Very light black for text field surface */
-  --wo_input_field_alt: #FFFFFF; /* Pure white for input field */
-  --wo_snackbar: #121212; /* Dark shade for snackbar */
-  --wo_surface_header: #FFFFFF; /* Pure white for surface header */
-  --wo_section_container: #F0EFEF; /* Very light grey for section container */
-  --wo_card: #FFFFFF; /* Pure white for card */
-  --wo_container2: #F8F9FA; /* Light grey for container */
-  --wo_container3: #E9ECEF; /* Another light grey shade for container */
-  --wo_container4: #DEE2E6; /* Slightly darker grey for container */
-  --wo_greeting_container: rgba(255, 255, 255, 0.95); /* White with slight transparency for greeting container */
-  --wo_primary: #007BFF; /* Example: a blue shade for primary */
-  --wo_primary_alt: #5A9FFF; /* Lighter blue for primary alternate */
-  --wo_primary_button: #0056B3; /* Darker blue for primary button */
-  --wo_primary_variant: #D1E9FF; /* Very light blue for primary variant */
-  --wo_secondary: #6C757D; /* Grey shade for secondary */
-  --wo_secondary_variant: #ADB5BD; /* Lighter grey for secondary variant */
-  --wo_modifier_overlay: rgba(108, 117, 125, 0.1); /* Grey with transparency for modifier overlay */
-  --wo_modifier_container: rgba(255, 255, 255, 0.87); /* White with high transparency for modifier container */
-  --wo_error: #DC3545; /* Red shade for error */
-  --wo_skeleton1: #E9ECEF; /* Light grey for skeleton 1 */
-  --wo_skeleton2: #F8F9FA; /* Lighter grey for skeleton 2 */
-  --wo_backdrop: rgba(0, 0, 0, 0.38); /* Black with transparency for backdrop */
-  --wo_text_on_error: #FFFFFF; /* White for text on error */
-  --wo_on_search_overlay: rgba(255, 255, 255, 0.6); /* White with medium transparency for search overlay */
-  --wo_on_button_container: #000000; /* Black for button container */
-  --wo_on_primary: #FFFFFF; /* White for on primary */
-  --wo_on_secondary: #FFFFFF; /* White for on secondary */
-  --wo_box_shadow: rgba(0, 0, 0, 0.25); /* Black with some transparency for box shadow */
-  --wo_placeholder: #EAEAEA; /* Light grey for placeholder */
-
+  --flex_wo-item-component: 0 0 calc((100% - 48px) / 3);
+  --flex_wo-item-component_desktop: 0 0 calc((100% - 48px) / 3);
+  --padding_wo-item-component_wo-wrap: 30px;
+  --padding_wo-item-component_wo-wrap_desktop: 30px;
+  --padding_wo-item-component_wo-wrap_laptop: 30px;
+  --padding_wo-item-component_wo-wrap_tablet: 24px;
+  --padding_wo-item-component_wo-wrap_mobile: 24px;
+  --justify-content_wo-item-component_wo-wrap_wo-footer_wo-buy-info: flex-start;
+  --justify-content_wo-item-component_wo-wrap_wo-footer_wo-buy-info_desktop: flex-start;
+  --justify-content_wo-item-component_wo-wrap_wo-footer_wo-buy-info_laptop: flex-start;
+  --justify-content_wo-item-component_wo-wrap_wo-footer_wo-buy-info_tablet: flex-start;
+  --justify-content_wo-item-component_wo-wrap_wo-footer_wo-buy-info_mobile: flex-start;
+  --align-items_wo-top-banner: flex-start;
+  --padding_wo-top-banner: 0 0 0 60px;
+  --align-items_wo-top-banner_desktop: flex-start;
+  --padding_wo-top-banner_desktop: 0 0 0 60px;
+  --align-items_wo-top-banner_laptop: flex-start;
+  --padding_wo-top-banner_laptop: 0 0 0 46px;
+  --align-items_wo-top-banner_tablet: flex-start;
+  --height_wo-top-banner_tablet: auto;
+  --align-items_wo-top-banner_mobile: flex-start;
+  --height_wo-top-banner_mobile: 512px;
+  --align-items_wo-top-banner_wo-banner-info: flex-start;
+  --background-color_wo-top-banner_wo-banner-info: transporent;
+  --padding_wo-top-banner_wo-banner-info: 0;
+  --align-items_wo-top-banner_wo-banner-info_desktop: flex-start;
+  --background-color_wo-top-banner_wo-banner-info_desktop: transporent;
+  --padding_wo-top-banner_wo-banner-info_desktop: 0;
+  --align-items_wo-top-banner_wo-banner-info_laptop: flex-start;
+  --background-color_wo-top-banner_wo-banner-info_laptop: transporent;
+  --padding_wo-top-banner_wo-banner-info_laptop: 0;
+  --align-items_wo-top-banner_wo-banner-info_tablet: flex-start;
+  --background-color_wo-top-banner_wo-banner-info_tablet: var(--wo_greeting_container);
+  --padding_wo-top-banner_wo-banner-info_tablet: 40px 24px;
+  --width_wo-top-banner_wo-banner-info_tablet: 100%;
+  --height_wo-top-banner_wo-banner-info_mobile: 100%;
+  --background-color_wo-top-banner_wo-banner-info_mobile: var(--wo_greeting_container);
+  --margin_wo-top-banner_wo-banner-info_mobile: auto 0 0;
+  --padding_wo-top-banner_wo-banner-info_mobile: 24px 24px;
+  --justify-content_wo-top-banner_wo-banner-info_wo-location-info: flex-start;
+  --justify-content_wo-top-banner_wo-banner-info_wo-location-info_desktop: flex-start;
+  --justify-content_wo-top-banner_wo-banner-info_wo-location-info_laptop: flex-start;
+  --justify-content_wo-top-banner_wo-banner-info_wo-location-info_tablet: flex-start;
+  --justify-content_wo-top-banner_wo-banner-info_wo-location-info_mobile: flex-start;
+  --padding_wo-top-banner_wo-banner-info_wo-location-info_mobile: 8px 0 16px 0;
+  --height_wo-top-banner_wo-banner-info_wo-small-screen-wrap_mobile: auto;
+  --padding_wo-top-banner_wo-banner-info_wo-small-screen-wrap_mobile: 0;
+  --display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: flex;
+  --margin_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add: 0 0 0 auto;
+  --display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_desktop: flex;
+  --margin_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_desktop: 0 0 0 auto;
+  --display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_laptop: flex;
+  --margin_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_laptop: 0 0 0 auto;
+  --display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_tablet: flex;
+  --margin_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_tablet: 0 0 0 auto;
+  --display_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_mobile: flex;
+  --margin_button-normal_txt-button_wo-item-component_wo-wrap_wo-footer_wo-buy-info_wo-add_mobile: 0 0 0 auto;
+  --background-color_wo-item-component_wo-wrap_focus: var(--wo_card);
+  --background-color_wo-item-component_wo-wrap_focus_desktop: var(--wo_card);
+  --background-color_wo-item-component_wo-wrap_focus_laptop: var(--wo_card);
+  --background-color_wo-item-component_wo-wrap_focus_tablet: var(--wo_card);
+  --background-color_wo-item-component_wo-wrap_focus_mobile: var(--wo_card);
+  --padding_wo-item-component_wo-wrap_wo-footer: 0;
+  --padding_wo-item-component_wo-wrap_wo-footer_desktop: 0;
+  --padding_wo-item-component_wo-wrap_wo-footer_laptop: 0;
+  --padding_wo-item-component_wo-wrap_wo-footer_tablet: 0;
+  --padding_wo-item-component_wo-wrap_wo-footer_mobile: 0;
+  --margin_wo-item-component_wo-wrap_wo-header: 0 0 12px 0;
+  --order_wo-item-component_wo-wrap_wo-header: 0;
+  --padding_wo-item-component_wo-wrap_wo-header: 0;
+  --margin_wo-item-component_wo-wrap_wo-header_desktop: 0 0 12px 0;
+  --order_wo-item-component_wo-wrap_wo-header_desktop: 0;
+  --padding_wo-item-component_wo-wrap_wo-header_desktop: 0;
+  --margin_wo-item-component_wo-wrap_wo-header_laptop: 0 0 12px 0;
+  --order_wo-item-component_wo-wrap_wo-header_laptop: 0;
+  --padding_wo-item-component_wo-wrap_wo-header_laptop: 0;
+  --margin_wo-item-component_wo-wrap_wo-header_tablet: 0 0 8px 0;
+  --order_wo-item-component_wo-wrap_wo-header_tablet: 0;
+  --padding_wo-item-component_wo-wrap_wo-header_tablet: 0;
+  --margin_wo-item-component_wo-wrap_wo-header_mobile: 0 0 8px 0;
+  --order_wo-item-component_wo-wrap_wo-header_mobile: 0;
+  --padding_wo-item-component_wo-wrap_wo-header_mobile: 0;
+  --margin_wo-item-component_wo-wrap_wo-main: 0 0 16px 0;
+  --margin_wo-item-component_wo-wrap_wo-main_desktop: 0 0 16px 0;
+  --margin_wo-item-component_wo-wrap_wo-main_laptop: 0 0 16px 0;
+  --margin_wo-item-component_wo-wrap_wo-main_tablet: 0 0 12px 0;
+  --margin_wo-item-component_wo-wrap_wo-main_mobile: 0 0 12px 0;
+  --display_wo-item-component_wo-wrap_wo-main_wo-img: none;
+  --display_wo-item-component_wo-wrap_wo-main_wo-img_desktop: none;
+  --display_wo-item-component_wo-wrap_wo-main_wo-img_laptop: none;
+  --display_wo-item-component_wo-wrap_wo-main_wo-img_tablet: none;
+  --display_wo-item-component_wo-wrap_wo-main_wo-img_mobile: none;
+  --padding_wo-items-group-component: 60px 227px 0 227px;
+  --padding_wo-items-group-component_desktop: 60px 120px 0 120px;
+  --display_wo-menu-and-categories_wo-location-header: flex;
+  --display_wo-menu-and-categories_wo-location-header_desktop: flex;
+  --display_wo-menu-and-categories_wo-location-header_laptop: flex;
+  --display_wo-menu-and-categories_wo-location-header_tablet: flex;
+  --display_wo-menu-and-categories_wo-location-header_mobile: flex;
+  --background-color_wo-top-banner_picture: var(--wo_card);
+  --background-color_wo-top-banner_picture_desktop: var(--wo_card);
+  --background-color_wo-top-banner_picture_laptop: var(--wo_card);
+  --position_wo-top-banner_picture_tablet: relative;
+  --height_wo-top-banner_picture_mobile: 100%;
+  --justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap: flex-start;
+  --justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap_desktop: flex-start;
+  --justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap_laptop: flex-start;
+  --justify-content_wo-top-banner_wo-banner-info_wo-actions-wrap_tablet: flex-start;
+  --padding_wo-top-banner_wo-banner-info_wo-actions-wrap_mobile: 0;
+  --background-color_wo-top-banner_wo-banner-info_wo-actions-wrap_wo-guest_mobile: transporent;
+  --background-color_wo-top-banner_wo-banner-info_wo-guest: transporent;
+  --background-color_wo-top-banner_wo-banner-info_wo-guest_desktop: transporent;
+  --background-color_wo-top-banner_wo-banner-info_wo-guest_laptop: transporent;
+  --background-color_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: transporent;
+  --padding_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_mobile: 0;
+  --background-color_wo-top-banner_wo-banner-info_wo-small-screen-wrap_wo-small-screen-bg_wo-guest_mobile: transporent;
+  --display_txt-body1_wo-item-component_wo-wrap_wo-main_wo-desc: -webkit-box;
+  --display_txt-body1_wo-item-component_wo-wrap_wo-main_wo-desc_desktop: -webkit-box;
+  --display_txt-body1_wo-item-component_wo-wrap_wo-main_wo-desc_laptop: -webkit-box;
+  --display_txt-body1_wo-item-component_wo-wrap_wo-main_wo-desc_tablet: -webkit-box;
+  --display_txt-body1_wo-item-component_wo-wrap_wo-main_wo-desc_mobile: -webkit-box;
+  --text-align_txt-h1_wo-top-banner_wo-banner-info_h1: left;
+  --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_desktop: left;
+  --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_laptop: left;
+  --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_tablet: left;
+  --text-align_txt-h1_wo-top-banner_wo-banner-info_h1_mobile: left;
+  --color_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name: var(--wo_text_high_emphasis);
+  --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name: flex-start;
+  --color_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_desktop: var(--wo_text_high_emphasis);
+  --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_desktop: flex-start;
+  --color_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_laptop: var(--wo_text_high_emphasis);
+  --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_laptop: flex-start;
+  --color_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_tablet: var(--wo_text_high_emphasis);
+  --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_tablet: flex-start;
+  --color_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_mobile: var(--wo_text_high_emphasis);
+  --justify-content_txt-h5_wo-item-component_wo-wrap_wo-header_wo-name_mobile: flex-start;
+  --object-fit_wo-top-banner_picture_img: contain;
+  --object-fit_wo-top-banner_picture_img_desktop: contain;
+  --object-fit_wo-top-banner_picture_img_laptop: contain;
+  --wo_success: rgba(1, 128, 59, 1);
+  --wo_background: #F4F4F5;
+  --wo_background_additional: rgba(252, 252, 252, 1);
+  --wo_background_warning: rgba(255, 227, 227, 1);
+  --wo_text_high_emphasis: rgba(0, 0, 0, 0.87);
+  --wo_high_emphasis_alt: rgba(255, 255, 255, 0.87);
+  --wo_text_mid_emphasis: rgba(0, 0, 0, 0.6);
+  --wo_medium_emphasis_alt: rgba(255, 255, 255, 0.6);
+  --wo_text_field_underline: rgba(0, 0, 0, 0.6);
+  --wo_separator: rgba(0, 0, 0, 0.15);
+  --wo_outline_main: rgba(0, 0, 0, 0.87);
+  --wo_text_field_surface: rgba(0, 0, 0, 0.03);
+  --wo_input_field_alt: #FFFFFF;
+  --wo_snackbar: rgba(18, 18, 18, 1);
+  --wo_surface_header: rgba(255, 255, 255, 1);
+  --wo_section_container: rgba(240, 239, 239, 1);
+  --wo_card: #FFFFFF;
+  --wo_container2: #FFFFFF;
+  --wo_container3: #FFFFFF;
+  --wo_container4: #FFFFFF;
+  --wo_greeting_container: rgba(255, 255, 255, 0.95);
+  --wo_primary: rgba(0, 56, 101, 1);
+  --wo_primary_alt: rgba(126, 198, 255, 1);
+  --wo_primary_button: rgba(0, 56, 101, 1);
+  --wo_primary_variant: rgba(225, 241, 247, 1);
+  --wo_secondary: rgba(0, 103, 185, 1);
+  --wo_secondary_variant: rgba(204, 241, 255, 1);
+  --wo_modifier_overlay: rgba(108, 117, 125, 0.1);
+  --wo_modifier_container: rgba(255, 255, 255, 0.87);
+  --wo_error: rgba(176, 0, 32, 1);
+  --wo_skeleton1: rgba(235, 234, 235, 1);
+  --wo_skeleton2: rgba(252, 252, 252, 1);
+  --wo_backdrop: rgba(0, 0, 0, 0.38);
+  --wo_text_on_error: rgba(255, 255, 255, 1);
+  --wo_on_search_overlay: rgba(255, 255, 255, 0.6);
+  --wo_on_button_container: rgba(255, 255, 255, 1);
+  --wo_on_primary: rgba(255, 255, 255, 1);
+  --wo_on_secondary: rgba(255, 255, 255, 1);
+  --wo_box_shadow: rgba(0, 0, 0, 0.25);
+  --wo_placeholder: #EAEAEA;
   --typography-font-family_txt-h1: FSAlbertPro-Bold;
   --typography-font-size_txt-h1: 40px;
   --typography-line-height_txt-h1: 57px;
