@@ -1,0 +1,29 @@
+<article>
+  <section>
+    <header><h2>Logo</h2></header>
+    <form>
+      <ul>
+        <li *ngFor="let logo of logos | keyvalue">
+          <div class="wo-container">
+            <h5>{{logo.key}}</h5>
+            <div class="wo-controls">
+              <div class="wo-left">
+                <input type="file"
+                       [name]="logo.key"
+                       (change)="onFileSelected($event, logo.value)"/>
+              </div>
+              <div class="wo-right">
+                <img [alt]="logo.key" [src]="'http://localhost:3000/img/'+projectName+'|'+logo.value"/>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <footer>
+        <button mat-flat-button color="primary" type="submit">Save</button>
+      </footer>
+    </form>
+  </section>
+</article>
+

@@ -1,0 +1,39 @@
+:host {
+  > article {
+    padding: 24px;
+
+    form {
+      flex-direction: column;
+      display: flex;
+      gap: 32px;
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        .wo-container {
+          flex-direction: column;
+          display: flex;
+          gap: 16px;
+
+          .wo-controls {
+            display: flex;
+            gap: 24px;
+
+            .wo-right {
+              img {
+                height: 100px;
+                background-color: lightgray;
+              }
+            }
+          }
+        }
+      }
+
+      footer {
+
+      }
+    }
+  }
+}
